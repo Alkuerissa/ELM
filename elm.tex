@@ -3,7 +3,7 @@
 %\usepackage{helvetica} % uses helvetica postscript font (download helvetica.sty)
 %\usepackage{newcent}   % uses new century schoolbook postscript font 
 %\setlength{\textwidth}{5.5in} % set width of text portion
-
+\usepackage{graphicx}
 \usepackage{polski}
 %\usepackage[polish, english]{babel}
 %\usepackage[T1]{fontenc} % T1, OT4
@@ -34,16 +34,6 @@
 \addcontentsline{toc}{section}{Wprowadzenie}
 Celem pracy jest przetestowanie ELM na wybranych zestawach small data, a następnie big data, przy użyciu służących do tego, istniejących już bibliotek do Pythona i Matlaba.
 
-Aplikacje udostępniają następujące funkcjonalności:
-\begin{itemize}
-\item Przygotowanie danych trenujących i testowych w formie plików csv
-\item Trenowanie sieci neuronowej o architekturze ELM
-\item Klasyfikacja danych testowych przez wytrenowaną sieć
-\item Porównywanie wyników klasyfikacji do spodziewanych rezultatów
-\item Analiza jakości klasyfikacji i  czasu trwania treningu
-\item Interfejs graficzny
-\end{itemize}
-
 Ahmed Abdelkarim zajmował się porównywaniem wyników dla big data i~small data przy użyciu Pythona.
 Aleksandra Hernik sprawdzała dokładność i~wydajność uczenia dla big data za pomocą Matlaba.
 
@@ -51,18 +41,23 @@ Aleksandra Hernik sprawdzała dokładność i~wydajność uczenia dla big data z
 \section*{Wykaz ważniejszych oznaczeń i akronimów}
 \addcontentsline{toc}{section}{Wykaz ważniejszych oznaczeń i akronimów}
 \begin{itemize}[label={},leftmargin=*]
-\item ELM -- Extreme Learning Machine
-\item SLFN -- Single-Layer Feed-forward Network 
-\item BP -- Back-propagation
-\item MLP -- Multilayer Perceptron
-\item SVM -- Support Vector Machines
-\item Big Data
-\item Toolbox
+\item ELM -- \textbf{E}xtreme \textbf{L}earning \textbf{M}achine - ekstremalne uczenie maszynowe
+\item SLFN -- \textbf{S}ingle-\textbf{L}ayer \textbf{F}eed-forward \textbf{N}etwork - jednowarstwowa jednokierunkowa sieć neuronowa
+\item BP -- \textbf{B}ack-\textbf{p}ropagation - propagacja wsteczna
+\item MLP -- \textbf{M}ulti\textbf{l}ayer \textbf{P}erceptron - perceptron wielowarstwowy
+\item SVM -- \textbf{S}upport \textbf{V}ector \textbf{M}achine - maszyna wektorów nośnych
+\item Big Data -- dane z liczbą próbek tak dużą, że nie występuje efekt przeuczenia
+\item Small Data -- dane, dla których jest za mało próbek, aby sieć poznała dokładnie model bez przeuczenia
+\item Toolbox -- zbiór funkcji stworzonych we wspólnym celu; biblioteka
 \end{itemize}
 \clearpage
 \section{Opracowanie modelu pracy sieci do ekstremalnego uczenia maszynowego ELM}
 \subsection{Rys historyczny}
-W 2004 roku Guang-Bin Huang, Qin-Yu Zhu i Chee-Kheong Siew zaproponowali koncepcję ELM w pracy \textit{Extreme Learning Machine: A New Learning Scheme of Feedforward Neural Networks}, dotyczącej SLFN. W tym samym roku Guang-Bin Huang i Chee-Kheong Siew zaproponowali również w artykule \textit{Extreme Learning Machine: RBF Network Case} wariant ELM dotyczący sieci radialnych, których nie dotyczy ta praca. 
+Sieci neuronowe znajdują coraz to nowe zastosowania i stają się jednym z najważniejszych kierunków rozwoju informatyki. Jednak ograniczeniem tej metody jest długotrwały proces uczenia.
+
+W 2004 roku w pracy \textit{Extreme Learning Machine: A New Learning Scheme of Feedforward Neural Networks} Guang-Bin Huang, Qin-Yu Zhu i Chee-Kheong Siew zaproponowali koncepcję ELM, mającą być rozwiązaniem tego problemu. Publikacja ta dotyczyła zastosowania ELM w SLFN. Przedstawiała podstawy teoretyczne do zastosowania tej metody, a także dowodziła zalet tego rozwiązania. Należą do nich wspomniana prędkość uczenia
+
+W tym samym roku Guang-Bin Huang i Chee-Kheong Siew zaproponowali również w artykule \textit{Extreme Learning Machine: RBF Network Case} wariant ELM dotyczący sieci radialnych, których nie dotyczy ta praca. 
 
 Kolejną istotnym wkładem tych autorów do tematu ELM jest opublikowany w 2005 artykuł \textit{Extreme Learning Machine: Theory and Applications}. Prezentowane są w nim wyniki ELM dla testowych danych, które pokazują, że metoda ta pozwala na dobrą klasyfikację, a może działać nawet kilka tysięcy razy szybciej niż tradycyjne metody. Od tego czasu pojawiło się wiele innych prac dotyczących tego zagadnienia, a zagadnienie stało się popularnym tematem.
 
@@ -78,6 +73,18 @@ Ponieważ ELM jest bardzo szybką metodą, naturalne jest zastosowanie jej do bi
 
 \clearpage
 \section{Wykonanie implementacji ELM w Pythonie i Matlabie}
+\subsection{Założenia dotyczące aplikacji}
+
+Aplikacje udostępniają następujące funkcjonalności:
+\begin{itemize}
+\item Przygotowanie danych trenujących i testowych w formie plików csv
+\item Trenowanie sieci neuronowej o architekturze ELM
+\item Klasyfikacja danych testowych przez wytrenowaną sieć
+\item Porównywanie wyników klasyfikacji do spodziewanych rezultatów
+\item Analiza jakości klasyfikacji i  czasu trwania treningu
+\item Interfejs graficzny
+\end{itemize}
+\includegraphics[width=\textwidth]{use_case.png}
 \subsection{Projekt aplikacji sieci ELM w Pythonie}
 \subsection{Projekt aplikacji sieci ELM w Matlabie}
 \subsection{Wnioski i uwagi}
