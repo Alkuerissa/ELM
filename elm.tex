@@ -7,6 +7,7 @@
 \usepackage{polski}
 \usepackage{bm}
 \usepackage{amsfonts}
+\usepackage{amsmath}
 %\usepackage[polish, english]{babel}
 %\usepackage[T1]{fontenc} % T1, OT4
 \usepackage[utf8]{inputenc}
@@ -43,14 +44,14 @@ Aleksandra Hernik sprawdzała dokładność i~wydajność uczenia dla big data z
 \section*{Wykaz ważniejszych oznaczeń i akronimów}
 \addcontentsline{toc}{section}{Wykaz ważniejszych oznaczeń i akronimów}
 \begin{itemize}[label={},leftmargin=*]
-\item ELM -- \textbf{E}xtreme \textbf{L}earning \textbf{M}achine - ekstremalne uczenie maszynowe
-\item SLFN -- \textbf{S}ingle-\textbf{L}ayer \textbf{F}eed-forward \textbf{N}etwork - jednowarstwowa jednokierunkowa sieć neuronowa
-\item BP -- \textbf{B}ack-\textbf{p}ropagation - propagacja wsteczna
-\item MLP -- \textbf{M}ulti\textbf{l}ayer \textbf{P}erceptron - perceptron wielowarstwowy
-\item SVM -- \textbf{S}upport \textbf{V}ector \textbf{M}achine - maszyna wektorów nośnych
 \item Bias -- wyraz wolny, czyli dodatkowy neuron w warstwie wejściowej niewynikający z danych wejściowych, generujący zawsze +1, ale posiadający wagę
 \item Big Data -- dane z liczbą próbek tak dużą, że nie występuje efekt przeuczenia
+\item BP -- \textbf{B}ack-\textbf{p}ropagation - propagacja wsteczna
+\item ELM -- \textbf{E}xtreme \textbf{L}earning \textbf{M}achine - ekstremalne uczenie maszynowe
+\item MLP -- \textbf{M}ulti\textbf{l}ayer \textbf{P}erceptron - perceptron wielowarstwowy
+\item SLFN -- \textbf{S}ingle-\textbf{L}ayer \textbf{F}eed-forward \textbf{N}etwork - jednowarstwowa jednokierunkowa sieć neuronowa
 \item Small Data -- dane, dla których jest za mało próbek, aby sieć poznała dokładnie model bez przeuczenia
+\item SVM -- \textbf{S}upport \textbf{V}ector \textbf{M}achine - maszyna wektorów nośnych
 \item Toolbox -- zbiór funkcji stworzonych we wspólnym celu; biblioteka
 \end{itemize}
 \clearpage
@@ -67,7 +68,7 @@ Kolejną istotnym wkładem tych autorów do tematu ELM jest opublikowany w 2005 
 Z wyżej wymienionymi pracami związane są kontrowersje dotyczące rzeczywistej innowacyjności rozwiązania Huanga i innych, a także oskarżenia dotyczące plagiatowania i nieuwzględniania w bibliografii rzeczywistych głównych źródeł pracy -- według nich artykuł dotyczący SLFN opiera się głównie na pracy \textit{Feed Forward Neural Networks With Random Weights} Woutera Schmidta, Martina Kraaijvelda i Roberta Duina z 1992, a artykuł dotyczący sieci radialnych wzoruje się na \textit{Multivariable Functional Interpolation and Adaptive Networks} Davida Broomheada i Davida Lowe'a. Huang wskazał pewne różnice między tymi pracami.
 \subsection{Założenia dla sieci neuronowych klasy ELM}
 Rozważane tu ELM zaliczają się do kategorii SLFN -- poza warstwą wejściową i wyjściową posiadają tylko jedną warstwę ukrytą. Od innych SLFN odróżnia je to, że ELM opierają się na losowym generowaniu neuronów warstwy ukrytej bez późniejszego ich dostosowywania do danych -- dzięki temu, że wszystkie ich parametry, takie jak np. wagi wejściowe, mogą zostać dobrane losowo, są one niezależne od danych trenujących, a w przeciwieństwie do metody BP, wagi wyjściowe są niezależne od wag wejściowych, co pozwala na nieiteracyjne ich wyznaczenie. Takie rozwiązanie zapewnia o kilka rzędów wielkości szybszy czas działania od innych metod, takich jak BP, MLP i SVM. 
-
+%dodać cytowanie Akusoka
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{schemat_sieci.png}
 \caption{Schemat SLFN typu ELM}
@@ -75,7 +76,26 @@ Rozważane tu ELM zaliczają się do kategorii SLFN -- poza warstwą wejściową
 
 Niech $N$ to liczba próbek danych trenujących postaci $(\bm{x}_i, \bm{t}_i) \in \mathbb{R}^n \times \mathbb{R}^m$, gdzie $\bm{x}_i = [x_{i1}, x_{i2}, \dots,  x_{in}]^T$ to dane wejściowe, a $\bm{t}_i = [t_{i1}, t_{i2}, \dots,  t_{im}]^T$ to oczekiwane wyniki. Wtedy dla SLFN z $\bar{N}$ ukrytymi neuronami wyjście dla i-tej próbki danych $(i=1,\dots,N)$ można zapisać jako:
 $$\sum_{j=1}^{\bar{N}} \bm{\beta}_j g (\bm{w}_j \cdot \bm{x}_i + b_j)  = \bm{o}_i$$
-gdzie $\bm{w}_j = [w_{j1}, w_{j2},\dots,w_{jn}]^T$ to wektor wag łączących warstwę wejściową z j-tym 
+gdzie $\bm{w}_j = [w_{j1}, w_{j2},\dots,w_{jn}]^T$ to wektor wag łączących warstwę wejściową z j-tym neuronem warstwy ukrytej, $\bm{\beta}_j = [\beta_{j1}, \beta_{j2}, \dots, \beta_{jm}]$ to wektor wag łączących j-ty neuron warstwy ukrytej z warstwą wyjściową, a $b_j$ to bias. W przypadku przybliżenia z zerowym błędem otrzymujemy układ $N$ równań $(i=1,\dots,N)$:
+$$\sum_{j=1}^{\bar{N}} \bm{\beta}_j g (\bm{w}_j \cdot \bm{x}_i + b_j)  = \bm{t}_i$$
+który można zapisać w postaci macierzowej $\bm{H}\bm{\beta}=\bm{T}$, gdzie: \\
+$
+H = \begin{bmatrix}
+ g(\bm{w}_1 \cdot \bm{x}_1 + b_1) & \cdots & g(\bm{w}_{\bar{N}} \cdot \bm{x}_1 + b_{\bar{N}}) \\
+ \vdots & \ddots & \vdots \\
+ g(\bm{w}_1 \cdot \bm{x}_N + b_1) & \cdots & g(\bm{w}_{\bar{N}} \cdot \bm{x}_N + b_{\bar{N}})
+\end{bmatrix}_{N \times \bar{N}}$, \\
+$\bm{\beta} = \begin{bmatrix} \bm{\beta}_1^T \\ \vdots \\ \bm{\beta}_{\bar{N}}^T \end{bmatrix}_{\bar{N} \times m}$ i 
+ $ \bm{T} = \begin{bmatrix} \bm{t}_1^T \\ \vdots \\ \bm{t}_N^T \end{bmatrix}_{N \times m}. $\\
+i-ta kolumna macierzy $\bm{H}$ (macierzy wyjścia warstwy ukrytej) to wyjście i-tego neuronu warstwy ukrytej dla $\bm{x}_1, \dots, \bm{x}_N$. Jeśli rozważymy macierz $\bm{W}$ jako macierz odpowiednich wag, $\bm{X}$ jako macierz danych wejściowych i $\bm{b}$ jako wektor wyrazów wolnych, otrzymujemy $\bm{H} = g(\bm{XW} + \bm{b})$. W przypadku różnych funkcji aktywacji macierz $\bm{H}$ jest otrzymywana przez konkatenację analogicznie uzyskanych podmacierzy: 
+$$\bm{H} = [\bm{H}_1 | \bm{H}_2] = [g_1(\bm{XW}_1 + \bm{b}_1) | g_2(\bm{XW}_2 + \bm{b}_2)].$$ 
+
+Sposób rozwiązania równania $\bm{H}\bm{\beta}=\bm{T}$ jest zależny od liczby próbek $N$ i liczby neuronów warstwy ukrytej $\bar{N}$. W przypadku, gdy $N \leq \bar{N}$, należy zastosować regularyzację w celu otrzymania satysfakcjonującej wydajności. W najczęstszym przypadku $N \gg \bar{N}$ jednak należy zastosować pseudoinwersję Moore'a-Penrose'a:
+$$\bm{H}\bm{\beta}=\bm{T} \implies \bm{\beta}=\bm{H}^{\dagger}\bm{T},$$
+gdzie 
+$$\bm{H}^{\dagger} = (\bm{H}^T \bm{H})^{-1}\bm{H}^T. $$
+Błąd trenowania jest wyznaczany za pomocą normy euklidesowej.
+%dodać cytowanie Huanga
 
 Możliwości uczenia się ELM zależą między innymi od doboru funkcji transformacji -- w szczególności ważne jest, żeby była ona nieliniowa, ponieważ to jedyne miejsce w całym modelu, w którym może być wykorzystane jakiekolwiek nieliniowe przekształcenie. Możliwe jest wykorzystanie różnych funkcji w różnych neuronach. Dla optymalnej jakości uczenia ważne jest również znormalizowanie danych wejściowych -- jeśli charakterystyki danych wejściowych mają różne rzędy wielkości, relatywnie drobne zmiany większej wartości mogą mieć większe znaczenie niż stosunkowo duże zmiany mniejszych wartości. Normalizacja pozwala na zrównanie wagi zmian wszystkich charakterystyk. \par
 
