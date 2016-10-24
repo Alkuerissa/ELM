@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.6">
-<info created="D:20161024001512" modified="D:20161024203810"/>
+<info created="D:20161024001512" modified="D:20161024210553"/>
 <preamble>\usepackage{polski}
 \usepackage[utf8]{inputenc}</preamble>
 <ipestyle name="basic">
@@ -378,7 +378,7 @@ h
 <text matrix="1 0 0 1 26.6172 -7.92577" transformations="translations" pos="240.858 624.447" stroke="darkred" type="label" width="21.72" height="11.953" depth="3.35" valign="baseline" size="LARGE" style="math">\beta_{31}</text>
 <text matrix="1 0 0 1 30.3852 -12.232" transformations="translations" pos="232.784 553.394" stroke="darkred" type="label" width="21.72" height="11.953" depth="3.35" valign="baseline" size="LARGE" style="math">\beta_{41}</text>
 <text matrix="1 0 0 1 20.6961 -12.232" transformations="translations" pos="97.137 734.795" stroke="darkred" type="label" width="13.518" height="11.957" depth="2.58" valign="baseline" size="LARGE" style="math">b_2</text>
-<text matrix="1 0 0 1 27.6937 -11.1555" transformations="translations" pos="84.2183 651.899" stroke="darkred" type="label" width="24.254" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">w_{12}</text>
+<text matrix="1 0 0 1 27.6937 -11.1555" transformations="translations" pos="84.2183 651.899" stroke="darkred" type="label" width="24.254" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">w_{21}</text>
 <text matrix="1 0 0 1 25.0023 -6.84921" transformations="translations" pos="78.8355 564.698" stroke="darkred" type="label" width="24.254" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">w_{22}</text>
 <text matrix="1 0 0 1 12.1578 15.2203" transformations="translations" pos="17.4713 804.771" stroke="black" type="label" width="131.695" height="11.857" depth="3.35" valign="baseline" size="LARGE">Warstwa 
 wejściowa</text>
