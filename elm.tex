@@ -5,6 +5,8 @@
 %\setlength{\textwidth}{5.5in} % set width of text portion
 \usepackage{graphicx}
 \usepackage{polski}
+\usepackage{bm}
+\usepackage{amsfonts}
 %\usepackage[polish, english]{babel}
 %\usepackage[T1]{fontenc} % T1, OT4
 \usepackage[utf8]{inputenc}
@@ -66,8 +68,15 @@ Z wyżej wymienionymi pracami związane są kontrowersje dotyczące rzeczywistej
 \subsection{Założenia dla sieci neuronowych klasy ELM}
 Rozważane tu ELM zaliczają się do kategorii SLFN -- poza warstwą wejściową i wyjściową posiadają tylko jedną warstwę ukrytą. Od innych SLFN odróżnia je to, że ELM opierają się na losowym generowaniu neuronów warstwy ukrytej bez późniejszego ich dostosowywania do danych -- dzięki temu, że wszystkie ich parametry, takie jak np. wagi wejściowe, mogą zostać dobrane losowo, są one niezależne od danych trenujących, a w przeciwieństwie do metody BP, wagi wyjściowe są niezależne od wag wejściowych, co pozwala na nieiteracyjne ich wyznaczenie. Takie rozwiązanie zapewnia o kilka rzędów wielkości szybszy czas działania od innych metod, takich jak BP, MLP i SVM. 
 
-%tu rysunek
-Niech $N$ to liczba próbek danych trenujących postaci $(\textbf{x}_i, \textbf{t}_i)$, gdzie  
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{schemat_sieci.png}
+\caption{Schemat SLFN typu ELM}
+\end{figure}
+
+Niech $N$ to liczba próbek danych trenujących postaci $(\bm{x}_i, \bm{t}_i) \in \mathbb{R}^n \times \mathbb{R}^m$, gdzie $\bm{x}_i = [x_{i1}, x_{i2}, \dots,  x_{in}]^T$ to dane wejściowe, a $\bm{t}_i = [t_{i1}, t_{i2}, \dots,  t_{im}]^T$ to oczekiwane wyniki. Wtedy dla SLFN z $\bar{N}$ ukrytymi neuronami wyjście dla i-tej próbki danych można zapisać jako:
+$$\sum_{j=1}^{\bar{N}} \bm{\beta}_j g_j (\bm{x}_i) = 
+\sum_{j=1}^{\bar{N}} \bm{\beta}_j g (\bm{w}_j \bm{x}_i + b_j)  = \bm{o}_i$$
+
 Możliwości uczenia się ELM zależą między innymi od doboru funkcji transformacji -- w szczególności ważne jest, żeby była ona nieliniowa, ponieważ to jedyne miejsce w całym modelu, w którym może być wykorzystane jakiekolwiek nieliniowe przekształcenie. Możliwe jest wykorzystanie różnych funkcji w różnych neuronach. Dla optymalnej jakości uczenia ważne jest również znormalizowanie danych wejściowych -- jeśli charakterystyki danych wejściowych mają różne rzędy wielkości, relatywnie drobne zmiany większej wartości mogą mieć większe znaczenie niż stosunkowo duże zmiany mniejszych wartości. Normalizacja pozwala na zrównanie wagi zmian wszystkich charakterystyk. \par
 
 W przypadku problemu klasyfikacji, który jest rozważany w tej pracy, rozwiązaniem jest kategoria, dla której wartość na węźle wyjściowym była największa. 
@@ -87,9 +96,9 @@ Aplikacje udostępniają następujące funkcjonalności:
 \item Analiza jakości klasyfikacji i  czasu trwania treningu
 \item Interfejs graficzny
 \end{itemize}
-\begin{figure}
-\caption{Diagram przypadków użycia}
+\begin{figure}[H]
 \includegraphics[width=\textwidth]{use_case.png}
+\caption{Diagram przypadków użycia}
 \end{figure}
 \subsection{Projekt aplikacji sieci ELM w Pythonie}
 \subsection{Projekt aplikacji sieci ELM w Matlabie}

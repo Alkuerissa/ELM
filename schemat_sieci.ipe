@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.6">
-<info created="D:20161024001512" modified="D:20161024003430"/>
+<info created="D:20161024001512" modified="D:20161024203810"/>
 <preamble>\usepackage{polski}
 \usepackage[utf8]{inputenc}</preamble>
 <ipestyle name="basic">
@@ -222,13 +222,13 @@ h
 <dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
 <dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
 <textsize name="large" value="\large"/>
+<textsize name="small" value="\small"/>
+<textsize name="tiny" value="\tiny"/>
 <textsize name="Large" value="\Large"/>
 <textsize name="LARGE" value="\LARGE"/>
 <textsize name="huge" value="\huge"/>
 <textsize name="Huge" value="\Huge"/>
-<textsize name="small" value="\small"/>
 <textsize name="footnote" value="\footnotesize"/>
-<textsize name="tiny" value="\tiny"/>
 <textstyle name="center" begin="\begin{center}" end="\end{center}"/>
 <textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
 <textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
@@ -367,10 +367,10 @@ h
 <text matrix="1 0 0 1 16.9281 -25.1508" transformations="translations" pos="36.3385 737.378" stroke="black" type="label" width="52.141" height="16.938" depth="0" valign="baseline" size="Huge" style="math">Bias</text>
 <text matrix="1 0 0 1 34.388 -14.7741" transformations="translations" pos="35.262 635.642" stroke="black" type="label" width="30.668" height="10.671" depth="5.01" valign="baseline" size="Huge" style="math">x_{i1}</text>
 <text matrix="1 0 0 1 30.0889 -16.3185" transformations="translations" pos="39.2112 541.713" stroke="black" type="label" width="30.668" height="10.671" depth="5.01" valign="baseline" size="Huge" style="math">x_{i2}</text>
-<text matrix="1 0 0 1 29.3086 -18.6914" transformations="translations" pos="200.756 768.868" stroke="black" type="label" width="21.596" height="10.672" depth="4.82" valign="baseline" size="Huge" style="math">g_1</text>
-<text matrix="1 0 0 1 31.4617 -16.5383" transformations="translations" pos="199.141 684.896" stroke="black" type="label" width="21.596" height="10.672" depth="4.82" valign="baseline" size="Huge" style="math">g_2</text>
-<text matrix="1 0 0 1 28.7703 -14.3852" transformations="translations" pos="200.756 603.616" stroke="black" type="label" width="21.596" height="10.672" depth="4.82" valign="baseline" size="Huge" style="math">g_3</text>
-<text matrix="1 0 0 1 28.7703 -14.3852" transformations="translations" pos="200.487 523.25" stroke="black" type="label" width="21.596" height="10.672" depth="4.82" valign="baseline" size="Huge" style="math">g_4</text>
+<text matrix="1 0 0 1 34.4048 -18.6914" transformations="translations" pos="200.756 768.868" stroke="black" type="label" width="12.511" height="10.672" depth="4.82" valign="baseline" size="Huge" style="math">g</text>
+<text matrix="1 0 0 1 35.6023 -16.2198" transformations="translations" pos="199.141 684.896" stroke="black" type="label" width="12.511" height="10.672" depth="4.82" valign="baseline" size="Huge" style="math">g</text>
+<text matrix="1 0 0 1 33.5479 -14.3852" transformations="translations" pos="200.756 603.616" stroke="black" type="label" width="12.511" height="10.672" depth="4.82" valign="baseline" size="Huge" style="math">g</text>
+<text matrix="1 0 0 1 34.185 -14.0667" transformations="translations" pos="200.487 523.25" stroke="black" type="label" width="12.511" height="10.672" depth="4.82" valign="baseline" size="Huge" style="math">g</text>
 <text matrix="1 0 0 1 25.0023 -32.6867" transformations="translations" pos="367.355 727.797" stroke="black" type="label" width="16.548" height="17.074" depth="0" valign="baseline" size="Huge" style="math">\Sigma</text>
 <text matrix="1 0 0 1 29.8469 -28.3805" transformations="translations" pos="361.972 578.693" stroke="black" type="label" width="16.548" height="17.074" depth="0" valign="baseline" size="Huge" style="math">\Sigma</text>
 <text matrix="1 0 0 1 12.6219 -10.0789" transformations="translations" pos="264.004 768.168" stroke="darkred" type="label" width="21.72" height="11.953" depth="3.35" valign="baseline" size="LARGE" style="math">\beta_{11}</text>
