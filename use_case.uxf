@@ -29,43 +29,43 @@ halign=left</panel_attributes>
     <coordinates>
       <x>240</x>
       <y>440</y>
-      <w>200</w>
-      <h>90</h>
+      <w>190</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;10.0;180.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;170.0;180.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>240</x>
       <y>440</y>
-      <w>200</w>
-      <h>210</h>
+      <w>190</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;10.0;180.0;190.0</additional_attributes>
+    <additional_attributes>10.0;10.0;170.0;90.0</additional_attributes>
   </element>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>420</x>
-      <y>490</y>
+      <x>410</x>
+      <y>600</y>
       <w>240</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>Wprowadzenie danych treningowych</panel_attributes>
+    <panel_attributes>Wprowadzenie danych</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>420</x>
-      <y>610</y>
+      <x>410</x>
+      <y>510</y>
       <w>240</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>Wprowadzenie danych testowych</panel_attributes>
+    <panel_attributes>Ustawienie proporcji danych</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -242,7 +242,7 @@ z oczekiwanymi</panel_attributes>
     <id>UMLUseCase</id>
     <coordinates>
       <x>980</x>
-      <y>610</y>
+      <y>600</y>
       <w>240</w>
       <h>40</h>
     </coordinates>
@@ -255,33 +255,21 @@ z oczekiwanymi</panel_attributes>
       <x>1210</x>
       <y>440</y>
       <w>190</w>
-      <h>210</h>
+      <h>200</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;190.0;170.0;10.0</additional_attributes>
+    <additional_attributes>10.0;180.0;170.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>610</y>
-      <w>350</w>
+      <x>640</x>
+      <y>600</y>
+      <w>360</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;includes&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;20.0;330.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>650</x>
-      <y>500</y>
-      <w>360</w>
-      <h>140</h>
-    </coordinates>
-    <panel_attributes>lt=.&gt;
-&lt;&lt;includes&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;340.0;120.0</additional_attributes>
+    <additional_attributes>10.0;20.0;340.0;20.0</additional_attributes>
   </element>
 </diagram>
