@@ -1,6 +1,9 @@
 \documentclass{article}
 \usepackage[hidelinks]{hyperref}
 \usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{enumitem}
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
 \usepackage{indentfirst}
@@ -20,6 +23,7 @@ Wydział Matematyki i Nauk Informacyjnych Politechniki Warszawskiej
 \clearpage
 \noindent
 \begin{table}[H]
+\caption{Zmiany w dokumentacji}
 \hspace*{-1cm}
 \begin{tabular}{|l|l|l|r|}
 \hline
@@ -38,6 +42,7 @@ Wydział Matematyki i Nauk Informacyjnych Politechniki Warszawskiej
 \clearpage
 \section{Specyfikacja}
 \subsection{Opis biznesowy}
+Projekt polega na przygotowaniu dwóch aplikacji. Pierwsza jest napisana w języku Python. Druga została stworzona w środowisku Matlab. Celem obu jest przetestowanie nowego modelu sieci neuronowych - Extreme Learning Machine. Programy zapewniają możliwość wytrenowania sieci neuronowej przy użyciu różnych danych i dostarczają informacje, dotyczące czasu trwania i jakości treningu. Dzięki temu będzie możliwe określenie, czy metoda ELM może być uważana za dobrą alternatywę dla tradycyjnych architektur sieci neuronowych, a także w jakich obszarach sprawdzi się najlepiej.
 \subsection{Wymagania funkcjonalne}
 \begin{itemize}
 \item Przygotowanie danych trenujących i testowych w formie plików csv
@@ -53,7 +58,6 @@ Poniższy diagram UML przedstawia zbiór przypadków użycia aplikacji z punktu 
 \includegraphics[width=16cm]{use_case.png}
 \caption{Diagram przypadków użycia}
 \end{figure}
-\clearpage
 Poniższa tabela zawiera opisy przypadków użycia dla użytkownika oraz odpowiedzi systemu.
 
 \begin{table}[H]
@@ -69,6 +73,7 @@ Uruchomienie testów & Uruchomienie testów sieci wytrenowanej wcześniej schema
 \hline
 \end{tabular}
 \end{table}
+\clearpage
 \subsection{Wymagania niefunkcjonalne}
 W poniższej tabeli znajduje się lista wymagań niefunkcjonalnych.
 \begin{table}[H]
@@ -91,6 +96,7 @@ Inne & 5 & Wykonanie aplikacji w językach Python i MATLAB \\
 
 \subsection{Harmonogram projektu}
 \begin{table}[H]
+\caption{Harmonogram prac}
 \begin{tabular}{|l|r|r|r|}
 \hline
 \textbf{Etap} & \textbf{Czas} & \textbf{Początek} & \textbf{Koniec} \\
@@ -98,6 +104,7 @@ Inne & 5 & Wykonanie aplikacji w językach Python i MATLAB \\
 Przygotowanie pierwszego rozdziału dokumentacji & 24 dni & 10.10.2016 & 02.11.2016 \\
 Opracowanie modelu pracy sieci ELM & 14 dni & 17.10.2016 & 30.10.2016 \\
 Analiza narzędzi & 7 dni & 31.10.2016 & 06.11.2016 \\
+Projekt techniczny & 7 dni & 07.11.2016 & 13.11.2016 \\
 Implementacja i napisanie drugiego rozdziału pracy & 14 dni & 07.11.2016 & 20.11.2016 \\
 Tworzenie i wykonywanie testów dla small data & 7 dni & 21.11.2016 & 27.11.2016 \\
 Tworzenie i wykonywanie testów dla big data & 7 dni & 28.11.2016 & 04.12.2016 \\
@@ -105,4 +112,17 @@ Opis wniosków z testów & 7 dni & 05.12.2016 & 11.12.2016 \\
 \hline
 \end{tabular}
 \end{table}
+\subsection{Uwagi}
+\begin{itemize}
+\item Automatyczne testy, sprawdzające główną funkcjonalność programu - trening sieci - nie zostaną utworzone. Istotą projektu jest przeanalizowanie otrzymywanych wyników, a nie otrzymanie z góry zaplanowanych rezultatów.
+\end{itemize}
+\clearpage
+\section{Wykaz ważniejszych oznaczeń i akronimów}
+\begin{itemize}[label={},leftmargin=*]
+\item Big Data -- dane z liczbą próbek tak dużą, że nie występuje efekt przeuczenia
+\item ELM -- \textbf{E}xtreme \textbf{L}earning \textbf{M}achine - ekstremalne uczenie maszynowe
+\item Small Data -- dane, dla których jest za mało próbek, aby sieć poznała dokładnie model bez przeuczenia
+\item Toolbox -- zbiór funkcji stworzonych we wspólnym celu; biblioteka;
+\end{itemize}
+
 \end{document}
