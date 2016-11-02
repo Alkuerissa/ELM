@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage[hidelinks]{hyperref}
-
+\usepackage{graphicx}
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
 \usepackage{indentfirst}
@@ -20,6 +20,7 @@ Wydział Matematyki i Nauk Informacyjnych Politechniki Warszawskiej
 \clearpage
 \noindent
 \begin{table}[H]
+\hspace*{-1cm}
 \begin{tabular}{|l|l|l|r|}
 \hline
 \textbf{Data} & \textbf{Autor} & \textbf{Opis zmian} & \textbf{Wersja} \\
@@ -46,13 +47,48 @@ Wydział Matematyki i Nauk Informacyjnych Politechniki Warszawskiej
 \item Analiza jakości klasyfikacji i  czasu trwania treningu
 \item Interfejs graficzny
 \end{itemize}
+Poniższy diagram UML przedstawia zbiór przypadków użycia aplikacji z punktu widzenia użytkownika i systemu. Dotyczy obu aplikacji.
+\begin{figure}[H]
+\hspace*{-2cm}
+\includegraphics[width=16cm]{use_case.png}
+\caption{Diagram przypadków użycia}
+\end{figure}
+\clearpage
+Poniższa tabela zawiera opisy przypadków użycia dla użytkownika oraz odpowiedzi systemu.
+
+\begin{table}[H]
+\caption{Opisy przypadków użycia}
+\begin{tabular}{|p{3.4cm}|p{5cm}|p{4cm}|}
+\hline
+\textbf{Nazwa} & \textbf{Opis} & \textbf{Odpowiedź systemu} \\
+\hline
+Wprowadzenie danych & Wprowadzenie danych używanych do uczenia sieci & Odczytanie pliku csv \\ \hline
+Ustawienie proporcji danych & Ustawienie proporcji danych treningowych, testowych i zatwierdzających & Zapisanie wyboru \\ \hline
+Uruchomienie treningu & Uruchomienie treningu sieci schematem ELM & Trenowanie sieci i zmierzenie czasu treningu \\ \hline
+Uruchomienie testów & Uruchomienie testów sieci wytrenowanej wcześniej schematem ELM & Testowanie sieci i porównanie otrzymanych wyników z oczekiwanymi \\
+\hline
+\end{tabular}
+\end{table}
 \subsection{Wymagania niefunkcjonalne}
-\begin{itemize}
-\item Działanie na komputerach wydziałowych
-\item Działanie o kilka rzędów wielkości szybsze od tradycyjnych metod uczenia
-\item Przejrzysty interfejs graficzny
-\item Czytelne wykresy
-\end{itemize}
+W poniższej tabeli znajduje się lista wymagań niefunkcjonalnych.
+\begin{table}[H]
+\caption{Lista wymagań niefunkcjonalnych}
+\begin{tabular}{|l|l|p{9.4cm}|}
+\hline
+\textbf{Obszar} & \textbf{Numer} & \textbf{Opis} \\
+\hline
+Użyteczność & 1 & Aplikacje muszą działać na komputerach wydziałowych \\
+ & 2 & Aplikacje powinny mieć przejrzysty interfejs graficzny \\
+ & 3 & Wykresy wyświetlane w aplikacji powinny być czytelne \\
+\hline
+Wydajność & 4 & Działanie w oparciu o ELM powinno dawać o kilka rzędów wielkości szybszy czas uczenia niż tradycyjne metody \\
+\hline 
+Inne & 5 & Wykonanie aplikacji w językach Python i MATLAB \\
+& 6 & Dobrze udokumentowany kod \\
+\hline
+\end{tabular}
+\end{table}
+
 \subsection{Harmonogram projektu}
 \begin{table}[H]
 \begin{tabular}{|l|r|r|r|}
