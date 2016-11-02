@@ -5,12 +5,39 @@
 \usepackage[utf8]{inputenc}
 \usepackage{indentfirst}
 \usepackage{float}
-\title{Analiza biznesowa}
+\title{Projekt aplikacji do ekstremalnego uczenia maszynowego do klasyfikacji big data}
 \author{Abdelkarim Ahmed, Hernik Aleksandra}
 \begin{document}
+Wydział Matematyki i Nauk Informacyjnych Politechniki Warszawskiej
+\vspace*{\fill}
+\begin{center}
+\begin{minipage}{.9\textwidth}
 \maketitle
+\begin{center}Wersja 1.2\end{center}
+\end{minipage}
+\end{center}
+\vfill % equivalent to \vspace{\fill}
+\clearpage
 \noindent
-Wymagania funkcjonalne:
+\begin{table}[H]
+\begin{tabular}{|l|l|l|r|}
+\hline
+\textbf{Data} & \textbf{Autor} & \textbf{Opis zmian} & \textbf{Wersja} \\
+\hline
+10.10.2016 & Ahmed Abdelkarim & Diagram przypadków użycia & 0.1 \\
+10.10.2016 & Aleksandra Hernik & Wstępna wersja harmonogramu i wymagań & 0.2 \\
+19.10.2016 & Aleksandra Hernik & Korekty harmonogramu i wymagań & 0.3 \\
+02.11.2016 & Ahmed Abdelkarim & Stworzenie i wprowadzenie szablonu & 1.0 \\
+02.11.2016 & Ahmed Abdelkarim & Opis przypadków użycia & 1.1 \\
+02.11.2016 & Aleksandra Hernik & Opis biznesowy, dokończenie harmonogramu & 1.2 \\
+\hline
+\end{tabular}
+\end{table}
+\tableofcontents
+\clearpage
+\section{Specyfikacja}
+\subsection{Opis biznesowy}
+\subsection{Wymagania funkcjonalne}
 \begin{itemize}
 \item Przygotowanie danych trenujących i testowych w formie plików csv
 \item Trenowanie sieci neuronowej o architekturze ELM
@@ -19,8 +46,27 @@ Wymagania funkcjonalne:
 \item Analiza jakości klasyfikacji i  czasu trwania treningu
 \item Interfejs graficzny
 \end{itemize}
-Wymagania niefunkcjonalne:
+\subsection{Wymagania niefunkcjonalne}
 \begin{itemize}
 \item Działanie na komputerach wydziałowych
+\item Działanie o kilka rzędów wielkości szybsze od tradycyjnych metod uczenia
+\item Przejrzysty interfejs graficzny
+\item Czytelne wykresy
 \end{itemize}
+\subsection{Harmonogram projektu}
+\begin{table}[H]
+\begin{tabular}{|l|r|r|r|}
+\hline
+\textbf{Etap} & \textbf{Czas} & \textbf{Początek} & \textbf{Koniec} \\
+\hline
+Przygotowanie pierwszego rozdziału dokumentacji & 24 dni & 10.10.2016 & 02.11.2016 \\
+Opracowanie modelu pracy sieci ELM & 14 dni & 17.10.2016 & 30.10.2016 \\
+Analiza narzędzi & 7 dni & 31.10.2016 & 06.11.2016 \\
+Implementacja i napisanie drugiego rozdziału pracy & 14 dni & 07.11.2016 & 20.11.2016 \\
+Tworzenie i wykonywanie testów dla small data & 7 dni & 21.11.2016 & 27.11.2016 \\
+Tworzenie i wykonywanie testów dla big data & 7 dni & 28.11.2016 & 04.12.2016 \\
+Opis wniosków z testów & 7 dni & 05.12.2016 & 11.12.2016 \\
+\hline
+\end{tabular}
+\end{table}
 \end{document}
