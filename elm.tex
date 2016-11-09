@@ -14,12 +14,13 @@
 \usepackage{indentfirst}
 \usepackage{float}
 \usepackage{enumitem}
-
+\renewcommand\refname{Bibliografia}
 \title{Projekt aplikacji do ekstremalnego uczenia maszynowego do klasyfikacji big data}
 \author{Abdelkarim Ahmed, Hernik Aleksandra}
 \date{}
 \begin{document}
-
+\renewcommand*\listfigurename{Wykaz rysunków}
+\renewcommand*\listtablename{Wykaz tabel}
 \clearpage
 \vspace*{\fill}
 \begin{center}
@@ -181,11 +182,10 @@ Inne & 5 & Wykonanie aplikacji w językach Python i MATLAB \\
 \addcontentsline{toc}{section}{Podsumowanie}
 
 \clearpage
-\section*{Bibliografia}
 \addcontentsline{toc}{section}{Bibliografia}
+
 TODO dobre referencje
 \begin{thebibliography}{9}
-
 \bibitem{akusok-hpelm}
   A. Akusok, K.-M. Björk, Y. Miche, A. Lendasse,
   \emph{High-Performance Extreme Learning Machines: A Complete Toolbox for Big Data Applications}
@@ -200,10 +200,10 @@ TODO dobre referencje
 
 
 \clearpage
-\addcontentsline{toc}{section}{Spis rysunków}
+\addcontentsline{toc}{section}{Wykaz rysunków}
 \listoffigures
 \clearpage
-\addcontentsline{toc}{section}{Spis tabel}
+\addcontentsline{toc}{section}{Wykaz tabel}
 \listoftables
 \clearpage
 \section*{Dodatek. Instrukcja obsługi aplikacji}
