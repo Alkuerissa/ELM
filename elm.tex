@@ -48,6 +48,7 @@ Aleksandra Hernik sprawdzała dokładność i~wydajność uczenia dla big data z
 \item Big Data -- dane z liczbą próbek tak dużą, że nie występuje efekt przeuczenia
 \item BP -- \textbf{B}ack-\textbf{p}ropagation - propagacja wsteczna
 \item ELM -- \textbf{E}xtreme \textbf{L}earning \textbf{M}achine - ekstremalne uczenie maszynowe
+\item GPU -- \textbf{G}raphics \textbf{P}rocessing \textbf{U}nit
 \item MLP -- \textbf{M}ulti\textbf{l}ayer \textbf{P}erceptron - perceptron wielowarstwowy
 \item SLFN -- \textbf{S}ingle-\textbf{L}ayer \textbf{F}eed-forward \textbf{N}etwork - jednowarstwowa jednokierunkowa sieć neuronowa
 \item Small Data -- dane, dla których jest za mało próbek, aby sieć poznała dokładnie model bez przeuczenia
@@ -159,6 +160,24 @@ Inne & 5 & Wykonanie aplikacji w językach Python i MATLAB \\
 \hline
 \end{tabular}
 \end{table}
+\subsection{Analiza wykorzystywanych narzędzi}
+W związku ze wspomnianą wcześniej pracą \textit{High-Performance Extreme Learning Machines: A Complete Toolbox for Big Data Applications} Anton Akusok napisał w Pythonie i udostępnił dwie biblioteki wykorzystujące ELM.
+
+Projekt \textit{High Performance toolbox for Extreme Learning Machines} prezentuje kompleksowe podejście do wykorzystania ELM. Zapewnia następujące funkcjonalności:
+\begin{itemize}
+\item Wczytywanie plików z danymi
+\item Tworzenie sieci na podstawie danych
+\item Dodawanie neuronów z wybranymi funkcjami aktywacji
+\item Trening sieci
+\item Klasyfikacja lub regresja danych przez wytrenowaną sieć
+\end{itemize}
+Dodatkowo dostępne są liczne udogodnienia:
+\begin{itemize}
+\item Efektywne przechowywanie danych (w formacie HDF5)
+\item Możliwość wykorzystywania zbiorów danych niemieszczących się w pamięci operacyjnej
+\item Regularyzacja (dla małych zbiorów danych)
+\item Możliwość wykonywania obliczeń na GPU
+\end{itemize}
 \subsection{Projekt aplikacji sieci ELM w Pythonie}
 \subsection{Projekt aplikacji sieci ELM w Matlabie}
 \subsection{Wnioski i uwagi}
@@ -183,22 +202,19 @@ Inne & 5 & Wykonanie aplikacji w językach Python i MATLAB \\
 \clearpage
 \section*{Bibliografia}
 \addcontentsline{toc}{section}{Bibliografia}
-TODO dobre referencje
 \begin{thebibliography}{9}
 
-\bibitem{akusok-hpelm}
+\bibitem{akusok}
   A. Akusok, K.-M. Björk, Y. Miche, A. Lendasse,
-  \emph{High-Performance Extreme Learning Machines: A Complete Toolbox for Big Data Applications}
+  \emph{High-Performance Extreme Learning Machines: A Complete Toolbox for Big Data Applications},
 
-\bibitem{huang-elm:ta}
-  A. G.-B. Huang, L. Chen, C.-K. Siew, 
-  \emph{Extreme Learning Machine: Theory and Applications}
-  
-\bibitem{originofelm} 
-  \emph{http://elmorigin.wixsite.com/originofelm}  
 \end{thebibliography}
-
-
+TODO dobre referencje
+\begin{itemize}
+\item  \textit{}
+\item G.-B. Huang, L. Chen, C.-K. Siew, \textit{Extreme learning machine: Theory and applications} 
+\item http://elmorigin.wixsite.com/originofelm
+\end{itemize}
 \clearpage
 \addcontentsline{toc}{section}{Spis rysunków}
 \listoffigures
