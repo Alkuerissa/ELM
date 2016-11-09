@@ -110,6 +110,7 @@ Ponieważ ELM jest bardzo szybką metodą, naturalne jest zastosowanie jej do bi
 \clearpage
 \section{Wykonanie implementacji ELM w Pythonie i Matlabie}
 \subsection{Założenia dotyczące aplikacji}
+Projekt polega na przygotowaniu dwóch aplikacji. Pierwsza jest napisana w języku Python. Druga została stworzona w środowisku Matlab. Celem obu jest przetestowanie nowego modelu sieci neuronowych - Extreme Learning Machine. Programy zapewniają możliwość wytrenowania sieci neuronowej przy użyciu różnych danych i dostarczają informacje, dotyczące czasu trwania i jakości treningu. Dzięki temu będzie możliwe określenie, czy metoda ELM może być uważana za dobrą alternatywę dla tradycyjnych architektur sieci neuronowych, a także w jakich obszarach sprawdzi się najlepiej. Szczególny nacisk został położony na zbadanie działania dla Big Data.
 
 Aplikacje udostępniają następujące funkcjonalności:
 \begin{itemize}
@@ -120,19 +121,59 @@ Aplikacje udostępniają następujące funkcjonalności:
 \item Analiza jakości klasyfikacji i  czasu trwania treningu
 \item Interfejs graficzny
 \end{itemize}
+Poniższy diagram UML przedstawia zbiór przypadków użycia aplikacji z punktu widzenia użytkownika i systemu, a w następnej tabeli znajduje się ich uszczegółowienie.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{use_case.png}
 \caption{Diagram przypadków użycia}
 \end{figure}
+
+\begin{table}[H]
+\caption{Opisy przypadków użycia}
+\begin{tabular}{|p{3.4cm}|p{5cm}|p{4cm}|}
+\hline
+\textbf{Nazwa} & \textbf{Opis} & \textbf{Odpowiedź systemu} \\
+\hline
+Wprowadzenie danych & Wprowadzenie danych używanych do uczenia sieci & Odczytanie pliku csv \\ \hline
+Ustawienie proporcji danych & Ustawienie proporcji danych treningowych, testowych i zatwierdzających & Zapisanie wyboru \\ \hline
+Uruchomienie treningu & Uruchomienie treningu sieci schematem ELM & Trenowanie sieci i zmierzenie czasu treningu \\ \hline
+Uruchomienie testów & Uruchomienie testów sieci wytrenowanej wcześniej schematem ELM & Testowanie sieci i porównanie otrzymanych wyników z oczekiwanymi \\
+\hline
+\end{tabular}
+\end{table}
+
+Wymagania niefunkcjonalne aplikacji zostały określone następująco:
+\begin{table}[H]
+\caption{Lista wymagań niefunkcjonalnych}
+\begin{tabular}{|l|l|p{9.4cm}|}
+\hline
+\textbf{Obszar} & \textbf{Numer} & \textbf{Opis} \\
+\hline
+Użyteczność & 1 & Aplikacje muszą działać na komputerach wydziałowych \\
+ & 2 & Aplikacje powinny mieć przejrzysty interfejs graficzny \\
+ & 3 & Wykresy wyświetlane w aplikacji powinny być czytelne \\
+\hline
+Wydajność & 4 & Działanie w oparciu o ELM powinno dawać o kilka rzędów wielkości szybszy czas uczenia niż tradycyjne metody \\
+\hline 
+Inne & 5 & Wykonanie aplikacji w językach Python i MATLAB \\
+& 6 & Dobrze udokumentowany kod \\
+\hline
+\end{tabular}
+\end{table}
 \subsection{Projekt aplikacji sieci ELM w Pythonie}
 \subsection{Projekt aplikacji sieci ELM w Matlabie}
 \subsection{Wnioski i uwagi}
+\begin{itemize}
+\item Automatyczne testy, sprawdzające główną funkcjonalność programu - trening sieci - nie zostaną utworzone. Istotą projektu jest przeanalizowanie otrzymywanych, a nie otrzymanie z góry zaplanowanych wyników.
+\item Nie zostały postawione wymagania związane z niezawodnością i utrzymaniem. Aplikacje służą wyłącznie jako narzędzia do przetestowania nowej technologii, więc jedynym wymaganiem jest działanie w momencie przeprowadzania testów. Ta kwestia może ulec zmianie, jeśli testy wypadną korzystnie dla ELM.
+\item Wydajność jest raczej oczekiwaniem, nie wymaganiem. Z prac, na których bazowany jest projekt wynika, że metoda powinna być szybka, jednak założenia projektu polegają na sprawdzeniu, a nie przyjęciu tej tezy. Ponadto nie zostały zaimplementowane inne metody uczenia sieci neuronowych, więc precyzyjna ocena wydajności byłaby trudna.
+\end{itemize}
 \clearpage
 \section{Trening ELM dla wybranych benchmarków big data i small data}
 \subsection{Opis wybranych benchmarków}
 \subsection{Trening dla instancji klasy small data}
 \subsection{Trening dla instancji klasy big data}
 \subsection{Wnioski i uwagi}
+
 \clearpage
 \section{Eksperymenty obejmujące instancje klasyfikacji wraz z badaniem ich wydajności}
 \clearpage
@@ -142,20 +183,25 @@ Aplikacje udostępniają następujące funkcjonalności:
 \clearpage
 \section*{Bibliografia}
 \addcontentsline{toc}{section}{Bibliografia}
+\begin{thebibliography}{9}
+
+\bibitem{akusok}
+  A. Akusok, K.-M. Björk, Y. Miche, A. Lendasse,
+  \emph{High-Performance Extreme Learning Machines: A Complete Toolbox for Big Data Applications},
+
+\end{thebibliography}
 TODO dobre referencje
 \begin{itemize}
-\item A. Akusok, K.-M. Björk, Y. Miche, A. Lendasse \textit{High-Performance Extreme Learning Machines: A Complete Toolbox for Big Data Applications}
+\item  \textit{}
 \item G.-B. Huang, L. Chen, C.-K. Siew, \textit{Extreme learning machine: Theory and applications} 
 \item http://elmorigin.wixsite.com/originofelm
 \end{itemize}
 \clearpage
-\section*{Wykaz rysunków}
-\addcontentsline{toc}{section}{Wykaz rysunków}
-
+\addcontentsline{toc}{section}{Spis rysunków}
+\listoffigures
 \clearpage
-\section*{Wykaz tabel}
-\addcontentsline{toc}{section}{Wykaz tabel}
-
+\addcontentsline{toc}{section}{Spis tabel}
+\listoftables
 \clearpage
 \section*{Dodatek. Instrukcja obsługi aplikacji}
 \addcontentsline{toc}{section}{Dodatek. Instrukcja obsługi aplikacji}
