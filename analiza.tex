@@ -121,13 +121,23 @@ Instrukcja użytkownika & 4 dni & 11.12.2016 & 14.12.2016 \\
 \end{tabular}
 \end{table}
 \subsection{Architektura rozwiązania}
-Zostaną przygotowane dwie niezależne aplikacje pełniące takie same funkcje -- jedna w języku MATLAB, a druga w języku Python. Aplikacje nie posiadają oddzielnych modułów.
+Zostaną przygotowane dwie niezależne aplikacje pełniące takie same funkcje -- jedna w języku MATLAB, a druga w języku Python. Aplikacje nie posiadają oddzielnych modułów. Opracowania w dalszym ciągu tego rozdziału dotyczy obu aplikacji.
 
 Komponentami aplikacji będą:
 \begin{itemize}
 \item Sieć - komponent odpowiadający za tworzenie, uczenie i testowanie sieci neuronowej.
 \item Preprocesor - komponent przygotowujący dane treningowe i testowe dla sieci. Jego funkcjami są wczytanie plików, przekonwertowanie na wygodny format, podział na dane treningowe i testowe oraz normalizacja danych.
 \item Benchmark - komponent zajmujący się korzystaniem z sieci na konkretnych danych i zbieraniem informacji na temat wyników.
+\end{itemize}
+Poniżej prezentowana jest struktura klas aplikacjii.
+
+<<Wstaw obrazek>>
+
+Uszczegółowienie opisu dla wybranych funkcji:
+\begin{itemize}
+\item Benchmark.Run zwraca listę czasów treningów i błędów dla przypadku testowego.
+\item Preprocessor.Split dzieli dane na treningowe i testowe. Analogiczna do SplitHdf5, ale dla małych danych.
+\item Big/SmallDataNetwork.Error zwraca błąd klasyfikacji na podstawie oczekiwanych i rzeczywistych rezultatów.
 \end{itemize}
 
 \subsection{Model wytwórczy}
