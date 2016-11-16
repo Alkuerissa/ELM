@@ -40,6 +40,7 @@ Wydział Matematyki i Nauk Informacyjnych Politechniki Warszawskiej
 02.11.2016 & Ahmed Abdelkarim & Stworzenie i wprowadzenie szablonu & 1.0 \\
 02.11.2016 & Ahmed Abdelkarim & Opis przypadków użycia & 1.1 \\
 02.11.2016 & Aleksandra Hernik & Opis biznesowy, dokończenie harmonogramu & 1.2 \\
+15.11.2016 & Ahmed Abdelkarim & Opis modelu wytwórczego & 1.3 \\
 \hline
 \end{tabular}
 \end{table}
@@ -118,11 +119,18 @@ Instrukcja użytkownika & 4 dni & 11.12.2016 & 14.12.2016 \\
 \hline
 \end{tabular}
 \end{table}
+\subsection{Architektura rozwiązania}
+Zostaną przygotowane dwie niezależne aplikacje pełniące takie same funkcje -- jedna w języku MATLAB, a druga w języku Python. Aplikacje nie posiadają oddzielnych modułów.
+
+\subsection{Model wytwórczy}
+Wybranym modelem wytwórczym jest model ewolucyjny, ponieważ stworzenie programu nie jest celem tej pracy inżynierskiej, a jedynie środkiem pozwalającym go osiągnąć. Ponadto do aplikacji prawdopodobnie będą dodawane funkcjonalności wraz z pojawianiem się nowych pomysłów związanych z powstawaniem dalszych części pracy. Zaistniała sytuacja spowoduje, że z punktu widzenia biznesowego osoby tworzące aplikacje są również klientami, a stawianie wymagań jest jednocześnie analizą i projektowaniem -- oddzielenie tych faz byłoby sztuczne i jedynie spowalniałoby pracę. Oprócz tego, stawianie nowych wymagań (połączone z analizą i projektowaniem) może odbywać się równolegle z implementacją. Wersją końcową projektu jest ostatnia wersja, która zostanie wykorzystana w trakcie tworzenia pracy inżynierskiej.
+
 \subsection{Uwagi}
 \begin{itemize}
 \item Automatyczne testy, sprawdzające główną funkcjonalność programu - trening sieci - nie zostaną utworzone. Istotą projektu jest przeanalizowanie otrzymywanych, a nie otrzymanie z góry zaplanowanych wyników.
 \item Nie zostały postawione wymagania związane z niezawodnością i utrzymaniem. Aplikacje służą wyłącznie jako narzędzia do przetestowania nowej technologii, więc jedynym wymaganiem jest działanie w momencie przeprowadzania testów. Ta kwestia może ulec zmianie, jeśli testy wypadną korzystnie dla ELM.
 \item Wydajność jest raczej oczekiwaniem, nie wymaganiem. Z prac, na których bazowany jest projekt wynika, że metoda powinna być szybka, jednak założenia projektu polegają na sprawdzeniu, a nie przyjęciu tej tezy. Ponadto nie zostały zaimplementowane inne metody uczenia sieci neuronowych, więc precyzyjna ocena wydajności byłaby trudna.
+\item Ponieważ aplikacje nie są ze sobą połączone, a same również nie składają się z modułów, problem integracji zostaje pominięty.
 \end{itemize}
 \clearpage
 \section{Wykaz ważniejszych oznaczeń i akronimów}
