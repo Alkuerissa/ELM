@@ -81,9 +81,13 @@ Rozważane tu ELM zaliczają się do kategorii SLFN -- poza warstwą wejściową
 \end{figure}
 
 Niech $N$ to liczba próbek danych trenujących postaci $(\bm{x}_i, \bm{t}_i) \in \mathbb{R}^n \times \mathbb{R}^m$, gdzie $\bm{x}_i = [x_{i1}, x_{i2}, \dots,  x_{in}]^T$ to dane wejściowe, a $\bm{t}_i = [t_{i1}, t_{i2}, \dots,  t_{im}]^T$ to oczekiwane wyniki. Wtedy dla SLFN z $\bar{N}$ ukrytymi neuronami wyjście dla i-tej próbki danych $(i=1,\dots,N)$ można zapisać jako:
-$$\sum_{j=1}^{\bar{N}} \bm{\beta}_j g (\bm{w}_j \cdot \bm{x}_i + b_j)  = \bm{o}_i$$
+\begin{equation}
+\sum_{j=1}^{\bar{N}} \bm{\beta}_j g (\bm{w}_j \cdot \bm{x}_i + b_j)  = \bm{o}_i
+\end{equation}
 gdzie $\bm{w}_j = [w_{j1}, w_{j2},\dots,w_{jn}]^T$ to wektor wag łączących warstwę wejściową z j-tym neuronem warstwy ukrytej, $\bm{\beta}_j = [\beta_{j1}, \beta_{j2}, \dots, \beta_{jm}]$ to wektor wag łączących j-ty neuron warstwy ukrytej z warstwą wyjściową, a $b_j$ to bias. W przypadku przybliżenia z zerowym błędem otrzymujemy układ $N$ równań $(i=1,\dots,N)$:
-$$\sum_{j=1}^{\bar{N}} \bm{\beta}_j g (\bm{w}_j \cdot \bm{x}_i + b_j)  = \bm{t}_i$$
+\begin{equation}
+\sum_{j=1}^{\bar{N}} \bm{\beta}_j g (\bm{w}_j \cdot \bm{x}_i + b_j)  = \bm{t}_i
+\end{equation}
 który można zapisać w postaci macierzowej $\bm{H}\bm{\beta}=\bm{T}$, gdzie: \\
 $
 H = \begin{bmatrix}
@@ -94,12 +98,18 @@ H = \begin{bmatrix}
 $\bm{\beta} = \begin{bmatrix} \bm{\beta}_1^T \\ \vdots \\ \bm{\beta}_{\bar{N}}^T \end{bmatrix}_{\bar{N} \times m}$ i 
  $ \bm{T} = \begin{bmatrix} \bm{t}_1^T \\ \vdots \\ \bm{t}_N^T \end{bmatrix}_{N \times m}. $\\
 i-ta kolumna macierzy $\bm{H}$ (macierzy wyjścia warstwy ukrytej) to wyjście i-tego neuronu warstwy ukrytej dla $\bm{x}_1, \dots, \bm{x}_N$. Jeśli rozważymy macierz $\bm{W}$ jako macierz odpowiednich wag, $\bm{X}$ jako macierz danych wejściowych i $\bm{b}$ jako wektor wyrazów wolnych, otrzymujemy $\bm{H} = g(\bm{XW} + \bm{b})$. W przypadku różnych funkcji aktywacji macierz $\bm{H}$ jest otrzymywana przez konkatenację analogicznie uzyskanych podmacierzy: 
-$$\bm{H} = [\bm{H}_1 | \bm{H}_2] = [g_1(\bm{XW}_1 + \bm{b}_1) | g_2(\bm{XW}_2 + \bm{b}_2)].$$ 
+\begin{equation}
+\bm{H} = [\bm{H}_1 | \bm{H}_2] = [g_1(\bm{XW}_1 + \bm{b}_1) | g_2(\bm{XW}_2 + \bm{b}_2)]. 
+\end{equation}
 
 Sposób rozwiązania równania $\bm{H}\bm{\beta}=\bm{T}$ jest zależny od liczby próbek $N$ i liczby neuronów warstwy ukrytej $\bar{N}$. W przypadku, gdy $N \leq \bar{N}$, należy zastosować regularyzację w celu otrzymania satysfakcjonującej wydajności. W najczęstszym przypadku $N \gg \bar{N}$ jednak należy zastosować pseudoinwersję Moore'a-Penrose'a:
-$$\bm{H}\bm{\beta}=\bm{T} \implies \bm{\beta}=\bm{H}^{\dagger}\bm{T},$$
+\begin{equation}
+\bm{H}\bm{\beta}=\bm{T} \implies \bm{\beta}=\bm{H}^{\dagger}\bm{T},
+\end{equation}
 gdzie 
-$$\bm{H}^{\dagger} = (\bm{H}^T \bm{H})^{-1}\bm{H}^T. $$
+\begin{equation}
+{H}^{\dagger} = (\bm{H}^T \bm{H})^{-1}\bm{H}^T.
+\end{equation}
 Błąd trenowania jest wyznaczany za pomocą normy euklidesowej.
 %dodać cytowanie Huanga
 
@@ -209,14 +219,25 @@ TODO dobre referencje
   A. Akusok, K.-M. Björk, Y. Miche, A. Lendasse,
   \emph{High-Performance Extreme Learning Machines: A Complete Toolbox for Big Data Applications}
 
-\bibitem{huang-elm:ta}
+
+\bibitem{huang-elm-base:ta}
   A. G.-B. Huang, L. Chen, C.-K. Siew, 
-  \emph{Extreme Learning Machine: Theory and Applications}
+  \emph{Extreme Learning Machine: A New Learning Scheme of Feedforward Neural Networks}
+  
+\bibitem{huang-elm-rbf:ta}
+  A. G.-B. Huang, C.-K. Siew, 
+  \emph{Extreme Learning Machine: RBF Network Case} 
+
+\bibitem{huang-elm-tap:ta}
+  A. G.-B. Huang, L. Chen, C.-K. Siew, 
+  \emph{Extreme Learning Machine: Theory and Applications} 
   
 \bibitem{originofelm} 
   \emph{http://elmorigin.wixsite.com/originofelm}  
+  
+\bibitem{originofelm} 
+  \emph{https://github.com/akusok/hpelm}  
 \end{thebibliography}
-
 
 \clearpage
 \addcontentsline{toc}{section}{Wykaz rysunków}
