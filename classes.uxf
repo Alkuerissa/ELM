@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>670</y>
+      <w>340</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>BigDataNetwork
+--
++Train(dataPath: string, resultsPath: string): void
++Predict(dataPath: string, outputPath: string): void
++Error(resultsPath: string, outputPath: string): double
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1050</x>
+      <y>670</y>
+      <w>290</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>SmallDataNetwork
+--
++Train(data: Matrix, results: Matrix): void
++Predict(data: Matrix): Matrix
++Error(results: Matrix, output: Matrix): double
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>800</x>
+      <y>500</y>
+      <w>390</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>/Network/
+--
+-Network: Matrix
+--
++AddNeuron(neuron: Neuron): void
++Save(path: string): void
++Load(path: string): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1110</x>
+      <y>590</y>
+      <w>100</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>790</x>
+      <y>590</y>
+      <w>110</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>710</x>
+      <y>200</y>
+      <w>580</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>Preprocessor
+--
++OpenCsv(path: string, delimiter: string): Matrix
++OpenHdf5(path: string): Matrix
++MakeHdf5(inputPath: string, outputPath: string, delimiter: string): void
++NormalizeHdf5(path: string): void
++Normalize(data: Matrix): void
++SplitHdf5(dataPath: string, resultsPath: string, trainingPercentage:double, 
+                  trainingDataPath: string, testDataPath: string, 
+                  trainingResultsPath: string, testResultsPath: string): void
++Split(data: Matrix, results: Matrix, trainingPercentage: double): Matrix, Matrix, Matrix, Matrix                 </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>490</x>
+      <y>510</y>
+      <w>190</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Neuron
+--
++Number: int
++ActivationFunction: Function</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>670</x>
+      <y>520</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+is used to create</panel_attributes>
+    <additional_attributes>130.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>300</x>
+      <y>200</y>
+      <w>230</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>/Benchmark/
+--
++Neurons: List&lt;List&lt;Neuron&gt; &gt;
++trainingPercentage: double
+--
++Run(): List&lt;double&gt;, List&lt;double&gt;
++Save(path: string): void
++Load(path:string): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>190</x>
+      <y>380</y>
+      <w>180</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>BigBenchmark
+--
++dataPath: string
++resultsPath: string
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>380</y>
+      <w>170</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>SmallBenchmark
+--
++data: Matrix
++results: Matrix</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>310</y>
+      <w>100</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>80.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>460</x>
+      <y>310</y>
+      <w>110</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>230</y>
+      <w>210</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+prepares data for</panel_attributes>
+    <additional_attributes>10.0;20.0;190.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>300</y>
+      <w>340</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+uses</panel_attributes>
+    <additional_attributes>320.0;200.0;320.0;160.0;160.0;160.0;160.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
