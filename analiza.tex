@@ -42,6 +42,7 @@ Wydział Matematyki i Nauk Informacyjnych Politechniki Warszawskiej
 02.11.2016 & Aleksandra Hernik & Opis biznesowy, dokończenie harmonogramu & 1.2 \\
 15.11.2016 & Ahmed Abdelkarim & Opis modelu wytwórczego & 1.3 \\
 15.11.2016 & Aleksandra Hernik & Architektura rozwiązania & 1.4 \\
+15.11.2016 & Ahmed Abdelkarim & Diagram klas & 1.5 \\
 \hline
 \end{tabular}
 \end{table}
@@ -126,12 +127,16 @@ Zostaną przygotowane dwie niezależne aplikacje pełniące takie same funkcje -
 Komponentami aplikacji będą:
 \begin{itemize}
 \item Sieć - komponent odpowiadający za tworzenie, uczenie i testowanie sieci neuronowej.
-\item Preprocesor - komponent przygotowujący dane treningowe i testowe dla sieci. Jego funkcjami są wczytanie plików, przekonwertowanie na wygodny format, podział na dane treningowe i testowe oraz normalizacja danych.
+\item Preprocesor - komponent przygotowujący dane treningowe i testowe dla sieci. Jego funkcjami są wczytanie plików, konwersja na wygodny format, podział na dane treningowe i testowe oraz normalizacja danych.
 \item Benchmark - komponent zajmujący się korzystaniem z sieci na konkretnych danych i zbieraniem informacji na temat wyników.
 \end{itemize}
-Poniżej prezentowana jest struktura klas aplikacjii.
+Poniżej prezentowana jest struktura klas aplikacji.
 
-<<Wstaw obrazek>>
+\begin{figure}[H]
+\hspace*{-2cm}
+\includegraphics[width=16cm]{classes.png}
+\caption{Diagram klas}
+\end{figure}
 
 Uszczegółowienie opisu dla wybranych funkcji:
 \begin{itemize}
