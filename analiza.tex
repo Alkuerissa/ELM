@@ -41,6 +41,7 @@ Wydział Matematyki i Nauk Informacyjnych Politechniki Warszawskiej
 02.11.2016 & Ahmed Abdelkarim & Opis przypadków użycia & 1.1 \\
 02.11.2016 & Aleksandra Hernik & Opis biznesowy, dokończenie harmonogramu & 1.2 \\
 15.11.2016 & Ahmed Abdelkarim & Opis modelu wytwórczego & 1.3 \\
+15.11.2016 & Aleksandra Hernik & Architektura rozwiązania & 1.4 \\
 \hline
 \end{tabular}
 \end{table}
@@ -120,7 +121,24 @@ Instrukcja użytkownika & 4 dni & 11.12.2016 & 14.12.2016 \\
 \end{tabular}
 \end{table}
 \subsection{Architektura rozwiązania}
-Zostaną przygotowane dwie niezależne aplikacje pełniące takie same funkcje -- jedna w języku MATLAB, a druga w języku Python. Aplikacje nie posiadają oddzielnych modułów.
+Zostaną przygotowane dwie niezależne aplikacje pełniące takie same funkcje -- jedna w języku MATLAB, a druga w języku Python. Aplikacje nie posiadają oddzielnych modułów. Opracowania w dalszym ciągu tego rozdziału dotyczy obu aplikacji.
+
+Komponentami aplikacji będą:
+\begin{itemize}
+\item Sieć - komponent odpowiadający za tworzenie, uczenie i testowanie sieci neuronowej.
+\item Preprocesor - komponent przygotowujący dane treningowe i testowe dla sieci. Jego funkcjami są wczytanie plików, przekonwertowanie na wygodny format, podział na dane treningowe i testowe oraz normalizacja danych.
+\item Benchmark - komponent zajmujący się korzystaniem z sieci na konkretnych danych i zbieraniem informacji na temat wyników.
+\end{itemize}
+Poniżej prezentowana jest struktura klas aplikacjii.
+
+<<Wstaw obrazek>>
+
+Uszczegółowienie opisu dla wybranych funkcji:
+\begin{itemize}
+\item Benchmark.Run zwraca listę czasów treningów i błędów dla przypadku testowego.
+\item Preprocessor.Split dzieli dane na treningowe i testowe. Analogiczna do SplitHdf5, ale dla małych danych.
+\item Big/SmallDataNetwork.Error zwraca błąd klasyfikacji na podstawie oczekiwanych i rzeczywistych rezultatów.
+\end{itemize}
 
 \subsection{Model wytwórczy}
 Wybranym modelem wytwórczym jest model ewolucyjny, ponieważ stworzenie programu nie jest celem tej pracy inżynierskiej, a jedynie środkiem pozwalającym go osiągnąć. Ponadto do aplikacji prawdopodobnie będą dodawane funkcjonalności wraz z pojawianiem się nowych pomysłów związanych z powstawaniem dalszych części pracy. Zaistniała sytuacja spowoduje, że z punktu widzenia biznesowego osoby tworzące aplikacje są również klientami, a stawianie wymagań jest jednocześnie analizą i projektowaniem -- oddzielenie tych faz byłoby sztuczne i jedynie spowalniałoby pracę. Oprócz tego, stawianie nowych wymagań (połączone z analizą i projektowaniem) może odbywać się równolegle z implementacją. Wersją końcową projektu jest ostatnia wersja, która zostanie wykorzystana w trakcie tworzenia pracy inżynierskiej.
