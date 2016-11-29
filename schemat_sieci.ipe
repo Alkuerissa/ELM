@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.6">
-<info created="D:20161024001512" modified="D:20161024210553"/>
+<info created="D:20161024001512" modified="D:20161129200515"/>
 <preamble>\usepackage{polski}
 \usepackage[utf8]{inputenc}</preamble>
 <ipestyle name="basic">
@@ -283,15 +283,15 @@ h
 <path matrix="1 0 0 1 48 -48" stroke="black" fill="white">
 32 0 0 32 352 608 e
 </path>
-<path matrix="1 0 0 1 48 -48" stroke="darkred" fill="white" pen="ultrafat">
+<path matrix="1 0 0 1 48 -48" stroke="navy" fill="white" pen="ultrafat">
 64 768 m
 160 720 l
 </path>
-<path matrix="1 0 0 1 48 -48" stroke="darkred" fill="white" pen="ultrafat">
+<path matrix="1 0 0 1 48 -48" stroke="navy" fill="white" pen="ultrafat">
 64 672 m
 160 720 l
 </path>
-<path matrix="1 0 0 1 48 -48" stroke="darkred" fill="white" pen="ultrafat">
+<path matrix="1 0 0 1 47.442 -48" stroke="navy" fill="white" pen="ultrafat">
 64 576 m
 160 720 l
 </path>
@@ -371,15 +371,15 @@ h
 <text matrix="1 0 0 1 35.6023 -16.2198" transformations="translations" pos="199.141 684.896" stroke="black" type="label" width="12.511" height="10.672" depth="4.82" valign="baseline" size="Huge" style="math">g</text>
 <text matrix="1 0 0 1 33.5479 -14.3852" transformations="translations" pos="200.756 603.616" stroke="black" type="label" width="12.511" height="10.672" depth="4.82" valign="baseline" size="Huge" style="math">g</text>
 <text matrix="1 0 0 1 34.185 -14.0667" transformations="translations" pos="200.487 523.25" stroke="black" type="label" width="12.511" height="10.672" depth="4.82" valign="baseline" size="Huge" style="math">g</text>
-<text matrix="1 0 0 1 25.0023 -32.6867" transformations="translations" pos="367.355 727.797" stroke="black" type="label" width="16.548" height="17.074" depth="0" valign="baseline" size="Huge" style="math">\Sigma</text>
-<text matrix="1 0 0 1 29.8469 -28.3805" transformations="translations" pos="361.972 578.693" stroke="black" type="label" width="16.548" height="17.074" depth="0" valign="baseline" size="Huge" style="math">\Sigma</text>
+<text matrix="1 0 0 1 22.8492 -27.8422" transformations="translations" pos="367.355 727.797" stroke="black" type="label" width="21.642" height="10.674" depth="4.78" valign="baseline" size="Huge" style="math">o_1</text>
+<text matrix="1 0 0 1 27.1555 -21.9211" transformations="translations" pos="361.972 578.693" stroke="black" type="label" width="21.642" height="10.674" depth="4.78" valign="baseline" size="Huge" style="math">o_2</text>
 <text matrix="1 0 0 1 12.6219 -10.0789" transformations="translations" pos="264.004 768.168" stroke="darkred" type="label" width="21.72" height="11.953" depth="3.35" valign="baseline" size="LARGE" style="math">\beta_{11}</text>
 <text matrix="1 0 0 1 31.4617 -17.6148" transformations="translations" pos="244.088 700.883" stroke="darkred" type="label" width="21.72" height="11.953" depth="3.35" valign="baseline" size="LARGE" style="math">\beta_{21}</text>
 <text matrix="1 0 0 1 26.6172 -7.92577" transformations="translations" pos="240.858 624.447" stroke="darkred" type="label" width="21.72" height="11.953" depth="3.35" valign="baseline" size="LARGE" style="math">\beta_{31}</text>
 <text matrix="1 0 0 1 30.3852 -12.232" transformations="translations" pos="232.784 553.394" stroke="darkred" type="label" width="21.72" height="11.953" depth="3.35" valign="baseline" size="LARGE" style="math">\beta_{41}</text>
-<text matrix="1 0 0 1 20.6961 -12.232" transformations="translations" pos="97.137 734.795" stroke="darkred" type="label" width="13.518" height="11.957" depth="2.58" valign="baseline" size="LARGE" style="math">b_2</text>
-<text matrix="1 0 0 1 27.6937 -11.1555" transformations="translations" pos="84.2183 651.899" stroke="darkred" type="label" width="24.254" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">w_{21}</text>
-<text matrix="1 0 0 1 25.0023 -6.84921" transformations="translations" pos="78.8355 564.698" stroke="darkred" type="label" width="24.254" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">w_{22}</text>
+<text matrix="1 0 0 1 20.6961 -12.232" transformations="translations" pos="97.137 734.795" stroke="navy" type="label" width="13.518" height="11.957" depth="2.58" valign="baseline" size="LARGE" style="math">b_2</text>
+<text matrix="1 0 0 1 27.6937 -11.1555" transformations="translations" pos="84.2183 651.899" stroke="navy" type="label" width="24.254" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">w_{21}</text>
+<text matrix="1 0 0 1 25.0023 -6.84921" transformations="translations" pos="78.8355 564.698" stroke="navy" type="label" width="24.254" height="7.415" depth="2.58" valign="baseline" size="LARGE" style="math">w_{22}</text>
 <text matrix="1 0 0 1 12.1578 15.2203" transformations="translations" pos="17.4713 804.771" stroke="black" type="label" width="131.695" height="11.857" depth="3.35" valign="baseline" size="LARGE">Warstwa 
 wejściowa</text>
 <text matrix="1 0 0 1 27.5684 3.9637" transformations="translations" pos="160 816" stroke="black" type="label" width="110.617" height="11.857" depth="3.35" valign="baseline" size="LARGE">Warstwa ukryta</text>
