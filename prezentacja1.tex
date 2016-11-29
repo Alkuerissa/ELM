@@ -6,7 +6,10 @@
 \usepackage{fvextra}
 \usepackage{caption}
 \usepackage{epigraph}
-
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \definecolor{NiceGreen}{RGB}{40,200,0}
 \definecolor{CoolDarkGray}{RGB}{50,50,50}
 
@@ -102,16 +105,23 @@ Jeśli wierzyć autorom dotychczasowych prac:
 
 \begin{frame}{Harmonogram}
 \begin{table}[H]
-\begin{tabular}{|l|r|r|}
+\begin{tabular}{| L{6cm} |c|c|}
 \hline
 \textbf{Etap} & \textbf{Początek} & \textbf{Koniec} \\
+
 \hline
 Przygotowanie pierwszego rozdziału dokumentacji & 10.10.2016 & 02.11.2016 \\
+\hline
 Opracowanie modelu pracy sieci ELM & 17.10.2016 & 30.10.2016 \\
+\hline
 Analiza narzędzi &  31.10.2016 & 06.11.2016 \\
+\hline
 Projekt techniczny &  07.11.2016 & 13.11.2016 \\
+\hline
 Implementacja i napisanie drugiego rozdziału pracy & 07.11.2016 & 11.12.2016 \\
+\hline
 Tworzenie, wykonywanie i opisanie testów & 12.12.2016 & 18.12.2016 \\
+\hline
 Instrukcja użytkownika & 19.12.2016 & 20.12.2016 \\
 \hline
 \end{tabular}
