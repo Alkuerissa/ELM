@@ -3,13 +3,32 @@ classdef ELM
         X
         T
         Neurons
+        NeuronsCount
+        W
+        B
         H
         Beta
     end
     methods
         function obj = ELM(data)
             [obj.X, obj.T] = parseData(data);
-            obj.H = nan;
+        end
+        
+        function obj = addNeurons(obj, func, num)
+            obj.Neurons = cat(1, obj.Neurons, {func, num});
+        end
+        
+        function obj = train(obj)
+            neuronsCount = sum(cell2mat(obj.Neurons(:, 2)));
+            obj.W = random('Normal', 0, 1, size(obj.X, 2), neuronsCount);
+            bLine = random('Normal', 0, 1, 1, neuronsCount);
+            obj.B = repmat(bLine, size(obj.X), 1);
+            obj.H = createH(obj);
+            Hinv = pinv(obj.H);
+            obj.Beta = Hinv * obj.T;
+        end
+        
+        function obj = predict()
         end
         
         function [data, classes] = parseData(d)
@@ -21,28 +40,13 @@ classdef ELM
             end
         end
         
-        function obj = addNeurons(obj, func, num)
-            % obj.Neurons = cat(1, 
-        end
-        
-        function obj = train(obj)
-            Hinv = pinv(obj.H);
-            obj.Beta = Hinv * obj.T;
-        end
-        
-        function predict()
-            
-        end
-        
-        function createH(data)
-            W = random('Normal', 0, 1, size(obj.X, 2), num);
-            biasLine = random('Normal', 0, 1, 1, num);
-            B = repmat(biasLine, size(obj.Data), 1);
-            Hi = func(obj.X*W + B);
-            if isnan(obj.H)
-                obj.H = Hi;
-            else
-                obj.H = [obj.H, Hi];
+        function retH = createH(obj)
+            retH = [];
+            neuronSum = 0;
+            for neuron = obj.Neurons'
+                Hi = func(obj.X * obj.W(neuronSum, neuronSum + neuron(2)) + obj.B);
+                neuronSum = neuronSum + neuron(2);
+                retH = cat(2, retH, Hi);
             end
         end
     end
