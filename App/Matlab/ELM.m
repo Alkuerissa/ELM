@@ -23,12 +23,14 @@ classdef ELM
             obj.W = random('Normal', 0, 1, size(obj.X, 2), neuronsCount);
             bLine = random('Normal', 0, 1, 1, neuronsCount);
             obj.B = repmat(bLine, size(obj.X), 1);
-            obj.H = createH(obj);
+            obj.H = createH(obj, obj.X);
             Hinv = pinv(obj.H);
             obj.Beta = Hinv * obj.T;
         end
         
-        function obj = predict()
+        function T = predict(obj, Data)
+            H = createH(obj, Data);
+            T = H * obj.Beta;
         end
         
         function [data, classes] = parseData(d)
@@ -40,11 +42,11 @@ classdef ELM
             end
         end
         
-        function retH = createH(obj)
+        function retH = createH(obj, X)
             retH = [];
             neuronSum = 0;
             for neuron = obj.Neurons'
-                Hi = func(obj.X * obj.W(neuronSum, neuronSum + neuron(2)) + obj.B);
+                Hi = func(X * obj.W(neuronSum, neuronSum + neuron(2)) + obj.B);
                 neuronSum = neuronSum + neuron(2);
                 retH = cat(2, retH, Hi);
             end
