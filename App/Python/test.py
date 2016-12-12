@@ -18,11 +18,10 @@ from tkFileDialog import askopenfilename
 
 training_path = ""
 results_path = ""
-h5 = False
+h5 = None
 
 root = Tk()
 root.title("ELM")
-
 
 
 def file_select():
@@ -35,7 +34,9 @@ def file_select():
     if training_path == "":
         return
     if training_path[-3:] == '.h5':
-        h5 = True
+        change_h5(True)
+    else:
+        change_h5(False)
     if h5:
         options['filetypes'] = [('hdf5 files', '.h5')]
     else:
@@ -43,7 +44,7 @@ def file_select():
     options['title'] = 'Expected results'
     results_path = askopenfilename(**options)
     if results_path == "":
-        h5 = False
+        change_h5(False)
         training_path = ""
 
 
@@ -51,8 +52,19 @@ def convert():
     hpelm.make_hdf5(training_path, training_path[:-4] + ".h5")
     hpelm.make_hdf5(results_path, results_path[:-4] + ".h5")
 
+
+def change_h5(val):
+    global h5
+    h5 = val
+    if val == True:
+        convert_button.config(state='disabled')
+    elif val == False:
+        convert_button.config(state='normal')
+
 file_select_button = Button(root, text="Select data", command=file_select)
 file_select_button.pack()
+convert_button = Button(root, text="Convert to hdf5", state='disabled', command=convert)
+convert_button.pack()
 
 root.mainloop()
 
