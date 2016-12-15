@@ -2,6 +2,7 @@
 import benchmark as bn
 import preprocessor as pp
 import hpelm
+import matplotlib.pyplot as plt
 from Tkinter import *
 from tkFileDialog import askopenfilename
 
@@ -27,7 +28,8 @@ neuronsnum = 0
 neuronsnums = [0]
 functions = ['lin', 'sigm', 'tanh', 'rbf_l1', 'rbf_l2', 'rbf_linf']
 function_names = ['Linear', 'Sigmoid', 'Hyperbolic tangent', 'RBF (L1)', 'RBF (L2)', 'RBF (Linf)']
-
+groups = [0]
+last_group = 0
 
 root = Tk()
 root.title("ELM")
@@ -96,15 +98,19 @@ def add_neuronsnum(val):
 
 def set_current_benchmark(val):
     global current_benchmark
+    global last_group
     current_benchmark = val
     if current_benchmark >= neurons.__len__():
         current_benchmark = neurons.__len__() - 1
     if current_benchmark < 0:
         current_benchmark = 0
     add_neuronsnum(0)
+    last_group = groups[current_benchmark]
     benchmark_label.config(text='Benchmark {}/{}'.format(current_benchmark+1, neurons.__len__()))
     benchmark_previous.config(state='disabled' if current_benchmark == 0 else 'normal')
     benchmark_next.config(state='disabled' if current_benchmark + 1 == neurons.__len__() else 'normal')
+    group_spin.delete(0, "end")
+    group_spin.insert(0, groups[current_benchmark] + 1)
 
 
 def next_benchmark():
@@ -127,9 +133,12 @@ def reset_benchmarks():
     global neurons
     global neuronsnum
     global neuronsnums
+    global groups
+    global last_group
     neurons = [[]]
     neuronsnum = 0
     neuronsnums = [0]
+    groups = [0]
     set_current_benchmark(0)
     add_neuronsnum(0)
 
@@ -141,6 +150,7 @@ def add_benchmark():
     global current_benchmark
     neurons.insert(current_benchmark + 1, [])
     neuronsnums.insert(current_benchmark + 1, 0)
+    groups.insert(current_benchmark + 1, last_group)
     set_current_benchmark(current_benchmark + 1)
 
 
@@ -153,6 +163,7 @@ def delete_benchmark():
         neurons.__delitem__(current_benchmark)
         neuronsnum -= neuronsnums[current_benchmark]
         neuronsnums.__delitem__(current_benchmark)
+        groups.__delitem__(current_benchmark)
         set_current_benchmark(current_benchmark)
     else:
         reset_benchmarks()
@@ -200,6 +211,12 @@ def add_neurons():
         add_neuronsnum(n)
 
 
+def set_group():
+    global groups
+    global last_group
+    groups[current_benchmark] = last_group = int(group_spin.get()) - 1
+
+
 def start():
     percentage = int(percentage_spin.get())
     if percentage < 10:
@@ -225,6 +242,13 @@ def start():
     per_label.pack()
     times_label = Label(win, text="Training time: {}".format(times))
     times_label.pack()
+
+    grps = set(groups)
+    for g in grps:
+        xd = [x for ind, x in enumerate(neuronsnums) if groups[ind] == g]
+        e = [x for ind, x in enumerate(errors) if groups[ind] == g]
+        p = [x for ind, x in enumerate(percentages) if groups[ind] == g]
+        t = [x for ind, x in enumerate(times) if groups[ind] == g]
 
 
 name_label = Label(root, text=name)
@@ -257,6 +281,14 @@ benchmark_next.grid(row=0, column=2)
 
 neurons_label = Label(root, text="0 neurons")
 neurons_label.pack()
+
+group_label = Label(root, text="Group:")
+group_label.pack()
+
+group_spin = Spinbox(root, from_=1, to=100000, command=set_group)
+group_spin.delete(0, "end")
+group_spin.insert(0, 1)
+group_spin.pack()
 
 number_label = Label(root, text="Number of neurons:")
 number_label.pack()
