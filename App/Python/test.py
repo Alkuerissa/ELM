@@ -33,7 +33,7 @@ last_group = 0
 
 root = Tk()
 root.title("ELM")
-root.geometry("220x480")
+root.geometry("220x510")
 function = StringVar(root, function_names[0])
 
 
@@ -69,7 +69,7 @@ def file_select():
             ind = training_path.rfind('\\')
         if ind < 0:
             ind = 0
-        set_name(training_path[ind + 1:training_path.__len__()-3 if h5 else training_path.__len__()-4])
+        set_name(training_path[ind + 1:training_path.__len__() - 3 if h5 else training_path.__len__() - 4])
 
 
 def set_name(val):
@@ -106,7 +106,7 @@ def set_current_benchmark(val):
         current_benchmark = 0
     add_neuronsnum(0)
     last_group = groups[current_benchmark]
-    benchmark_label.config(text='Benchmark {}/{}'.format(current_benchmark+1, neurons.__len__()))
+    benchmark_label.config(text='Benchmark {}/{}'.format(current_benchmark + 1, neurons.__len__()))
     benchmark_previous.config(state='disabled' if current_benchmark == 0 else 'normal')
     benchmark_next.config(state='disabled' if current_benchmark + 1 == neurons.__len__() else 'normal')
     group_spin.delete(0, "end")
@@ -114,11 +114,11 @@ def set_current_benchmark(val):
 
 
 def next_benchmark():
-    set_current_benchmark(current_benchmark+1)
+    set_current_benchmark(current_benchmark + 1)
 
 
 def previous_benchmark():
-    set_current_benchmark(current_benchmark-1)
+    set_current_benchmark(current_benchmark - 1)
 
 
 def reset_current_benchmark():
@@ -232,23 +232,45 @@ def start():
         benchmark = bn.Benchmark.small_benchmark(name, percentage, neurons,
                                                  pp.open_csv(training_path), pp.open_csv(results_path))
     errors, percentages, times = benchmark.run()
-    win = Toplevel()
-    win.title = "Results:"
-    x_label = Label(win, text="Neurons: {}".format(neuronsnums))
-    x_label.pack()
-    err_label = Label(win, text="Mean square error: {}".format(errors))
-    err_label.pack()
-    per_label = Label(win, text="Correct percentage: {}".format(percentages))
-    per_label.pack()
-    times_label = Label(win, text="Training time: {}".format(times))
-    times_label.pack()
+    # win = Toplevel()
+    # win.title = "Results:"
+    # x_label = Label(win, text="Neurons: {}".format(neuronsnums))
+    # x_label.pack()
+    # err_label = Label(win, text="Mean square error: {}".format(errors))
+    # err_label.pack()
+    # per_label = Label(win, text="Correct ratio: {}".format(percentages))
+    # per_label.pack()
+    # times_label = Label(win, text="Training time: {}".format(times))
+    # times_label.pack()
 
     grps = set(groups)
+    fig, (axe, axp, axt) = plt.subplots(nrows=3)
+
     for g in grps:
         xd = [x for ind, x in enumerate(neuronsnums) if groups[ind] == g]
         e = [x for ind, x in enumerate(errors) if groups[ind] == g]
         p = [x for ind, x in enumerate(percentages) if groups[ind] == g]
         t = [x for ind, x in enumerate(times) if groups[ind] == g]
+
+        axe.plot(xd, e, label='Group {}'.format(g))
+        axp.plot(xd, p, label='Group {}'.format(g))
+        axt.plot(xd, t, label='Group {}'.format(g))
+
+    axe.set_title('Mean square error')
+    axe.set_xlabel('Number of neurons')
+    axe.set_ylabel('Mean square error')
+
+    axp.set_title('Correct ratio')
+    axp.set_xlabel('Number of neurons')
+    axp.set_ylabel('Correct ratio')
+
+    axt.set_title('Training time')
+    axt.set_xlabel('Number of neurons')
+    axt.set_ylabel('Training time')
+
+    plt.legend()
+    plt.subplots_adjust(hspace=1)
+    plt.show()
 
 
 name_label = Label(root, text=name)
@@ -324,6 +346,4 @@ reset_button.pack()
 train_button = Button(root, text="Run benchmarks", state='disabled', command=start)
 train_button.pack()
 
-
 root.mainloop()
-

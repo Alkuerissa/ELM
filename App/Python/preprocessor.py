@@ -9,7 +9,7 @@ def open_csv(path):
 
 
 def normalize(data):
-    min_max_scaler = preprocessing.MinMaxScaler()
+    min_max_scaler = preprocessing.MinMaxScaler() #(val - min)/(max - min)
     return min_max_scaler.fit_transform(data)
 
 
