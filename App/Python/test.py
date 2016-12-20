@@ -252,9 +252,9 @@ def start():
         p = [100*x for ind, x in enumerate(percentages) if groups[ind] == g]
         t = [x for ind, x in enumerate(times) if groups[ind] == g]
 
-        axe.plot(xd, e, '-o', label='Group {}'.format(g))
-        axp.plot(xd, p, '-o', label='Group {}'.format(g))
-        axt.plot(xd, t, '-o', label='Group {}'.format(g))
+        axe.plot(xd, e, '-o', label='Group {}'.format(g+1))
+        axp.plot(xd, p, '-o', label='Group {}'.format(g+1))
+        axt.plot(xd, t, '-o', label='Group {}'.format(g+1))
 
     axe.set_title('Mean square error')
     axe.set_xlabel('Number of neurons')
@@ -271,9 +271,9 @@ def start():
     axt.set_ylabel('Training time')
     axt.grid(True)
 
-    axe.legend(loc = 'upper left')
-    axp.legend(loc = 'upper left')
-    axt.legend(loc = 'upper left')
+    axe.legend(loc='upper left')
+    axp.legend(loc='upper left')
+    axt.legend(loc='upper left')
     plt.subplots_adjust(hspace=1)
     plt.show()
 
