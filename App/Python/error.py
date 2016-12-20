@@ -3,7 +3,7 @@ import numpy
 
 
 def percentage(expected, actual):
-    return numpy.count_nonzero(expected == actual) / (expected.shape[0] * expected.shape[1])
+    return numpy.count_nonzero(expected[:] == numpy.round(actual[:])) / float(expected.shape[0] * expected.shape[1])
 
 
 def hdf5_percentage(expected_path, actual_path):

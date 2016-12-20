@@ -4,6 +4,7 @@ import error
 import time
 import h5py
 import os
+import numpy as np
 
 
 class Benchmark:
@@ -26,7 +27,11 @@ class Benchmark:
     def small_benchmark(name, training_percentage, neurons, data, results):
         obj = Benchmark(name, training_percentage, neurons)
         obj.data = data
+        if obj.data.shape.__len__() == 1:
+            obj.data = obj.data.reshape(obj.data.shape[0], 1)
         obj.results = results
+        if obj.results.shape.__len__() == 1:
+            obj.results = obj.results.reshape(obj.results.shape[0], 1)
         return obj
 
     @staticmethod
@@ -45,10 +50,9 @@ class Benchmark:
             errors = []
             percentages = []
             times = []
-
-            for i in range(1, self.neurons.__len__()):
+            for i in range(0, self.neurons.__len__()):
                 model = hpelm.ELM(self.data.shape[1], self.results.shape[1], classification='c')
-                for j in range(1, self.neurons[i].__len__()):
+                for j in range(0, self.neurons[i].__len__()):
                     model.add_neurons(self.neurons[i][j][0], self.neurons[i][j][1])
                 start = time.time()
                 model.train(self.training_data, self.training_results)
