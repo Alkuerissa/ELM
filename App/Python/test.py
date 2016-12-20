@@ -227,7 +227,7 @@ def start():
     if h5 is True:
         benchmark = bn.Benchmark.big_benchmark(name, percentage, neurons,
                                                training_path, results_path,
-                                               training_path[:-3] + "_test_results" + ".h5")
+                                               training_path[:-3] + "_test_results")
     else:
         benchmark = bn.Benchmark.small_benchmark(name, percentage, neurons,
                                                  pp.open_csv(training_path), pp.open_csv(results_path))
