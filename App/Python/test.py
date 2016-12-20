@@ -249,26 +249,31 @@ def start():
     for g in grps:
         xd = [x for ind, x in enumerate(neuronsnums) if groups[ind] == g]
         e = [x for ind, x in enumerate(errors) if groups[ind] == g]
-        p = [x for ind, x in enumerate(percentages) if groups[ind] == g]
+        p = [100*x for ind, x in enumerate(percentages) if groups[ind] == g]
         t = [x for ind, x in enumerate(times) if groups[ind] == g]
 
-        axe.plot(xd, e, label='Group {}'.format(g))
-        axp.plot(xd, p, label='Group {}'.format(g))
-        axt.plot(xd, t, label='Group {}'.format(g))
+        axe.plot(xd, e, '-o', label='Group {}'.format(g))
+        axp.plot(xd, p, '-o', label='Group {}'.format(g))
+        axt.plot(xd, t, '-o', label='Group {}'.format(g))
 
     axe.set_title('Mean square error')
     axe.set_xlabel('Number of neurons')
     axe.set_ylabel('Mean square error')
+    axe.grid(True)
 
-    axp.set_title('Correct ratio')
+    axp.set_title('Correct percentage')
     axp.set_xlabel('Number of neurons')
-    axp.set_ylabel('Correct ratio')
+    axp.set_ylabel('Correct percentage')
+    axp.grid(True)
 
     axt.set_title('Training time')
     axt.set_xlabel('Number of neurons')
     axt.set_ylabel('Training time')
+    axt.grid(True)
 
-    plt.legend()
+    axe.legend(loc = 'upper left')
+    axp.legend(loc = 'upper left')
+    axt.legend(loc = 'upper left')
     plt.subplots_adjust(hspace=1)
     plt.show()
 
