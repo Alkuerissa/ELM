@@ -45,12 +45,14 @@ Aleksandra Hernik sprawdzała dokładność i~wydajność uczenia dla big data z
 \section*{Wykaz ważniejszych oznaczeń i akronimów}
 \addcontentsline{toc}{section}{Wykaz ważniejszych oznaczeń i akronimów}
 \begin{itemize}[label={},leftmargin=*]
+\item Benchmark -- test wydajności i jakości treningu
 \item Bias -- wyraz wolny, czyli dodatkowy neuron w warstwie wejściowej niewynikający z danych wejściowych, generujący zawsze +1, ale posiadający wagę
 \item Big Data -- dane z liczbą próbek tak dużą, że nie występuje efekt przeuczenia
 \item BP -- \textbf{B}ack-\textbf{p}ropagation - propagacja wsteczna
 \item ELM -- \textbf{E}xtreme \textbf{L}earning \textbf{M}achine - ekstremalne uczenie maszynowe
 \item GPU -- \textbf{G}raphics \textbf{P}rocessing \textbf{U}nit - procesor graficzny
 \item MLP -- \textbf{M}ulti\textbf{l}ayer \textbf{P}erceptron - perceptron wielowarstwowy
+\item RBF -- \textbf{R}adial \textbf{B}asis \textbf{F}unction, czyli radialna funkcja bazowa - funkcja rzeczywista, której wartość zależy tylko od odległości od pewnego punktu
 \item SLFN -- \textbf{S}ingle-\textbf{L}ayer \textbf{F}eed-forward \textbf{N}etwork - jednowarstwowa jednokierunkowa sieć neuronowa
 \item Small Data -- dane, dla których jest za mało próbek, aby sieć poznała dokładnie model bez przeuczenia
 \item SVM -- \textbf{S}upport \textbf{V}ector \textbf{M}achine - maszyna wektorów nośnych
@@ -167,7 +169,6 @@ Użyteczność & 1 & Aplikacje muszą działać na komputerach wydziałowych \\
 Wydajność & 4 & Działanie w oparciu o ELM powinno dawać o kilka rzędów wielkości szybszy czas uczenia niż tradycyjne metody \\
 \hline 
 Inne & 5 & Wykonanie aplikacji w językach Python i MATLAB \\
-& 6 & Dobrze udokumentowany kod \\
 \hline
 \end{tabular}
 \end{table}
@@ -178,24 +179,37 @@ Projekt \textit{High Performance toolbox for Extreme Learning Machines} prezentu
 \begin{itemize}
 \item Wczytywanie plików z danymi
 \item Tworzenie sieci na podstawie danych
-\item Dodawanie neuronów z wybranymi funkcjami aktywacji
+\item Dodawanie neuronów z wybranymi funkcjami aktywacji (spośród funkcji liniowej, sigmoidalnej, tangensa hiperbolicznego i funkcji klasy RBF z różnymi normami)
 \item Trening sieci
 \item Klasyfikacja lub regresja danych przez wytrenowaną sieć
+\item Obliczanie błędu średniokwadratowego
 \end{itemize}
 Dodatkowo dostępne są liczne udogodnienia:
 \begin{itemize}
 \item Efektywne przechowywanie danych (w formacie HDF5)
 \item Możliwość wykorzystywania zbiorów danych niemieszczących się w pamięci operacyjnej
-\item Regularyzacja (dla małych zbiorów danych)
-\item Możliwość wykonywania obliczeń na GPU
 \end{itemize}
 \subsection{Projekt aplikacji sieci ELM w Pythonie}
+Aplikacja w Pythonie wykorzystuje omówioną wcześniej bibliotekę i dodaje następujące funkcjonalności:
+\begin{itemize}
+\item Normalizację danych
+\item Podział danych na treningowe i testowe
+\item Obliczanie procenta poprawnie sklasyfikowanych próbek
+\item Pomiar czasu treningu
+\item Interfejs graficzny
+\item Projektowanie benchmarków i ich podział na grupy
+\item Rysowanie wykresów (zależności błędu średniokwadratowego, procenta sklasyfikowanych próbek i czasu treningu w zależności od liczby neuronów) z podziałem na grupy 
+\end{itemize}
+
+
+
 \subsection{Projekt aplikacji sieci ELM w Matlabie}
 \subsection{Wnioski i uwagi}
 \begin{itemize}
 \item Automatyczne testy, sprawdzające główną funkcjonalność programu - trening sieci - nie zostaną utworzone. Istotą projektu jest przeanalizowanie otrzymywanych, a nie otrzymanie z góry zaplanowanych wyników.
 \item Nie zostały postawione wymagania związane z niezawodnością i utrzymaniem. Aplikacje służą wyłącznie jako narzędzia do przetestowania nowej technologii, więc jedynym wymaganiem jest działanie w momencie przeprowadzania testów. Ta kwestia może ulec zmianie, jeśli testy wypadną korzystnie dla ELM.
 \item Wydajność jest raczej oczekiwaniem, nie wymaganiem. Z prac, na których bazowany jest projekt wynika, że metoda powinna być szybka, jednak założenia projektu polegają na sprawdzeniu, a nie przyjęciu tej tezy. Ponadto nie zostały zaimplementowane inne metody uczenia sieci neuronowych, więc precyzyjna ocena wydajności byłaby trudna.
+\item Funkcjonalność normalizacji danych oferowana przez wykorzystywaną bibliotekę wydaje się nie działać -- dla porównania własna implementacja nieznacznie poprawia wyniki.
 \end{itemize}
 \clearpage
 \section{Trening ELM dla wybranych benchmarków big data i small data}
