@@ -2,6 +2,8 @@ classdef ELM < handle
     properties
         X
         T
+        testX
+        testT
         Neurons
         NeuronsCount
         W
@@ -10,8 +12,23 @@ classdef ELM < handle
         Beta
     end
     methods
-        function obj = ELM(data)
-            obj.parseData(data);
+        function obj = ELM(data, trainingPercentage)
+            if nargin < 2
+               trainingPercentage = 80;
+            end
+            if trainingPercentage > 95
+                trainingPercentage = 95;
+            end
+            if trainingPercentage < 10
+                trainingPercentage = 10;
+            end
+            trainingNum = int32(trainingPercentage * size(data, 1) / 100);
+            [obj.X, obj.T] = obj.parseData(data(1:trainingNum, :));
+            %obj.X = obj.normalize(obj.X);
+            d = data(trainingNum+1:end, :);
+            obj.testX = d(:, 1:end-1);
+            %obj.testX = obj.normalize(obj.testX);
+            obj.testT = d(:, end);
         end
         
         function obj = addNeurons(obj, funcStr, num)
@@ -23,6 +40,21 @@ classdef ELM < handle
             obj.Neurons = cat(1, obj.Neurons, {func, num});
         end
         
+        function normalized = normalize(~, data)
+            minimum = min(data);
+            maximum = max(data);
+            diff = (maximum - minimum);
+            for i = 1:size(diff, 2)
+                if diff(i) == 0
+                    diff(i) = maximum(i);
+                end
+                if diff(i) == 0
+                    diff(i) = 1;
+                end
+            end
+            normalized = (data - minimum)./diff;
+        end
+        
         function obj = train(obj)
             neuronsCount = sum(cell2mat(obj.Neurons(:, 2)));
             obj.W = random('Normal', 0, 1, size(obj.X, 2), neuronsCount);
@@ -32,22 +64,30 @@ classdef ELM < handle
             obj.Beta = Hinv * obj.T;
         end
         
-        function T = predict(obj, Data)
-            H = createH(obj, Data);
+        function T = predict(obj)
+            H = createH(obj, obj.testX);
             resultMatrix = H * obj.Beta;
-            T = chooseResults(resultMatrix);
+            T = obj.chooseResults(resultMatrix);
         end
         
-        function res = chooseResults(m)
-            tmp, res = max(m, [], 2);
+        function res = exactCompare(~, actualT, predictedT)
+            res = double(sum(actualT == predictedT)) / size(actualT, 1);
         end
         
-        function obj = parseData(obj, d)
-            obj.X = d(:, 1:end-1);
+        function res = meanDistanceCompare(~, actualT, predictedT)
+            res = mean(abs(actualT - predictedT));
+        end
+        
+        function res = chooseResults(~, m)
+            [~, res] = max(m, [], 2);
+        end
+        
+        function [X, T] = parseData(~, d)
+            X = d(:, 1:end-1);
             classesVector = d(:, end);
-            obj.T = zeros(size(d, 1), max(classesVector));
+            T = zeros(size(d, 1), max(classesVector));
             for i = 1:size(classesVector,1)
-                obj.T(i, classesVector(i)) = 1;
+                T(i, classesVector(i)) = 1;
             end
         end
         
