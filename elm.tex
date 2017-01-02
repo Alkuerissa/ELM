@@ -46,12 +46,14 @@ Aleksandra Hernik sprawdzała dokładność i~wydajność uczenia dla big data z
 \section*{Wykaz ważniejszych oznaczeń i akronimów}
 \addcontentsline{toc}{section}{Wykaz ważniejszych oznaczeń i akronimów}
 \begin{itemize}[label={},leftmargin=*]
+\item Benchmark -- test wydajności i jakości treningu
 \item Bias -- wyraz wolny, czyli dodatkowy neuron w warstwie wejściowej niewynikający z danych wejściowych, generujący zawsze +1, ale posiadający wagę
 \item Big Data -- dane z liczbą próbek tak dużą, że nie występuje efekt przeuczenia
 \item BP -- \textbf{B}ack-\textbf{p}ropagation - propagacja wsteczna
 \item ELM -- \textbf{E}xtreme \textbf{L}earning \textbf{M}achine - ekstremalne uczenie maszynowe
 \item GPU -- \textbf{G}raphics \textbf{P}rocessing \textbf{U}nit - procesor graficzny
 \item MLP -- \textbf{M}ulti\textbf{l}ayer \textbf{P}erceptron - perceptron wielowarstwowy
+\item RBF -- \textbf{R}adial \textbf{B}asis \textbf{F}unction, czyli radialna funkcja bazowa - funkcja rzeczywista, której wartość zależy tylko od odległości od pewnego punktu
 \item SLFN -- \textbf{S}ingle-\textbf{L}ayer \textbf{F}eed-forward \textbf{N}etwork - jednowarstwowa jednokierunkowa sieć neuronowa
 \item Small Data -- dane, dla których jest za mało próbek, aby sieć poznała dokładnie model bez przeuczenia
 \item SVM -- \textbf{S}upport \textbf{V}ector \textbf{M}achine - maszyna wektorów nośnych
@@ -168,29 +170,56 @@ Użyteczność & 1 & Aplikacje muszą działać na komputerach wydziałowych \\
 Wydajność & 4 & Działanie w oparciu o ELM powinno dawać o kilka rzędów wielkości szybszy czas uczenia niż tradycyjne metody \\
 \hline 
 Inne & 5 & Wykonanie aplikacji w językach Python i MATLAB \\
-& 6 & Dobrze udokumentowany kod \\
 \hline
 \end{tabular}
 \end{table}
 \subsection{Analiza wykorzystywanych narzędzi}
-W związku ze wspomnianą wcześniej pracą \textit{High-Performance Extreme Learning Machines: A Complete Toolbox for Big Data Applications} Anton Akusok napisał w Pythonie i udostępnił dwie biblioteki wykorzystujące ELM.
+W związku ze wspomnianą wcześniej pracą \textit{High-Performance Extreme Learning Machines: A Complete Toolbox for Big Data Applications} Anton Akusok napisał w Pythonie i udostępnił dwie biblioteki wykorzystujące ELM, w tym wykorzystywaną tutaj bibliotekę \textit{HP-ELM}.
 
-Projekt \textit{High Performance toolbox for Extreme Learning Machines} prezentuje kompleksowe podejście do wykorzystania ELM. Zapewnia następujące funkcjonalności:
+Projekt \textit{HP-ELM}, czyli \textit{High Performance toolbox for Extreme Learning Machines} prezentuje kompleksowe podejście do wykorzystania ELM. Zapewnia następujące funkcjonalności:
 \begin{itemize}
 \item Wczytywanie plików z danymi
 \item Tworzenie sieci na podstawie danych
-\item Dodawanie neuronów z wybranymi funkcjami aktywacji
+\item Dodawanie neuronów z wybranymi funkcjami aktywacji (spośród funkcji liniowej, sigmoidalnej, tangensa hiperbolicznego i funkcji klasy RBF z różnymi normami)
 \item Trening sieci
 \item Klasyfikacja lub regresja danych przez wytrenowaną sieć
+\item Obliczanie błędu średniokwadratowego
 \end{itemize}
 Dodatkowo dostępne są liczne udogodnienia:
 \begin{itemize}
 \item Efektywne przechowywanie danych (w formacie HDF5)
 \item Możliwość wykorzystywania zbiorów danych niemieszczących się w pamięci operacyjnej
-\item Regularyzacja (dla małych zbiorów danych)
-\item Możliwość wykonywania obliczeń na GPU
 \end{itemize}
 \subsection{Projekt aplikacji sieci ELM w Pythonie}
+Aplikacja w Pythonie wykorzystuje omówioną wcześniej bibliotekę i dodaje następujące funkcjonalności:
+\begin{itemize}
+\item Normalizację danych
+\item Podział danych na treningowe i testowe
+\item Obliczanie procenta poprawnie sklasyfikowanych próbek
+\item Pomiar czasu treningu
+\item Interfejs graficzny
+\item Projektowanie benchmarków i ich podział na grupy
+\item Rysowanie wykresów (zależności błędu średniokwadratowego, procenta sklasyfikowanych próbek i czasu treningu w zależności od liczby neuronów) z podziałem na grupy 
+\end{itemize}
+Jako dane wejściowe aplikacja przyjmuje dwa pliki -- plik z danymi wejściowymi oraz plik z oczekiwanymi wynikami. Oferowane są możliwości przetwarzania dwóch typów plików: \textit{csv} oraz \textit{hdf5}. 
+
+\textit{Csv} to najczęstszy format stosowany do danych tego typu -- informacje są wczytywane za pomocą biblioteki \textit{numpy} (która jest również wykorzystywana do ogólnego przetwarzania macierzy, na przykład przy wyznaczaniu błędu) do pamięci jako macierz, którą dalej biblioteka \textit{HP-ELM} jest już w stanie bezpośrednio przetwarzać. Ograniczeniem (w celu utrzymania prostoty interfejsu) jest wymóg, aby dane były oddzielone przecinkami -- jednak nie powinno być to problemem ze względu na liczbę powszechnie stosowanych aplikacji pozwalające dostosować te pliki (np. pakiet \textit{Office}). Dane wczytane z plików \textit{csv} są traktowane jako \textit{small data} i wykorzystują implementację wczytującą dane do pamięci w całości. 
+
+\textit{Hdf5} (rozszerzenie \textit{h5}) to format zaprojektowany w celu przechowywania i organizowania dużych ilości danych. Biblioteka \textit{HP-ELM} przyjmuje tylko specyficzne pliki \textit{hdf5} i nie wykorzystuje wszystkich możliwości tego formatu (dotyczących organizacji). Narzucona jest prosta struktura, w której dane znajdują się w zbiorze o nazwie \textit{data} -- jednak nic więcej nie jest potrzebne do wykorzystania ELM. W celu odczytywania i przetwarzania plików \textit{hdf5} wykorzystywana jest biblioteka \textit{h5py}. Dane wczytane jako \textit{hdf5} traktowane są jako \textit{big data} i przetwarzane są bez wczytywania całości danych do pamięci, co umożliwia przetwarzanie zbiorów danych, które przekraczają rozmiarem ilość dostępnej pamięci RAM. Udostępniona została możliwość konwersji plików \textit{csv} na pliki \textit{hdf5} zgodne z aplikacją, co pozwala zasymulować działanie \textit{big data} nawet dla niewielkich zbiorów danych.  
+
+Do normalizacji została użyta biblioteka \textit{sklearn} -- o ile implementacja własnej normalizacji jest prosta, lepszym pomysłem jest wykorzystanie sprawdzonego rozwiązania.
+
+Interfejs graficzny został stworzony z wykorzystaniem biblioteki \textit{Tkinter}. Oprócz wczytania danych i uruchomienia umożliwia on projektowanie benchmarków i łączenie ich w grupy. Możliwe jest dodawanie neuronów, których funkcja aktywacji jest jedną z predefiniowanych funkcji udostępnionych w bibliotece \textit{HP-ELM}. W jednym benchmarku mogą być neurony z różnymi funkcjami aktywacji. 
+
+Funkcjonalność łączenia benchmarków w grupy została wprowadzona w celu umożliwienia tworzenia wykresów porównujących na przykład różne funkcje aktywacji. Dane wyjściowe benchmarków znajdujących się w tej samej grupie zostaną potraktowane jako pojedyncza seria danych przy rysowaniu wykresu -- tak więc stworzenie kilku grup pozwala na otrzymanie kilku serii danych na jednym wykresie, co jest przydatne szczególnie w celu porównywania wyników.  
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{przykladowy_wykres.png}
+\caption{Przykładowy wykres z dwiema grupami danych}
+\end{figure}
+Na powyższym rysunku jest przedstawiony wykres zależności procenta poprawnie przewidzianych klas w zależności od liczby neuronów dla dwóch grup -- grupa 1 składa się z czterech benchmarków zawierających jedynie neurony z sigmoidalną funkcją aktywacji, a w skład grupy 2 wchodzą cztery benchmarki, w których neurony oparte są o tangens hiperboliczny. 
+
+Wykresy są rysowane przy użyciu biblioteki \textit{matplotlib} i są ostatecznym rezultatem działania programu.
+
 \subsection{Projekt aplikacji sieci ELM w Matlabie}
 W Matlabie powstała pełna implementacja algorytmów ELM w formie klasy, zawierającej wszystkie niezbędne funkcje.
 Pozwala na trenowanie i testowanie sieci dla wybranej liczby neuronów z dowolnymi funkcjami aktywacji. 
@@ -254,6 +283,18 @@ Następnie wyniki otrzymane można porównać z oczekiwanymi za pomocą dwóch f
 \item Automatyczne testy, sprawdzające główną funkcjonalność programu - trening sieci - nie zostaną utworzone. Istotą projektu jest przeanalizowanie otrzymywanych, a nie otrzymanie z góry zaplanowanych wyników.
 \item Nie zostały postawione wymagania związane z niezawodnością i utrzymaniem. Aplikacje służą wyłącznie jako narzędzia do przetestowania nowej technologii, więc jedynym wymaganiem jest działanie w momencie przeprowadzania testów. Ta kwestia może ulec zmianie, jeśli testy wypadną korzystnie dla ELM.
 \item Wydajność jest raczej oczekiwaniem, nie wymaganiem. Z prac, na których bazowany jest projekt wynika, że metoda powinna być szybka, jednak założenia projektu polegają na sprawdzeniu, a nie przyjęciu tej tezy. Ponadto nie zostały zaimplementowane inne metody uczenia sieci neuronowych, więc precyzyjna ocena wydajności byłaby trudna.
+\item Funkcjonalność normalizacji danych oferowana przez wykorzystywaną bibliotekę \textit{HP-ELM} wydaje się nie działać i została zastąpiona inną implementacją, która nieznacznie poprawia wyniki.
+\item Biblioteka \textit{HP-ELM} nie pozwala na dodanie liczby neuronów liniowych większej od liczby cech próbek -- na przykład w przypadku próbki z 50 cechami próba dodania 2000 neuronów liniowych skończy się faktycznym dodaniem jedynie 50, o czym dokumentacja biblioteki nie wspomina.
+\item W aplikacji sieci ELM w Pythonie, w przypadku danych typu \textit{hdf5}, ze względu na konieczność przetwarzania danych na dysku, tworzone są pliki pośrednie -- dla pliku o nazwie \textit{plik.h5}, w katalogu \textit{plik\textunderscore test\textunderscore results/plik/} powstaną pliki:
+\begin{itemize}
+\item \textit{plik\textunderscore normalized.h5}, zawierający pełne dane po normalizacji, 
+\item \textit{plik\textunderscore training\textunderscore data.h5}, zawierający wydzielone dane trenujące, 
+\item \textit{plik\textunderscore test\textunderscore data.h5}, zawierający wydzielone dane testowe,
+\item \textit{plik\textunderscore training\textunderscore results.h5}, zawierający wyniki dla danych trenujących,
+\item \textit{plik\textunderscore test\textunderscore expected.h5}, zawierający oczekiwane wyniki dla danych testowych,
+\item \textit{plik\textunderscore test\textunderscore output.h5}, zawierający otrzymane wyniki dla danych testowych.
+\end{itemize} 
+Nie są one usuwane automatycznie, gdyż umożliwiają dokładniejszy wgląd w działanie aplikacji. Są jednak nadpisywane bez ostrzeżenia przy ponownym uruchomieniu programu.
 \end{itemize}
 \clearpage
 \section{Trening ELM dla wybranych benchmarków big data i small data}
@@ -306,8 +347,46 @@ TODO dobre referencje
 \clearpage
 \section*{Dodatek. Instrukcja obsługi aplikacji}
 \addcontentsline{toc}{section}{Dodatek. Instrukcja obsługi aplikacji}
-
+\subsection*{Aplikacja sieci ELM w Pythonie}
+\subsubsection*{Przygotowanie}
+Aplikacja sieci ELM w Pythonie wymaga zainstalowania najnowszej wersji Pythona 2 wraz ze standardowymi bibliotekami -- najprostszym sposobem jest zainstalowanie pakietu Anaconda. Oprócz tego, należy zainstalować bibliotekę \textit{HP-ELM} -- należy uruchomić konsolę z uprawnieniami administratora i wywołać polecenie \textit{pip install hpelm}. 
+\subsubsection*{Uruchomienie aplikacji}
+Aby uruchomić aplikację, należy za pomocą folderu przejsć do katalogu zawierającego pliki aplikacji i wywołać polecenie \textit{python test.py}. W przypadku niektórych systemów operacyjnych (na przykład Arch Linux) może być konieczne użycie zamiast tego polecenia \textit{python2 test.py}.
+\subsubsection*{Użytkowanie aplikacji}
+\begin{figure}[H]
+\centering
+\includegraphics{instrukcja_python_start.png}
+\caption{Ekran aplikacji}
+\end{figure}
+Bezpośrednio po uruchomieniu powinien pojawić się ekran jak na powyższym rysunku. Zawiera elementy oznaczone tu liczbami od 1 do 15:
+\begin{enumerate}
+\item Nazwa załadowanego pliku z danymi
+\item Wybór danych -- uruchamia dwa okienka umożliwiające wybór pliku z danymi w formacie \textit{csv} (dla small data) i \textit{hdf5} (dla big data) -- pierwsze okienko to wybór danych wejściowych, a drugie okienko to wybór oczekiwanych wyników
+\item Konwersja wczytanych danych do \textit{hdf5} -- pozwala na utworzenie plików \textit{hdf5} zgodnych z aplikacją, na przykład w celu zasymulowania obliczeń big data
+\item Procent danych treningowych
+\item Obecnie wybrany benchmark oraz kontrolki pozwalające przełączać się między benchmarkami
+\item Liczba neuronów w obecnym benchmarku
+\item Grupa, do której należy obecny benchmark
+\item Liczba neuronów do dodania do obecnego benchmarku
+\item Funkcja aktywacji dla neuronów do dodania do obecnego benchmarku
+\item Dodanie określonych powyżej neuronów
+\item Dodanie nowego benchmarku (przypisanego do tej samej grupy, co obecny benchmark)
+\item Usunięcie obecnego benchmarku
+\item Usunięcie wszystkich neuronów z obecnego benchmarku
+\item Usunięcie wszystkich benchmarków
+\item Uruchomienie benchmarków
+\end{enumerate}
+Aby skorzystać poprawnie z aplikacji, należy najpierw wybrać dane, ustalić procent danych treningowych, dodać tyle benchmarków, ile się chce (w każdym musi być co najmniej jeden neuron), przypisać im odpowiednie grupy, aby podzielić otrzymane wyniki na różne serie danych, a następnie wcisnąć przycisk \textit{Run benchmarks}. Efektem jest pojawienie się nowego okienka z wykresami opisującymi wyniki eksperymentu, jak na poniższym obrazku.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{instrukcja_python_end.png}
+\caption{Przykładowe wyniki działania aplikacji}
+\end{figure}
 \clearpage
+\subsection*{Aplikacja sieci ELM w Matlabie}
+\subsubsection*{Przygotowanie}
+\subsubsection*{Uruchomienie aplikacji}
+\subsubsection*{Użytkowanie aplikacji}
 \end{document}
 
 
