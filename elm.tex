@@ -289,8 +289,46 @@ TODO dobre referencje
 \clearpage
 \section*{Dodatek. Instrukcja obsługi aplikacji}
 \addcontentsline{toc}{section}{Dodatek. Instrukcja obsługi aplikacji}
-
+\subsection*{Aplikacja sieci ELM w Pythonie}
+\subsubsection*{Przygotowanie}
+Aplikacja sieci ELM w Pythonie wymaga zainstalowania najnowszej wersji Pythona 2 wraz ze standardowymi bibliotekami -- najprostszym sposobem jest zainstalowanie pakietu Anaconda. Oprócz tego, należy zainstalować bibliotekę \textit{HP-ELM} -- należy uruchomić konsolę z uprawnieniami administratora i wywołać polecenie \textit{pip install hpelm}. 
+\subsubsection*{Uruchomienie aplikacji}
+Aby uruchomić aplikację, należy za pomocą folderu przejsć do katalogu zawierającego pliki aplikacji i wywołać polecenie \textit{python test.py}. W przypadku niektórych systemów operacyjnych (na przykład Arch Linux) może być konieczne użycie zamiast tego polecenia \textit{python2 test.py}.
+\subsubsection*{Użytkowanie aplikacji}
+\begin{figure}[H]
+\centering
+\includegraphics{instrukcja_python_start.png}
+\caption{Ekran aplikacji}
+\end{figure}
+Bezpośrednio po uruchomieniu powinien pojawić się ekran jak na powyższym rysunku. Zawiera elementy oznaczone tu liczbami od 1 do 15:
+\begin{enumerate}
+\item Nazwa załadowanego pliku z danymi
+\item Wybór danych -- uruchamia dwa okienka umożliwiające wybór pliku z danymi w formacie \textit{csv} (dla small data) i \textit{hdf5} (dla big data) -- pierwsze okienko to wybór danych wejściowych, a drugie okienko to wybór oczekiwanych wyników
+\item Konwersja wczytanych danych do \textit{hdf5} -- pozwala na utworzenie plików \textit{hdf5} zgodnych z aplikacją, na przykład w celu zasymulowania obliczeń big data
+\item Procent danych treningowych
+\item Obecnie wybrany benchmark oraz kontrolki pozwalające przełączać się między benchmarkami
+\item Liczba neuronów w obecnym benchmarku
+\item Grupa, do której należy obecny benchmark
+\item Liczba neuronów do dodania do obecnego benchmarku
+\item Funkcja aktywacji dla neuronów do dodania do obecnego benchmarku
+\item Dodanie określonych powyżej neuronów
+\item Dodanie nowego benchmarku (przypisanego do tej samej grupy, co obecny benchmark)
+\item Usunięcie obecnego benchmarku
+\item Usunięcie wszystkich neuronów z obecnego benchmarku
+\item Usunięcie wszystkich benchmarków
+\item Uruchomienie benchmarków
+\end{enumerate}
+Aby skorzystać poprawnie z aplikacji, należy najpierw wybrać dane, ustalić procent danych treningowych, dodać tyle benchmarków, ile się chce (w każdym musi być co najmniej jeden neuron), przypisać im odpowiednie grupy, aby podzielić otrzymane wyniki na różne serie danych, a następnie wcisnąć przycisk \textit{Run benchmarks}. Efektem jest pojawienie się nowego okienka z wykresami opisującymi wyniki eksperymentu, jak na poniższym obrazku.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{instrukcja_python_end.png}
+\caption{Przykładowe wyniki działania aplikacji}
+\end{figure}
 \clearpage
+\subsection*{Aplikacja sieci ELM w Matlabie}
+\subsubsection*{Przygotowanie}
+\subsubsection*{Uruchomienie aplikacji}
+\subsubsection*{Użytkowanie aplikacji}
 \end{document}
 
 
