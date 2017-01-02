@@ -14,6 +14,7 @@
 \usepackage{indentfirst}
 \usepackage{float}
 \usepackage{enumitem}
+\usepackage{listings}
 \renewcommand\refname{Bibliografia}
 \title{Projekt aplikacji do ekstremalnego uczenia maszynowego do klasyfikacji big data}
 \author{Abdelkarim Ahmed, Hernik Aleksandra}
@@ -191,6 +192,63 @@ Dodatkowo dostępne są liczne udogodnienia:
 \end{itemize}
 \subsection{Projekt aplikacji sieci ELM w Pythonie}
 \subsection{Projekt aplikacji sieci ELM w Matlabie}
+W Matlabie powstała pełna implementacja algorytmów ELM w formie klasy, zawierającej wszystkie niezbędne funkcje.
+Pozwala na trenowanie i testowanie sieci dla wybranej liczby neuronów z dowolnymi funkcjami aktywacji. 
+W celu umożliwienia maksymalnej elastyczności korzystanie z aplikacji polega na wywoływaniu kolejnych funkcji klasy.
+Został przygotowany skrypt, zawierający przykładowe wykonanie algorytmu.
+Możliwa jest jego modyfikacja zgodnie z własnymi potrzebami i pomysłami.
+
+Algorytm można podzielić na kilka etapów.
+Najpierw konieczne jest utworzenie obiektu sieci, który jest inicjalizowany zbiorem danych, takich, że $n-1$ kolumn to kolejne cechy, a ostatnia kolumna oznacza klasy.
+Na przykład w macierzy:
+\[D= \begin{bmatrix} 3&5&0&1 \\ 1&8&1&4 \\ 1&3&0&1 \\ 0&1&0&2 \end{bmatrix}\]
+pierwsza obserwacja składa się z cech o wartościach 3, 5 i 0 i należy do klasy 1.
+
+Tak może wyglądać wywołanie funkcji inicjalizującej sieć:
+
+
+\begin{lstlisting}
+	>> network = ELM(D, 90);
+\end{lstlisting}
+Pierwszy argument to macierz danych, a drugi - procent danych trenujących.
+
+Zbiór danych jest dzielony na część treningową i testową, zgodnie z wartością podaną przy tworzeniu sieci. 
+Ponadto dane są dzielone na dwie części - macierz cech i wektor klas.
+Wektor klas jest przekształcany w macierz o wysokości równej liczbie obserwacji i szerokości równej liczbie klas.
+Macierz ta jest wypełniona zerami z wyjątkiem jednego miejsca w każdym wierszu - w kolumnie o numerze równym numerowi klasy, do której należy dana obserwacja, wpisane jest 1.
+Na przykład dla wektora:
+\[ \begin{bmatrix} 1 \\ 4 \\ 1 \\ 2 \end{bmatrix}\]
+powstanie macierz:
+\[ \begin{bmatrix} 1&0&0&0 \\ 0&0&0&1 \\ 1&0&0&0 \\ 0&1&0&0 \end{bmatrix}.\]
+Można zauważyć, że prosta modyfikacja pozwoliłaby na przyjmowanie zbiorów danych, w których jedna obserwacja należy w różnym stopniu do kilku klas.
+
+Ukrytym etapem przygotowywania danych jest ich normalizacja. 
+Polega ona na sprowadzeniu wartości wszystkich cech do przedziału $[0, 1]$, korzystając z wzoru:
+\[(element - min(kolumna))/(max(kolumna) - min(kolumna))\]
+
+Następnie muszą zostać dodane neurony.
+Dodanie neuronów polega na wywołaniu funkcji, przyjmującej dwa argumenty - liczbę neuronów i funkcję aktywacji.
+W przeciwieństwie do aplikacji w Pythonie, opisywana implementacja pozwala na wykorzystanie dowolnej funkcji.
+Na przykład wywołanie funkcji:
+\begin{lstlisting}
+	>> network.addNeurons('sin(x)', 50);
+\end{lstlisting}
+spowoduje dodanie 50 neuronów z funkcją aktywacji sinus.
+
+Gdy zostaną dodane neurony można rozpocząć uczenie sieci. 
+Składają się na nie przygotowanie macierzy na podstawie danych i neuronów i pseudoinwersja tej macierzy. 
+Gdy sieć jest nauczona, można rozpocząć klasyfikację danych testowych.
+Algorytmy treningu i klasyfikacji zostały dokładniej opisane w rozdziale 1.2.
+Pośrednim wynikiem klasyfikacji jest macierz o wymiarach liczba klas na liczbę obserwacji.
+Dla każdej obserwacji zawiera wartości informujące o tym, w jakim stopniu należy ona do każdej z klas.
+Aby wynikiem dla każdej obserwacji była jedna klasa, wybierana jest klasa, dla której ta wartość jest największa.
+Na przykład jeśli pośrednim wynikiem była macierz:
+\[ \begin{bmatrix} 1&4&2&6 \\ 3&1&0&1 \\ 2&8&4&3 \\ 3&1&1&1 \end{bmatrix},\]
+to ostatecznym wynikiem będzie wektor:
+\[ \begin{bmatrix} 4 \\ 1 \\ 2 \\ 1 \end{bmatrix}.\]
+
+Następnie wyniki otrzymane można porównać z oczekiwanymi za pomocą dwóch funkcji: średnia odległość od poprawnego wyniku i procent trafień.
+
 \subsection{Wnioski i uwagi}
 \begin{itemize}
 \item Automatyczne testy, sprawdzające główną funkcjonalność programu - trening sieci - nie zostaną utworzone. Istotą projektu jest przeanalizowanie otrzymywanych, a nie otrzymanie z góry zaplanowanych wyników.
