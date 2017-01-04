@@ -234,8 +234,6 @@ Na przykład w macierzy:
 pierwsza obserwacja składa się z cech o wartościach 3, 5 i 0 i należy do klasy 1.
 
 Tak może wyglądać wywołanie funkcji inicjalizującej sieć:
-
-
 \begin{lstlisting}
 	>> network = ELM(D, 90);
 \end{lstlisting}
@@ -277,6 +275,20 @@ to ostatecznym wynikiem będzie wektor:
 \[ \begin{bmatrix} 4 \\ 1 \\ 2 \\ 1 \end{bmatrix}.\]
 
 Następnie wyniki otrzymane można porównać z oczekiwanymi za pomocą dwóch funkcji: średnia odległość od poprawnego wyniku i procent trafień.
+
+\subsection{Aplikacje w Matlabie i Pythonie - różnice}
+Implementacje algorytmu w obu aplikacjach różnią się. 
+Niektóre różnice mogą mieć wpływ na różnice w wynikach aplikacji.
+Główne różnice są następujące:
+\begin{enumerate}
+\item W dokumentacji biblioteki w Pythonie nie zostało wspomniane wykorzystywanie wyrazów wolnych w sieci.
+W Matlabie są one losowane i wykorzystywane podczas uczenia.
+\item Zastosowano różne algorytmy normalizacji danych.
+\item W Matlabie nie występuje ograniczenie na liczbę neuronów liniowych.
+\item W obu implementacjach została stworzona funkcja wyliczająca procent trafionych danych, ale każda aplikacja ma również po po jednej dodatkowej funkcji - w Pythonie błąd średniokwadratowy, w Matlabie suma modułów różnicy prawidłowej i otrzymanej odpowiedzi.
+\item W Pythonie możliwy jest wybór wyłącznie z predefiniowanych funkcji aktywacji. 
+W Matlabie można wprowadzić dowolną funkcję, co daje większe możliwości, ale nakłada na użytkownika odpowiedzialność zadbania o to, żeby podana funkcja spełniała założenia ELM.
+\end{enumerate}
 
 \subsection{Wnioski i uwagi}
 \begin{itemize}
@@ -385,8 +397,49 @@ Aby skorzystać poprawnie z aplikacji, należy najpierw wybrać dane, ustalić p
 \clearpage
 \subsection*{Aplikacja sieci ELM w Matlabie}
 \subsubsection*{Przygotowanie}
-\subsubsection*{Uruchomienie aplikacji}
+Aby uruchomić aplikację, należy skorzystać z programu Matlab.
+Aplikacja składa się z dwóch plików: klasy sieci, zawierającej implementację algorytmu (\textit{ELM.m}) i przykładowego skryptu wywołującego kolejne funkcje tej klasy (\textit{ELM \textunderscore run.m}).
+Konieczne jest ustawienie folderu roboczego na folder, w którym znajdują się te pliki.
 \subsubsection*{Użytkowanie aplikacji}
+Uruchomienie aplikacji polega na wywołaniu skryptu \textit{ELM \textunderscore run.m}, jednak najpierw należy ustawić wszystkie konieczne parametry.
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{elm_run.png}
+\caption{Skrypt \textit{ELM \textunderscore run.m}}
+\end{figure}
+Znaczenie i możliwe modyfikacje kolejnych linii:
+\begin{enumerate}
+\item Przygotowanie danych wejściowych.
+W tym wypadku dane są wczytywane z pliku csv, co nie jest konieczne.
+Wymagane jest jedynie, żeby dane wejściowe następnej funkcji były macierzą, w której $n$ kolumn oznacza cechy, a jedna (ostatnia) klasy, do których należą próbki. Wartości wszystkich cech i klas muszą być liczbami.
+\item Konstruktor klasy sieci. 
+Pierwszy argument to wspomniana wcześniej tablica. 
+Drugi oznacza procent danych przeznaczonych do treningu sieci.
+Pozostałe dane (w tym wypadku 10\%) to dane testowe.
+\item Dodawanie neuronów.
+Pierwszy argument to funkcja aktywacji.
+Może to być dowolny kod wykonywalny w Matlabie, gdzie zmienną jest x.
+Drugi argument to liczba neuronów tego typu.
+Ta funkcja może zostać wywołana dowolnie wiele razy, aby stworzyć neurony o różnych funkcjach aktywacji.
+\item Rozpoczęcie treningu sieci. 
+Funkcja wykorzystuje dane wybrane w drugim kroku jako treningowe.
+Należy ją wywołać po dodaniu wszystkich neuronów.
+\item Klasyfikacja danych testowych.
+Wynikiem jest wektor klas - po jednej dla każdego obiektu, należącego do danych testowych.
+\item Funkcja porównująca wynik uzyskany w poprzednim kroku z oczekiwaniami.
+Przyjmuje jako argumenty wektor z danymi oczekiwanymi (zapisany wcześniej przez aplikację jako pole klasy) i wektor wynikowy klasyfikacji.
+Funkcja zwraca liczbę z zakresu $[0, 1]$, oznaczającą jaka część próbek została sklasyfikowana poprawnie.
+\item Inna funkcja poprawności klasyfikacji, przyjmująca takie same argumenty.
+Zwraca średnią odległość klas przewidzianych od faktycznych.
+Ta miara może być użyteczna, jeśli klasy o bliskich numerach są bardziej zbliżone niż o dalekich.
+\end{enumerate}
+Po odpowiednim zmodyfikowaniu skryptu i uruchomieniu go otrzymujemy wyniki (rys. 7). 
+Liczby to wyniki dwóch funkcji oceny jakości klasyfikacji (z punktów 6. i 7.).
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.3\textwidth]{elm_results.png}
+\caption{Wynik wywołania skryptu}
+\end{figure}
 \end{document}
 
 
