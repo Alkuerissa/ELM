@@ -310,6 +310,12 @@ Nie są one usuwane automatycznie, gdyż umożliwiają dokładniejszy wgląd w d
 \end{itemize}
 \clearpage
 \section{Trening ELM dla wybranych benchmarków big data i small data}
+\subsection{Założenia}
+We wszystkich dalszych testach przyjęte zostało 80\% danych treningowych. Do testów wydajności dostępne były dwa zestawy:
+\begin{enumerate}
+\item AMD Phenom II X4 965 @ 3.4 GHz, 16 GB RAM
+\item Intel Core i5 4200M @ 2.5 GHz, 8 GB RAM
+\end{enumerate}
 \subsection{Przewidywanie wyniku meczu w grze \textit{Dota 2}}
 \subsubsection{Opis}
 Dane dotyczące meczów w grze \textit{Dota 2} zostały udostępnione przez Devina Anzelmo na stronie Kaggle. Struktura danych jest relacyjna -- czyli bez wstępnego przetworzenia zbyt złożona dla ELM -- więc w eksperymentach została wykorzystana tylko część danych. Zbiór danych obejmuje 50000 próbek, gdzie każda próbka charakteryzuje jeden mecz. Każda rozgrywka kończy się zwycięstwem dokładnie jednej z dwóch drużyn (o nazwach \textit{Radiant} i \textit{Dire}) -- remisy nie są możliwe. Wynikiem dla każdej próbki jest jedna z dwóch klas -- 0, gdy wygrała drużyna \textit{Dire} i 1, gdy wygrała drużyna \textit{Radiant}. Próbki zawierają następujące cechy każdego meczu:
@@ -329,7 +335,7 @@ Więcej informacji dotyczących danych jest dostępna na stronie będącej źró
 
 Ten zestaw danych można uznać za łatwy, ponieważ ze względu na charakter rozgrywki w większości przypadków sam status wież należących do danej drużyny jest wystarczającym wskaźnikiem zwycięstwa -- drużyna, która straciła wszystkie swoje wieże, wygrywa bardzo rzadko.
 \subsubsection{Trening sieci ELM w Pythonie}
-Testy zostały przeprowadzone dla 80\% danych treningowych. Niezależnie od wyboru funkcji aktywacji, nawet przy liczbach neuronów tak niskich jak 10, po wytrenowaniu poprawnie sklasyfikowanych zostało około 99\% meczów, a dodawanie większej ich liczby jedynie wydłuża czas treningu. 
+Niezależnie od wyboru funkcji aktywacji, nawet przy liczbach neuronów tak niskich jak 10, po wytrenowaniu poprawnie sklasyfikowanych zostało około 99\% meczów, a dodawanie większej ich liczby jedynie wydłuża czas treningu. 
 
 \begin{figure}[H]
 \centering
@@ -343,7 +349,7 @@ Na powyższym obrazku grupa 1 to benchmarki wykorzystujące sigmoidalną funkcj�
 \includegraphics[width=\textwidth]{wyniki_dota2_python_performance.png}
 \caption{Wyniki dla dużej liczby neuronów liczby neuronów}
 \end{figure}
-Tutaj uwzględniona została tylko funkcja sigmoidalna
+Tutaj uwzględniona została tylko funkcja sigmoidalna. Jak widać, dodawanie neuronów przy większych wartościach wciąż nie zwiększyło jakości treningu, a wręcz przeciwnie -- neurony dodane powyżej 200 zaczęły już tylko pogarszać wyniki. Zależność czasu trwania treningu od liczby neuronów jest liniowa. Dla 900 neuronów (i 40000 próbek danych treningowych) czas treningu to niewiele ponad 3 sekundy -- tak więc główna cecha wyróżniająca ELM, czyli wydajność, jest widoczna również dla większych problemów.
 
 \subsubsection{Trening sieci ELM w Matlabie}
 \subsubsection{Wnioski}
