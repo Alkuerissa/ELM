@@ -384,6 +384,17 @@ Dokładniejsze informacje dotyczące danych (w tym dokładne wyjaśnienia binarn
 Warto zauważyć, że dane są dosyć nietypowe, ze względu na obecność licznych kolumn binarnych, których istotność może być nawet znikoma.
 \subsubsection{Trening sieci ELM w Pythonie}
 \subsubsection{Trening sieci ELM w Matlabie}
+Przy odpowiednich parametrach aplikacja osiąga nawet do 66\% skuteczności. 
+Taki wynik jest otrzymywany przy zastosowaniu 400 neuronów z funkcją Gaussa.
+Przeprowadzone zostały również testy dla innych funkcji - liniowej, sinusa, tangensa hiperbolicznego i funkcji sigmoidalnej.
+Wyniki były zbliżone - między 60\% a 66\%.
+
+Na przykładzie tego zbioru danych można zauważyć ciekawą cechę tego algorytmu - niedeterminizm.
+Występuje tu zmienny element - losowane wagi i wyrazy wolne.
+Okazuje się, że ma to znaczący wpływ na wyniki.
+Przy uruchomieniu aplikacji kilka razy dla tych samych danych wejściowych różnice w skuteczności dochodzą nawet do 4 punktów procentowych.
+Ten fakt utrudnia porównywanie funkcji aktywacji.
+
 \subsubsection{Wnioski}
 \clearpage
 \section*{Podsumowanie}
