@@ -310,14 +310,41 @@ Nie są one usuwane automatycznie, gdyż umożliwiają dokładniejszy wgląd w d
 \end{itemize}
 \clearpage
 \section{Trening ELM dla wybranych benchmarków big data i small data}
-\subsection{Opis wybranych benchmarków}
-\subsection{Trening dla instancji klasy small data}
-\subsection{Trening dla instancji klasy big data}
-\subsection{Wnioski i uwagi}
+\subsection{Klasyfikacja pokrycia lasu ze względu na dominujący gatunek drzew}
+\subsubsection{Opis}
+Benchmark polegający na klasyfikacji pokrycia lasu ze względu na dominujący gatunek drzew został dostarczony przez Jocka A. Blackarda i Colorado State University na potrzeby konkursu zorganizowanego w 2014 roku przez Kaggle. Obejmuje 15120 próbek, gdzie każda próbka opisuje obszar 30 na 30 metrów w Roosevelt National Forest w Kolorado. Próbki pochodzą jedynie z obszarów chronionych przed działalnością człowieka w celu wyeliminowania zewnętrznych czynników, takich jak sadzenie drzew przez ludzi. Klasyfikacja polega na przypisaniu każdemu obszarowi dominującego w nim gatunku drzew opisanego za pomocą liczby:
+\begin{enumerate}
+\item Świerk/jodła
+\item Sosna wydmowa
+\item Sosna żółta
+\item Topola/wierzba
+\item Osika
+\item Daglezja zielona
+\item \textit{Krummholz}, czyli pewna specyficzna formacja drzew różnych gatunków
+\end{enumerate}
+Dane wejściowe składają się z kolumn opisujących następujące cechy:
+\begin{itemize}
+\item Elewacja w metrach
+\item Kierunek nachylenia w stopniach
+\item Kąt nachylenia w stopniach
+\item Pozioma odległość od najbliższego zbiornika wodnego
+\item Pionowa odległość od najbliższego zbiornika wodnego
+\item Pozioma odległość od najbliższej jezdni
+\item Zacienienie o 9.00 w przesilenie letnie
+\item Zacienienie o 12.00 w przesilenie letnie
+\item Zacienienie o 15.00 w przesilenie letnie
+\item Pozioma odległość od najbliższego punktu podatnego na pożary
+\item 4 binarne kolumny opisujące przynależność do poszczególnych obszarów chronionych przed działalnością człowieka
+\item 40 binarnych kolumn charakteryzujących glebę
+\end{itemize}
+Dokładniejsze informacje dotyczące danych (w tym dokładne wyjaśnienia binarnych kolumn) są dostępne na stronie będącej źródłem danych. 
 
+Warto zauważyć, że dane są dosyć nietypowe, ze względu na obecność licznych kolumn binarnych, których istotność może być nawet znikoma.
+\subsubsection{Trening sieci ELM w Pythonie}
+\subsubsection{Trening sieci ELM w Matlabie}
+\subsubsection{Wnioski}
 \clearpage
-\section{Eksperymenty obejmujące instancje klasyfikacji wraz z badaniem ich wydajności}
-\clearpage
+
 \section*{Podsumowanie}
 \addcontentsline{toc}{section}{Podsumowanie}
 
@@ -348,6 +375,10 @@ TODO dobre referencje
   
 \bibitem{originofelm} 
   \emph{https://github.com/akusok/hpelm}  
+
+\bibitem{forest_cover}
+  \emph{https://www.kaggle.com/c/forest-cover-type-prediction/data}
+  
 \end{thebibliography}
 
 \clearpage
