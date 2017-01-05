@@ -24,10 +24,10 @@ classdef ELM < handle
             end
             trainingNum = int32(trainingPercentage * size(data, 1) / 100);
             [obj.X, obj.T] = obj.parseData(data(1:trainingNum, :));
-            %obj.X = obj.normalize(obj.X);
+            obj.X = obj.normalize(obj.X);
             d = data(trainingNum+1:end, :);
             obj.testX = d(:, 1:end-1);
-            %obj.testX = obj.normalize(obj.testX);
+            obj.testX = obj.normalize(obj.testX);
             obj.testT = d(:, end);
         end
         
