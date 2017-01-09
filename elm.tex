@@ -316,6 +316,7 @@ We wszystkich dalszych testach przyjęte zostało 80\% danych treningowych. Do t
 \item AMD Phenom II X4 965 @ 3.4 GHz, 16 GB RAM
 \item Intel Core i5 4200M @ 2.5 GHz, 8 GB RAM
 \end{enumerate}
+Zestaw 1 był używany przy testach aplikacji w Pythonie, a zestaw 2 przy testach aplikacji w Matlabie.
 \subsection{Przewidywanie wyniku meczu w grze \textit{Dota 2}}
 \subsubsection{Opis}
 Dane dotyczące meczów w grze \textit{Dota 2} zostały udostępnione przez Devina Anzelmo na stronie Kaggle. Struktura danych jest relacyjna -- czyli bez wstępnego przetworzenia zbyt złożona dla ELM -- więc w eksperymentach została wykorzystana tylko część danych. Zbiór danych obejmuje 50000 próbek, gdzie każda próbka charakteryzuje jeden mecz. Każda rozgrywka kończy się zwycięstwem dokładnie jednej z dwóch drużyn (o nazwach \textit{Radiant} i \textit{Dire}) -- remisy nie są możliwe. Wynikiem dla każdej próbki jest jedna z dwóch klas -- 0, gdy wygrała drużyna \textit{Dire} i 1, gdy wygrała drużyna \textit{Radiant}. Próbki zawierają następujące cechy każdego meczu:
@@ -350,6 +351,7 @@ Na powyższym obrazku grupa 1 to benchmarki wykorzystujące sigmoidalną funkcj�
 \caption{Wyniki dla dużej liczby neuronów liczby neuronów}
 \end{figure}
 Tutaj uwzględniona została tylko funkcja sigmoidalna. Jak widać, dodawanie neuronów przy większych wartościach wciąż nie zwiększyło jakości treningu, a wręcz przeciwnie -- neurony dodane powyżej 200 zaczęły już tylko pogarszać wyniki. Zależność czasu trwania treningu od liczby neuronów jest liniowa przy takich rzędach wielkości neuronów. Dla 900 neuronów (i 40000 próbek danych treningowych) czas treningu to niewiele ponad 3 sekundy -- tak więc główna cecha wyróżniająca ELM, czyli wydajność, jest widoczna również dla większych problemów. Przy znaczącym zwiększeniu liczby neuronów -- z 900 do 10000 -- okazało się, że liniowa zależność jest jedynie pozorna, gdyż obliczenia nie skończyły się po 10 minutach, a w przypadku liniowej relacji trening nie powinien trwać więcej niż minuty.
+\label{10000_dota2}
 
 \subsubsection{Trening sieci ELM w Matlabie}
 \subsubsection{Wnioski}
@@ -389,7 +391,15 @@ Dokładniejsze informacje dotyczące danych (w tym dokładne wyjaśnienia binarn
 
 Warto zauważyć, że dane są dosyć nietypowe, ze względu na obecność licznych kolumn binarnych, których istotność może być nawet znikoma.
 \subsubsection{Trening sieci ELM w Pythonie}
-Aplikacja w Pythonie osiąga dosyć niewielką skuteczność. 
+Aplikacja w Pythonie osiąga dosyć niewielką skuteczność. Zarówno dla funkcji sigmoidalnej, jak i dla tangensa hiperbolicznego, maksimum skuteczności (44\%) jest osiągane przy 1800 neuronach -- przy czym dalej procent poprawnie sklasyfikowanych próbek pozostaje na stałym poziomie, a błąd średniokwadratowy wzrasta, co wskazuje na to, że większa liczba neuronów jedynie pogłębia różnice między klasami przypisanymi do źle przydzielonych próbek, a oczekiwanymi rezultatami, jednocześnie nie wpływając na wynik poprawnej klasyfikacji. Co istotne, nawet dla 2400 neuronów trening potrwał jedynie 5 sekund, zgodnie z tezą o szybkim działaniu ELM. 
+Na rysunku \ref{forest_python} zaprezentowane są wyniki dla sigmoidalnej funkcji aktywacji (grupa 1) i tangensa hiperbolicznego (grupa 2). Patrząc na wykres czasu uczenia w zależności od liczby neuronów, można już zauważyć, że wykres nie przedstawia linii prostej, a krzywą, której pochodna jest rosnąca, tak więc opisany w benchmarku z sekcji \ref{10000_dota2} przypadek 10000 neuronów jest oczekiwaną sytuacją. Podobne rezultaty występują również dla tych danych.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{wyniki_forest_python.png}
+\caption{Wyniki dla niewielkiej liczby neuronów}
+\label{forest_python}
+\end{figure}
 \subsubsection{Trening sieci ELM w Matlabie}
 Przy odpowiednich parametrach aplikacja osiąga nawet do 66\% skuteczności. 
 Taki wynik jest otrzymywany przy zastosowaniu 400 neuronów z funkcją Gaussa.
@@ -426,6 +436,10 @@ W przypadku funkcji Gaussa, osiągającej dobry wynik przy zastosowaniu normaliz
 
 
 \subsubsection{Wnioski}
+\begin{itemize}
+\item Dla dużej liczby cech, przy liczbach neuronów nieprzekraczających znacząco 1000, podobnie jak dla omawianego wcześniej przypadku mniejszej liczby cech, czas treningu jest liniowy. Przy większej liczbie neuronów widać już, że liniowość relacji była jedynie pozorna, a w rzeczywistości wykres przedstawia krzywą o dodatniej pochodnej.
+\item Wyniki implementacji ELM z biblioteki \textit{HP-ELM} znacząco się różnią od wyników własnej implementacji w Matlabie, która została stworzona jako bezpośrednie wdrożenie opisanej wcześniej części teoretycznej -- co sugeruje, że istnieją między nimi znaczące różnice. Znanymi różnicami między aplikacją w Pythonie i Matlabie jest normalizacja (w Matlabie własna, a w Pythonie została użyta w tym celu biblioteka \textit{sklearn}) oraz sposób losowania wag (w Matlabie wykorzystany rozkład normalny, w \textit{HP-ELM} nie została podana metoda losowania). Jeśli różnice w otrzymanych rezultatach nie są wynikiem którejś z powyższych rozbieżności, sugerowałoby to, że implementacja \textit{HP-ELM} zawiera odstępstwa od teorii -- jednak najprawdopodobniej najistotniejszym czynnikiem powodującym różnice są wskazane kwestie, nieuwzględnione w części teoretycznej.
+\end{itemize}
 
 
 Eksperymenty wykazały, że zastosowanie normalizacji dla ELM jest koniecznością - nawet tak prosta implementacja jak ta zastosowana w aplikacji w Matlabie może kilkukrotnie poprawić wyniki klasyfikacji.
@@ -459,7 +473,7 @@ TODO dobre referencje
 \bibitem{originofelm} 
   \emph{http://elmorigin.wixsite.com/originofelm}  
   
-\bibitem{originofelm} 
+\bibitem{hpelm} 
   \emph{https://github.com/akusok/hpelm}  
 
 \bibitem{dota2}
