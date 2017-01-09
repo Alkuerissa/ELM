@@ -85,11 +85,11 @@ Rozważane tu ELM zaliczają się do kategorii SLFN -- poza warstwą wejściową
 
 Niech $N$ to liczba próbek danych trenujących postaci $(\bm{x}_i, \bm{t}_i) \in \mathbb{R}^n \times \mathbb{R}^m$, gdzie $\bm{x}_i = [x_{i1}, x_{i2}, \dots,  x_{in}]^T$ to dane wejściowe, a $\bm{t}_i = [t_{i1}, t_{i2}, \dots,  t_{im}]^T$ to oczekiwane wyniki. Wtedy dla SLFN z $\bar{N}$ ukrytymi neuronami wyjście dla i-tej próbki danych $(i=1,\dots,N)$ można zapisać jako:
 \begin{equation}
-\sum_{j=1}^{\bar{N}} \bm{\beta}_j g (\bm{w}_j \cdot \bm{x}_i + b_j)  = \bm{o}_i
+\sum_{j=1}^{\bar{N}} \bm{\beta}_j g (\bm{w}_j \cdot \bm{x}_i + b_j)  = \bm{o}_i,
 \end{equation}
 gdzie $\bm{w}_j = [w_{j1}, w_{j2},\dots,w_{jn}]^T$ to wektor wag łączących warstwę wejściową z j-tym neuronem warstwy ukrytej, $\bm{\beta}_j = [\beta_{j1}, \beta_{j2}, \dots, \beta_{jm}]$ to wektor wag łączących j-ty neuron warstwy ukrytej z warstwą wyjściową, a $b_j$ to bias. W przypadku sieci typu ELM, $\bm{w_j}$ i $\bm{b_j}$ są losowane, tak więc wystarczy wyznaczyć $\bm{\beta_j}$.  W przypadku przybliżenia z zerowym błędem otrzymujemy układ $N$ równań $(i=1,\dots,N)$:
 \begin{equation}
-\sum_{j=1}^{\bar{N}} \bm{\beta}_j g (\bm{w}_j \cdot \bm{x}_i + b_j)  = \bm{t}_i
+\sum_{j=1}^{\bar{N}} \bm{\beta}_j g (\bm{w}_j \cdot \bm{x}_i + b_j)  = \bm{t}_i,
 \end{equation}
 który można zapisać w postaci macierzowej $\bm{H}\bm{\beta}=\bm{T}$, gdzie: \\
 $
@@ -100,7 +100,7 @@ H = \begin{bmatrix}
 \end{bmatrix}_{N \times \bar{N}}$, \\
 $\bm{\beta} = \begin{bmatrix} \bm{\beta}_1^T \\ \vdots \\ \bm{\beta}_{\bar{N}}^T \end{bmatrix}_{\bar{N} \times m}$ i 
  $ \bm{T} = \begin{bmatrix} \bm{t}_1^T \\ \vdots \\ \bm{t}_N^T \end{bmatrix}_{N \times m}. $\\
-i-ta kolumna macierzy $\bm{H}$ (macierzy wyjścia warstwy ukrytej) to wyjście i-tego neuronu warstwy ukrytej dla $\bm{x}_1, \dots, \bm{x}_N$. Jeśli rozważymy macierz $\bm{W}$ jako macierz odpowiednich wag, $\bm{X}$ jako macierz danych wejściowych i $\bm{b}$ jako wektor wyrazów wolnych, otrzymujemy $\bm{H} = g(\bm{XW} + \bm{b})$. W przypadku różnych funkcji aktywacji macierz $\bm{H}$ jest otrzymywana przez konkatenację analogicznie uzyskanych podmacierzy: 
+W macierzy $\bm{H}$ i-ta kolumna (macierzy wyjścia warstwy ukrytej) to wyjście i-tego neuronu warstwy ukrytej dla $\bm{x}_1, \dots, \bm{x}_N$. Jeśli rozważymy macierz $\bm{W}$ jako macierz odpowiednich wag, $\bm{X}$ jako macierz danych wejściowych i $\bm{b}$ jako wektor wyrazów wolnych, otrzymujemy $\bm{H} = g(\bm{XW} + \bm{b})$. W przypadku różnych funkcji aktywacji macierz $\bm{H}$ jest otrzymywana przez konkatenację analogicznie uzyskanych podmacierzy: 
 \begin{equation}
 \bm{H} = [\bm{H}_1 | \bm{H}_2] = [g_1(\bm{XW}_1 + \bm{b}_1) | g_2(\bm{XW}_2 + \bm{b}_2)]. 
 \end{equation}
@@ -129,12 +129,12 @@ Projekt polega na przygotowaniu dwóch aplikacji. Pierwsza jest napisana w języ
 
 Aplikacje udostępniają następujące funkcjonalności:
 \begin{itemize}
-\item Przygotowanie danych trenujących i testowych w formie plików csv
-\item Trenowanie sieci neuronowej o architekturze ELM
-\item Klasyfikacja danych testowych przez wytrenowaną sieć
-\item Porównywanie wyników klasyfikacji do spodziewanych rezultatów
-\item Analiza jakości klasyfikacji i  czasu trwania treningu
-\item Interfejs graficzny
+\item Przygotowanie danych trenujących i testowych w formie plików csv,
+\item Trenowanie sieci neuronowej o architekturze ELM,
+\item Klasyfikacja danych testowych przez wytrenowaną sieć,
+\item Porównywanie wyników klasyfikacji do spodziewanych rezultatów,
+\item Analiza jakości klasyfikacji i  czasu trwania treningu,
+\item Interfejs graficzny.
 \end{itemize}
 Poniższy diagram UML przedstawia zbiór przypadków użycia aplikacji z punktu widzenia użytkownika i systemu, a w następnej tabeli znajduje się ich uszczegółowienie.
 \begin{figure}[H]
@@ -178,28 +178,28 @@ W związku ze wspomnianą wcześniej pracą \textit{High-Performance Extreme Lea
 
 Projekt \textit{HP-ELM}, czyli \textit{High Performance toolbox for Extreme Learning Machines} prezentuje kompleksowe podejście do wykorzystania ELM. Zapewnia następujące funkcjonalności:
 \begin{itemize}
-\item Wczytywanie plików z danymi
-\item Tworzenie sieci na podstawie danych
-\item Dodawanie neuronów z wybranymi funkcjami aktywacji (spośród funkcji liniowej, sigmoidalnej, tangensa hiperbolicznego i funkcji klasy RBF z różnymi normami)
-\item Trening sieci
-\item Klasyfikacja lub regresja danych przez wytrenowaną sieć
-\item Obliczanie błędu średniokwadratowego
+\item Wczytywanie plików z danymi,
+\item Tworzenie sieci na podstawie danych,
+\item Dodawanie neuronów z wybranymi funkcjami aktywacji (spośród funkcji liniowej, sigmoidalnej, tangensa hiperbolicznego i funkcji klasy RBF z różnymi normami),
+\item Trening sieci,
+\item Klasyfikacja lub regresja danych przez wytrenowaną sieć,
+\item Obliczanie błędu średniokwadratowego.
 \end{itemize}
 Dodatkowo dostępne są liczne udogodnienia:
 \begin{itemize}
-\item Efektywne przechowywanie danych (w formacie HDF5)
-\item Możliwość wykorzystywania zbiorów danych niemieszczących się w pamięci operacyjnej
+\item Efektywne przechowywanie danych (w formacie HDF5),
+\item Możliwość wykorzystywania zbiorów danych niemieszczących się w pamięci operacyjnej.
 \end{itemize}
 \subsection{Projekt aplikacji sieci ELM w Pythonie}
 Aplikacja w Pythonie wykorzystuje omówioną wcześniej bibliotekę i dodaje następujące funkcjonalności:
 \begin{itemize}
-\item Normalizację danych
-\item Podział danych na treningowe i testowe
-\item Obliczanie procenta poprawnie sklasyfikowanych próbek
-\item Pomiar czasu treningu
-\item Interfejs graficzny
-\item Projektowanie benchmarków i ich podział na grupy
-\item Rysowanie wykresów (zależności błędu średniokwadratowego, procenta sklasyfikowanych próbek i czasu treningu w zależności od liczby neuronów) z podziałem na grupy 
+\item Normalizację danych,
+\item Podział danych na treningowe i testowe,
+\item Obliczanie procenta poprawnie sklasyfikowanych próbek,
+\item Pomiar czasu treningu,
+\item Interfejs graficzny,
+\item Projektowanie benchmarków i ich podział na grupy,
+\item Rysowanie wykresów (zależności błędu średniokwadratowego, procenta sklasyfikowanych próbek i czasu treningu w zależności od liczby neuronów) z podziałem na grupy.
 \end{itemize}
 Jako dane wejściowe aplikacja przyjmuje dwa pliki -- plik z danymi wejściowymi oraz plik z oczekiwanymi wynikami. Oferowane są możliwości przetwarzania dwóch typów plików: \textit{csv} oraz \textit{hdf5}. 
 
@@ -251,7 +251,7 @@ Można zauważyć, że prosta modyfikacja pozwoliłaby na przyjmowanie zbiorów 
 
 Ukrytym etapem przygotowywania danych jest ich normalizacja. 
 Polega ona na sprowadzeniu wartości wszystkich cech do przedziału $[0, 1]$, korzystając z wzoru:
-\[(element - min(kolumna))/(max(kolumna) - min(kolumna))\]
+\[(element - min(kolumna))/(max(kolumna) - min(kolumna)).\]
 
 Następnie muszą zostać dodane neurony.
 Dodanie neuronów polega na wywołaniu funkcji, przyjmującej dwa argumenty - liczbę neuronów i funkcję aktywacji.
@@ -313,24 +313,24 @@ Nie są one usuwane automatycznie, gdyż umożliwiają dokładniejszy wgląd w d
 \subsection{Założenia}
 We wszystkich dalszych testach przyjęte zostało 80\% danych treningowych. Do testów wydajności dostępne były dwa zestawy:
 \begin{enumerate}
-\item AMD Phenom II X4 965 @ 3.4 GHz, 16 GB RAM
-\item Intel Core i5 4200M @ 2.5 GHz, 8 GB RAM
+\item AMD Phenom II X4 965 @ 3.4 GHz, 16 GB RAM,
+\item Intel Core i5 4200M @ 2.5 GHz, 8 GB RAM.
 \end{enumerate}
 Zestaw 1 był używany przy testach aplikacji w Pythonie, a zestaw 2 przy testach aplikacji w Matlabie.
 \subsection{Przewidywanie wyniku meczu w grze \textit{Dota 2}}
 \subsubsection{Opis}
 Dane dotyczące meczów w grze \textit{Dota 2} zostały udostępnione przez Devina Anzelmo na stronie Kaggle. Struktura danych jest relacyjna -- czyli bez wstępnego przetworzenia zbyt złożona dla ELM -- więc w eksperymentach została wykorzystana tylko część danych. Zbiór danych obejmuje 50000 próbek, gdzie każda próbka charakteryzuje jeden mecz. Każda rozgrywka kończy się zwycięstwem dokładnie jednej z dwóch drużyn (o nazwach \textit{Radiant} i \textit{Dire}) -- remisy nie są możliwe. Wynikiem dla każdej próbki jest jedna z dwóch klas -- 0, gdy wygrała drużyna \textit{Dire} i 1, gdy wygrała drużyna \textit{Radiant}. Próbki zawierają następujące cechy każdego meczu:
 \begin{itemize}
-\item Czas trwania meczu
-\item Status wież należących do drużyny \textit{Radiant}, zakodowany w 16-bitowej liczbie całkowitej
-\item Status wież należących do drużyny \textit{Dire}
-\item Status koszarów należących do drużyny \textit{Dire}, zakodowany w 8-bitowej liczbie całkowitej
-\item Status koszarów należących do drużyny \textit{Radiant}
-\item Czas pierwszego zabójstwa
-\item Tryb gry, zapisany jako wartości od 1 do 22
-\item Liczba negatywnych głosów oddanych przez graczy na dany mecz 
-\item Liczba pozytywnych głosów oddanych przez graczy na dany mecz
-\item Grupa serwerów, na których rozgrywany był mecz
+\item Czas trwania meczu,
+\item Status wież należących do drużyny \textit{Radiant}, zakodowany w 16-bitowej liczbie całkowitej,
+\item Status wież należących do drużyny \textit{Dire},
+\item Status koszarów należących do drużyny \textit{Dire}, zakodowany w 8-bitowej liczbie całkowitej,
+\item Status koszarów należących do drużyny \textit{Radiant},
+\item Czas pierwszego zabójstwa,
+\item Tryb gry, zapisany jako wartości od 1 do 22,
+\item Liczba negatywnych głosów oddanych przez graczy na dany mecz,
+\item Liczba pozytywnych głosów oddanych przez graczy na dany mecz,
+\item Grupa serwerów, na których rozgrywany był mecz.
 \end{itemize}
 Więcej informacji dotyczących danych jest dostępna na stronie będącej źródłem danych, a wyjaśnienia dotyczące struktury danych (na przykład kodowanie statusu wież) są dostępne w dokumentacji WebAPI gry \textit{Dota 2}.
 
@@ -364,28 +364,28 @@ Tutaj uwzględniona została tylko funkcja sigmoidalna. Jak widać, dodawanie ne
 \subsubsection{Opis}
 Benchmark polegający na klasyfikacji pokrycia lasu ze względu na dominujący gatunek drzew został dostarczony przez Jocka A. Blackarda i Colorado State University na potrzeby konkursu zorganizowanego w 2014 roku przez Kaggle. Obejmuje 15120 próbek, gdzie każda próbka opisuje obszar 30 na 30 metrów w Roosevelt National Forest w Kolorado. Próbki pochodzą jedynie z obszarów chronionych przed działalnością człowieka w celu wyeliminowania zewnętrznych czynników, takich jak sadzenie drzew przez ludzi. Klasyfikacja polega na przypisaniu każdemu obszarowi dominującego w nim gatunku drzew opisanego za pomocą liczby:
 \begin{enumerate}
-\item Świerk/jodła
-\item Sosna wydmowa
-\item Sosna żółta
-\item Topola/wierzba
-\item Osika
-\item Daglezja zielona
-\item \textit{Krummholz}, czyli pewna specyficzna formacja drzew różnych gatunków
+\item Świerk/jodła,
+\item Sosna wydmowa,
+\item Sosna żółta,
+\item Topola/wierzba,
+\item Osika,
+\item Daglezja zielona,
+\item \textit{Krummholz}, czyli pewna specyficzna formacja drzew różnych gatunków.
 \end{enumerate}
 Dane wejściowe składają się z kolumn opisujących następujące cechy:
 \begin{itemize}
-\item Elewacja w metrach
-\item Kierunek nachylenia w stopniach
-\item Kąt nachylenia w stopniach
-\item Pozioma odległość od najbliższego zbiornika wodnego
-\item Pionowa odległość od najbliższego zbiornika wodnego
-\item Pozioma odległość od najbliższej jezdni
-\item Zacienienie o 9.00 w przesilenie letnie
-\item Zacienienie o 12.00 w przesilenie letnie
-\item Zacienienie o 15.00 w przesilenie letnie
-\item Pozioma odległość od najbliższego punktu podatnego na pożary
-\item 4 binarne kolumny opisujące przynależność do poszczególnych obszarów chronionych przed działalnością człowieka
-\item 40 binarnych kolumn charakteryzujących glebę
+\item Elewacja w metrach,
+\item Kierunek nachylenia w stopniach,
+\item Kąt nachylenia w stopniach,
+\item Pozioma odległość od najbliższego zbiornika wodnego,
+\item Pionowa odległość od najbliższego zbiornika wodnego,
+\item Pozioma odległość od najbliższej jezdni,
+\item Zacienienie o 9.00 w przesilenie letnie,
+\item Zacienienie o 12.00 w przesilenie letnie,
+\item Zacienienie o 15.00 w przesilenie letnie,
+\item Pozioma odległość od najbliższego punktu podatnego na pożary,
+\item 4 binarne kolumny opisujące przynależność do poszczególnych obszarów chronionych przed działalnością człowieka,
+\item 40 binarnych kolumn charakteryzujących glebę.
 \end{itemize}
 Dokładniejsze informacje dotyczące danych (w tym dokładne wyjaśnienia binarnych kolumn) są dostępne na stronie będącej źródłem danych. 
 
@@ -405,6 +405,17 @@ Przy odpowiednich parametrach aplikacja osiąga nawet do 66\% skuteczności.
 Taki wynik jest otrzymywany przy zastosowaniu 400 neuronów z funkcją Gaussa.
 Przeprowadzone zostały również testy dla innych funkcji - liniowej, sinusa, tangensa hiperbolicznego i funkcji sigmoidalnej.
 Wyniki były zbliżone - między 60\% a 66\%.
+
+Został również zbadany wpływ liczby neuronów na jakość klasyfikacji.
+Rysunek \ref{forest_liczba_neuronow} pokazuje jak zmieniała się liczba poprawnie sklasyfikowanych obiektów przy zwiększaniu liczby neuronów dla funkcji aktywacji $sigmoid$ i $tanh$.
+Jak widać w przypadku obu funkcji jakość klasyfikacji rosła, ale coraz wolniej, aż w końcu przestała się zmieniać.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{forest_liczba_neuronow.png}
+\label{forest_liczba_neuronow}
+\label{forest_python}
+\caption{Wykres zależności jakości uczenia od liczby neuronów}
+\end{figure}
 
 Na przykładzie tego zbioru danych można zauważyć ciekawą cechę tego algorytmu - niedeterminizm.
 Występuje tu zmienny element - losowane wagi i wyrazy wolne.
@@ -432,18 +443,18 @@ W przypadku funkcji Gaussa, osiągającej dobry wynik przy zastosowaniu normaliz
 \hline
 \end{tabular}
 \end{table}
-
+Można wywnioskować, że w tej implementacji zastosowanie normalizacji jest koniecznością.
+Jako że polega ona na zastosowaniu jedynie kilku prostych operacji arytmetycznych na macierzy, jej koszt jest bardzo niewielki - pomijalny w stosunku do czasu trwania całego algorytmu.
 
 
 \subsubsection{Wnioski}
 \begin{itemize}
-\item Dla dużej liczby cech, przy liczbach neuronów nieprzekraczających znacząco 1000, podobnie jak dla omawianego wcześniej przypadku mniejszej liczby cech, czas treningu jest liniowy. Przy większej liczbie neuronów widać już, że liniowość relacji była jedynie pozorna, a w rzeczywistości wykres przedstawia krzywą o dodatniej pochodnej.
+\item Dla dużej liczby cech, przy liczbach neuronów nieprzekraczających znacząco 1000, podobnie jak dla omawianego wcześniej przypadku mniejszej liczby cech, czas treningu jest liniowy. Przy większej liczbie neuronów widać już, że liniowość relacji była jedynie pozorna, a w rzeczywistości wykres przedstawia krzywą rosnącej pochodnej.
 \item Wyniki implementacji ELM z biblioteki \textit{HP-ELM} znacząco się różnią od wyników własnej implementacji w Matlabie, która została stworzona jako bezpośrednie wdrożenie opisanej wcześniej części teoretycznej -- co sugeruje, że istnieją między nimi znaczące różnice. Znanymi różnicami między aplikacją w Pythonie i Matlabie jest normalizacja (w Matlabie własna, a w Pythonie została użyta w tym celu biblioteka \textit{sklearn}) oraz sposób losowania wag (w Matlabie wykorzystany rozkład normalny, w \textit{HP-ELM} nie została podana metoda losowania). Jeśli różnice w otrzymanych rezultatach nie są wynikiem którejś z powyższych rozbieżności, sugerowałoby to, że implementacja \textit{HP-ELM} zawiera odstępstwa od teorii -- jednak najprawdopodobniej najistotniejszym czynnikiem powodującym różnice są wskazane kwestie, nieuwzględnione w części teoretycznej.
 \end{itemize}
 
 
-Eksperymenty wykazały, że zastosowanie normalizacji dla ELM jest koniecznością - nawet tak prosta implementacja jak ta zastosowana w aplikacji w Matlabie może kilkukrotnie poprawić wyniki klasyfikacji.
-Jako że normalizacja polega na zastosowaniu jedynie kilku prostych operacji arytmetycznych na macierzy, jej koszt jest bardzo niewielki - pomijalny w stosunku do czasu trwania całego algorytmu.
+
 \clearpage
 \section*{Podsumowanie}
 \addcontentsline{toc}{section}{Podsumowanie}
@@ -509,21 +520,21 @@ Aby uruchomić aplikację, należy za pomocą folderu przejsć do katalogu zawie
 \end{figure}
 Bezpośrednio po uruchomieniu powinien pojawić się ekran jak na powyższym rysunku. Zawiera elementy oznaczone tu liczbami od 1 do 15:
 \begin{enumerate}
-\item Nazwa załadowanego pliku z danymi
-\item Wybór danych -- uruchamia dwa okienka umożliwiające wybór pliku z danymi w formacie \textit{csv} (dla small data) i \textit{hdf5} (dla big data) -- pierwsze okienko to wybór danych wejściowych, a drugie okienko to wybór oczekiwanych wyników
-\item Konwersja wczytanych danych do \textit{hdf5} -- pozwala na utworzenie plików \textit{hdf5} zgodnych z aplikacją, na przykład w celu zasymulowania obliczeń big data
-\item Procent danych treningowych
-\item Obecnie wybrany benchmark oraz kontrolki pozwalające przełączać się między benchmarkami
-\item Liczba neuronów w obecnym benchmarku
-\item Grupa, do której należy obecny benchmark
-\item Liczba neuronów do dodania do obecnego benchmarku
-\item Funkcja aktywacji dla neuronów do dodania do obecnego benchmarku
-\item Dodanie określonych powyżej neuronów
-\item Dodanie nowego benchmarku (przypisanego do tej samej grupy, co obecny benchmark)
-\item Usunięcie obecnego benchmarku
-\item Usunięcie wszystkich neuronów z obecnego benchmarku
-\item Usunięcie wszystkich benchmarków
-\item Uruchomienie benchmarków
+\item Nazwa załadowanego pliku z danymi,
+\item Wybór danych -- uruchamia dwa okienka umożliwiające wybór pliku z danymi w formacie \textit{csv} (dla small data) i \textit{hdf5} (dla big data) -- pierwsze okienko to wybór danych wejściowych, a drugie okienko to wybór oczekiwanych wyników,
+\item Konwersja wczytanych danych do \textit{hdf5} -- pozwala na utworzenie plików \textit{hdf5} zgodnych z aplikacją, na przykład w celu zasymulowania obliczeń big data,
+\item Procent danych treningowych,
+\item Obecnie wybrany benchmark oraz kontrolki pozwalające przełączać się między benchmarkami,
+\item Liczba neuronów w obecnym benchmarku,
+\item Grupa, do której należy obecny benchmark,
+\item Liczba neuronów do dodania do obecnego benchmarku,
+\item Funkcja aktywacji dla neuronów do dodania do obecnego benchmarku,
+\item Dodanie określonych powyżej neuronów,
+\item Dodanie nowego benchmarku (przypisanego do tej samej grupy, co obecny benchmark),
+\item Usunięcie obecnego benchmarku,
+\item Usunięcie wszystkich neuronów z obecnego benchmarku,
+\item Usunięcie wszystkich benchmarków,
+\item Uruchomienie benchmarków.
 \end{enumerate}
 Aby skorzystać poprawnie z aplikacji, należy najpierw wybrać dane, ustalić procent danych treningowych, dodać tyle benchmarków, ile się chce (w każdym musi być co najmniej jeden neuron), przypisać im odpowiednie grupy, aby podzielić otrzymane wyniki na różne serie danych, a następnie wcisnąć przycisk \textit{Run benchmarks}. Efektem jest pojawienie się nowego okienka z wykresami opisującymi wyniki eksperymentu, jak na poniższym obrazku.
 \begin{figure}[H]
@@ -538,10 +549,11 @@ Aby uruchomić aplikację, należy skorzystać z programu Matlab.
 Aplikacja składa się z dwóch plików: klasy sieci, zawierającej implementację algorytmu (\textit{ELM.m}) i przykładowego skryptu wywołującego kolejne funkcje tej klasy (\textit{ELM \textunderscore run.m}).
 Konieczne jest ustawienie folderu roboczego na folder, w którym znajdują się te pliki.
 \subsubsection*{Użytkowanie aplikacji}
-Uruchomienie aplikacji polega na wywołaniu skryptu \textit{ELM \textunderscore run.m}, jednak najpierw należy ustawić wszystkie konieczne parametry.
+Uruchomienie aplikacji polega na wywołaniu skryptu \textit{ELM \textunderscore run.m}, jednak najpierw należy ustawić wszystkie konieczne parametry. Rysunek \ref{elm_run} przedstawia kod skryptu \textit{ELM \textunderscore run.m} z pominięciem części odpowiedzialnej za komunikację z użytkownikiem.
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\textwidth]{elm_run.png}
+\label{elm_run}
 \caption{Skrypt \textit{ELM \textunderscore run.m}}
 \end{figure}
 Znaczenie i możliwe modyfikacje kolejnych linii:
@@ -570,12 +582,12 @@ Funkcja zwraca liczbę z zakresu $[0, 1]$, oznaczającą jaka część próbek z
 Zwraca średnią odległość klas przewidzianych od faktycznych.
 Ta miara może być użyteczna, jeśli klasy o bliskich numerach są bardziej zbliżone niż o dalekich.
 \end{enumerate}
-Po odpowiednim zmodyfikowaniu skryptu i uruchomieniu go otrzymujemy wyniki (rys. 7). 
-Liczby to wyniki dwóch funkcji oceny jakości klasyfikacji (z punktów 6. i 7.).
+Po odpowiednim zmodyfikowaniu skryptu i uruchomieniu go otrzymujemy wynik (rys. \ref{elm_run_result}) - informacje o czasie trwania i skuteczności treningu.
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.3\textwidth]{elm_results.png}
+\includegraphics[width=0.9\textwidth]{elm_results.PNG}
 \caption{Wynik wywołania skryptu}
+\label{elm_run_result}
 \end{figure}
 \end{document}
 
