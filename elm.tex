@@ -399,9 +399,36 @@ Na przykładzie tego zbioru danych można zauważyć ciekawą cechę tego algory
 Występuje tu zmienny element - losowane wagi i wyrazy wolne.
 Okazuje się, że ma to znaczący wpływ na wyniki.
 Przy uruchomieniu aplikacji kilka razy dla tych samych danych wejściowych różnice w skuteczności dochodzą nawet do 4 punktów procentowych.
-Ten fakt utrudnia porównywanie funkcji aktywacji.
+Ten fakt utrudnia porównywanie funkcji aktywacji - jedno uruchomienie nie wystarczy, żeby stwierdzić, że któraś funkcja była lepsza.
+
+Na przykładzie powyższego zbioru danych został również przeprowadzony eksperyment, dotyczący normalizacji.
+W tabeli \ref{tab_norm} zostały przedstawione wyniki klasyfikacji, przeprowadzonej dla każdej z wybranych funkcji aktywacji dwa razy: najpierw nie korzystając, a potem korzystając z normalizacji.
+Można zauważyć, że jedynie dla funkcji liniowej wyniki są porównywalne.
+W przypadku pozostałych funkcji zrezygnowanie z normalizacji pogarsza skuteczność od 3 aż do 5 razy.
+W przypadku funkcji Gaussa, osiągającej dobry wynik przy zastosowaniu normalizacji, skuteczność uczenie bez jej zastosowania jest porównywalna z losową klasyfikacją.
+\begin{table}[H]
+\caption{Skuteczność (w procentach) klasyfikacji z normalizacją i bez dla przykładowych funkcji aktywacji}
+\label{tab_norm}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+& $x$ & $sin(x)$ & $\frac{1}{1+e^{-x}}$ & $tanh(x)$ & $e^{-x^2}$ \\
+\hline
+\textbf{Bez normalizacji} & 65 & 16 & 23 & 21 & 13 \\
+\hline
+\textbf{Z normalizacją} & 63 & 68 & 69 & 66 & 67 \\
+\hline
+
+\hline
+\end{tabular}
+\end{table}
+
+
 
 \subsubsection{Wnioski}
+
+
+Eksperymenty wykazały, że zastosowanie normalizacji dla ELM jest koniecznością - nawet tak prosta implementacja jak ta zastosowana w aplikacji w Matlabie może kilkukrotnie poprawić wyniki klasyfikacji.
+Jako że normalizacja polega na zastosowaniu jedynie kilku prostych operacji arytmetycznych na macierzy, jej koszt jest bardzo niewielki - pomijalny w stosunku do czasu trwania całego algorytmu.
 \clearpage
 \section*{Podsumowanie}
 \addcontentsline{toc}{section}{Podsumowanie}
