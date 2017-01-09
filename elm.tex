@@ -349,14 +349,14 @@ Na powyższym obrazku grupa 1 to benchmarki wykorzystujące sigmoidalną funkcj�
 \includegraphics[width=\textwidth]{wyniki_dota2_python_performance.png}
 \caption{Wyniki dla dużej liczby neuronów liczby neuronów}
 \end{figure}
-Tutaj uwzględniona została tylko funkcja sigmoidalna. Jak widać, dodawanie neuronów przy większych wartościach wciąż nie zwiększyło jakości treningu, a wręcz przeciwnie -- neurony dodane powyżej 200 zaczęły już tylko pogarszać wyniki. Zależność czasu trwania treningu od liczby neuronów jest liniowa. Dla 900 neuronów (i 40000 próbek danych treningowych) czas treningu to niewiele ponad 3 sekundy -- tak więc główna cecha wyróżniająca ELM, czyli wydajność, jest widoczna również dla większych problemów.
+Tutaj uwzględniona została tylko funkcja sigmoidalna. Jak widać, dodawanie neuronów przy większych wartościach wciąż nie zwiększyło jakości treningu, a wręcz przeciwnie -- neurony dodane powyżej 200 zaczęły już tylko pogarszać wyniki. Zależność czasu trwania treningu od liczby neuronów jest liniowa przy takich rzędach wielkości neuronów. Dla 900 neuronów (i 40000 próbek danych treningowych) czas treningu to niewiele ponad 3 sekundy -- tak więc główna cecha wyróżniająca ELM, czyli wydajność, jest widoczna również dla większych problemów. Przy znaczącym zwiększeniu liczby neuronów -- z 900 do 10000 -- okazało się, że liniowa zależność jest jedynie pozorna, gdyż obliczenia nie skończyły się po 10 minutach, a w przypadku liniowej relacji trening nie powinien trwać więcej niż minuty.
 
 \subsubsection{Trening sieci ELM w Matlabie}
 \subsubsection{Wnioski}
 \begin{itemize}
 \item Sieci typu ELM są w stanie spośród wielu kolumn danych wyłuskać oczywistą relację między niewielką liczbą cech a wynikiem, nawet przy niewielkiej liczbie neuronów.
 \item Przy prostej relacji maksymalna jakość uczenia jest osiągana przy bardzo niskiej liczbie neuronów.
-\item Przy niewielkiej liczbie cech długość treningu skaluje się liniowo z liczbą neuronów.
+\item Przy niewielkiej liczbie cech, dla liczby neuronów nieprzekraczającej znacznie 1000, długość treningu skaluje się liniowo z liczbą neuronów. Próba dodania dużo większej liczby neuronów, na przykład 10000, znacznie spowalnia działanie i pokazuje nieliniowość zależności.
 \end{itemize}
 \subsection{Klasyfikacja pokrycia lasu ze względu na dominujący gatunek drzew}
 \subsubsection{Opis}
@@ -389,6 +389,7 @@ Dokładniejsze informacje dotyczące danych (w tym dokładne wyjaśnienia binarn
 
 Warto zauważyć, że dane są dosyć nietypowe, ze względu na obecność licznych kolumn binarnych, których istotność może być nawet znikoma.
 \subsubsection{Trening sieci ELM w Pythonie}
+Aplikacja w Pythonie osiąga dosyć niewielką skuteczność. 
 \subsubsection{Trening sieci ELM w Matlabie}
 Przy odpowiednich parametrach aplikacja osiąga nawet do 66\% skuteczności. 
 Taki wynik jest otrzymywany przy zastosowaniu 400 neuronów z funkcją Gaussa.
