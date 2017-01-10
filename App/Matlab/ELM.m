@@ -94,9 +94,10 @@ classdef ELM < handle
         function retH = createH(obj, X)
             retH = [];
             neuronSum = 1;
-            B = repmat(obj.BLine, size(X, 1), 1);
             for neuron = obj.Neurons'
-                Hi = neuron{1}(X * obj.W(:, neuronSum:neuronSum + neuron{2} - 1) + B);
+                B = repmat(obj.BLine, size(X, 1), 1);
+                Hi = neuron{1}(X * obj.W(:, neuronSum:(neuronSum + neuron{2} - 1)) ...
+                               + B(:, neuronSum:(neuronSum + neuron{2} - 1)));
                 neuronSum = neuronSum + neuron{2};
                 retH = cat(2, retH, Hi);
             end

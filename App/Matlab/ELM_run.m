@@ -1,9 +1,12 @@
 Data = csvread('../Data/csv/forest_base.csv', 1, 0);
-%Data = csvread('../Data/csv/match.csv', 1, 0);
-%Data = csvread('../Data/csv/match_results.csv', 1, 0);
 network = ELM(Data, 80);
-network.addNeurons('exp(-x^2)', 100);
+network.addNeurons('tanh(x)', 800);
+disp('Rozpoczêcie treningu');
+tic;
 network.train();
+fprintf('Trening zakoñczony po %.2f sekundach\n', toc);
 res = network.predict();
-exact = network.exactCompare(network.testT, res)
-meanDistance = network.meanDistanceCompare(network.testT, res)
+exact = network.exactCompare(network.testT, res);
+meanDistance = network.meanDistanceCompare(network.testT, res);
+fprintf('Procent poprawnie sklasyfikowanych obiektów: %.2f\n', exact);
+fprintf('Œrednia odleg³oœæ od w³aœciwej klasy: %.2f\n', meanDistance);
