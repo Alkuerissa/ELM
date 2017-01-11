@@ -277,6 +277,7 @@ to ostatecznym wynikiem będzie wektor:
 Następnie wyniki otrzymane można porównać z oczekiwanymi za pomocą dwóch funkcji: średnia odległość od poprawnego wyniku i procent trafień.
 
 \subsection{Aplikacje w Matlabie i Pythonie - różnice}
+\label{porownanie_aplikacji}
 Implementacje algorytmu w obu aplikacjach różnią się. 
 Niektóre różnice mogą mieć wpływ na różnice w wynikach aplikacji.
 Główne różnice są następujące:
@@ -354,6 +355,26 @@ Tutaj uwzględniona została tylko funkcja sigmoidalna. Jak widać, dodawanie ne
 \label{10000_dota2}
 
 \subsubsection{Trening sieci ELM w Matlabie}
+Na rysunku \ref{dota_liczba_neuronow} została przedstawiona skuteczność uczenia dla funkcji aktywacji sigmoidalnej i tangensa hiperbolicznego.
+Można zauważyć, że najlepsze wyniki są otrzymywane dla liczby neuronów od 50 do 300.
+Powyżej 300 rezultaty są gorsze, niektóre znacząco.
+Jednak najlepsze wyniki są zadowalające - niektóre ponad 99%.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{dota_liczba_neuronow.png}
+\label{dota_liczba_neuronow}
+\caption{Wykres zależności jakości uczenia od liczby neuronów}
+\end{figure}
+
+Przy wykonywaniu obliczeń został również zmierzony czas - uzyskane wyniki przedstawiono na rysunku \ref{dota_wydajnosc}.
+Dla liczby neuronów, dla której wynik był najlepszy (150) czas uczenia to około 2 sekund, co jest bardzo dobrym wynikiem biorąc pod uwagę ilość przetwarzanych danych.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{dota_wydajnosc.png}
+\label{dota_wydajnosc}
+\caption{Wykres zależności czasu uczenia od liczby neuronów}
+\end{figure}
+
 \subsubsection{Wnioski}
 \begin{itemize}
 \item Sieci typu ELM są w stanie spośród wielu kolumn danych wyłuskać oczywistą relację między niewielką liczbą cech a wynikiem, nawet przy niewielkiej liczbie neuronów.
@@ -401,10 +422,10 @@ Na rysunku \ref{forest_python} zaprezentowane są wyniki dla sigmoidalnej funkcj
 \label{forest_python}
 \end{figure}
 \subsubsection{Trening sieci ELM w Matlabie}
-Przy odpowiednich parametrach aplikacja osiąga nawet do 66\% skuteczności. 
-Taki wynik jest otrzymywany przy zastosowaniu 400 neuronów z funkcją Gaussa.
-Przeprowadzone zostały również testy dla innych funkcji - liniowej, sinusa, tangensa hiperbolicznego i funkcji sigmoidalnej.
-Wyniki były zbliżone - między 60\% a 66\%.
+Przy odpowiednich parametrach aplikacja osiąga nawet do 76\% skuteczności. 
+Taki wynik jest otrzymywany przy zastosowaniu 800 neuronów z tangensem hiperbolicznym.
+Przeprowadzone zostały również testy dla innych funkcji - liniowej, sinusa, tangensa hiperbolicznego i funkcji sigmoidalnej, a także przy użyciu dwóch zbiorów neuronów z różnymi funkcjami aktywacji.
+Wyniki były zbliżone - między 72\% a 76\%.
 
 Został również zbadany wpływ liczby neuronów na jakość klasyfikacji.
 Rysunek \ref{forest_liczba_neuronow} pokazuje jak zmieniała się liczba poprawnie sklasyfikowanych obiektów przy zwiększaniu liczby neuronów dla funkcji aktywacji $sigmoid$ i $tanh$.
@@ -412,15 +433,22 @@ Jak widać w przypadku obu funkcji jakość klasyfikacji rosła, ale coraz wolni
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{forest_liczba_neuronow.png}
-\label{forest_liczba_neuronow}
 \caption{Wykres zależności jakości uczenia od liczby neuronów}
+\label{forest_liczba_neuronow}
 \end{figure}
+
+Dla tych samych danych przeprowadzono testy wydajności.
+Wyniki zostały przedstawione na rysunku \ref{forest_wydajnosc}.
+Jak widać dla liczb neuronów, które warto rozważać (dalej nie następuje wzrost skuteczności) zależność czasu uczenia od liczby neuronów można przybliżyć do liniowej.
+Uczenie nawet dla większej liczby neuronów nie trwa dłużej niż 6 sekund, co można uznać za dobry wynik.
+Warto zauważyć, że użyta funkcja nie ma istotnego wpływu na czas uczenia, ponieważ głównym kosztem obliczeń jest pseudoinwersja macierzy.
+
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{forest_wydajnosc.png}
-\label{forest_wydajnosc}
 \caption{Wykres zależności czasu uczenia od liczby neuronów}
+\label{forest_wydajnosc}
 \end{figure}
 
 Na przykładzie tego zbioru danych można zauważyć ciekawą cechę tego algorytmu - niedeterminizm.
@@ -452,19 +480,36 @@ W przypadku funkcji Gaussa, osiągającej dobry wynik przy zastosowaniu normaliz
 Można wywnioskować, że w tej implementacji zastosowanie normalizacji jest koniecznością.
 Jako że polega ona na zastosowaniu jedynie kilku prostych operacji arytmetycznych na macierzy, jej koszt jest bardzo niewielki - pomijalny w stosunku do czasu trwania całego algorytmu.
 
-
+Wyniki można uznać za zadowalające - skuteczność jest całkiem wysoka, a czas uczenia niski.
+Dzięki temu, że dane pochodzą z konkursu można porównać otrzymany wynik z nadesłanymi rozwiązaniami.
+Uzyskany rezultat plasuje się około pięćsetnego miejsca na 1694 nadesłane odpowiedzi.
+Można to uznać za sukces tej metody, jeśli wziąć pod uwagę dwa fakty.
+Po pierwsze algorytm nie był w żaden sposób optymalizowany pod kątem tych danych, co prawdopodobnie miało miejsce w przypadku większości przesłanych odpowiedzi.
+Po drugie w konkursie nie było wymagań związanych z czasem uczenia, więc można było zastosować wolniejsze, ale skuteczniejsze metody.
 \subsubsection{Wnioski}
 \begin{itemize}
 \item Dla dużej liczby cech, przy liczbach neuronów nieprzekraczających znacząco 1000, podobnie jak dla omawianego wcześniej przypadku mniejszej liczby cech, czas treningu jest liniowy. Przy większej liczbie neuronów widać już, że liniowość relacji była jedynie pozorna, a w rzeczywistości wykres przedstawia krzywą rosnącej pochodnej.
 \item Wyniki implementacji ELM z biblioteki \textit{HP-ELM} znacząco się różnią od wyników własnej implementacji w Matlabie, która została stworzona jako bezpośrednie wdrożenie opisanej wcześniej części teoretycznej -- co sugeruje, że istnieją między nimi znaczące różnice. Znanymi różnicami między aplikacją w Pythonie i Matlabie jest normalizacja (w Matlabie własna, a w Pythonie została użyta w tym celu biblioteka \textit{sklearn}) oraz sposób losowania wag (w Matlabie wykorzystany rozkład normalny, w \textit{HP-ELM} nie została podana metoda losowania). Jeśli różnice w otrzymanych rezultatach nie są wynikiem którejś z powyższych rozbieżności, sugerowałoby to, że implementacja \textit{HP-ELM} zawiera odstępstwa od teorii -- jednak najprawdopodobniej najistotniejszym czynnikiem powodującym różnice są wskazane kwestie, nieuwzględnione w części teoretycznej.
 \end{itemize}
-
-
-
 \clearpage
 \section*{Podsumowanie}
 \addcontentsline{toc}{section}{Podsumowanie}
+Na podstawie eksperymentów przeprowadzonych przy użyciu obu aplikacji można wyciągnąć wnioski dotyczące sieci ELM, a także detali implementacji.
 
+Uzyskane rezultaty są zgodne z wnioskami przedstawionymi w cytowanych pracach.
+Uczenie jest szybkie i skuteczne.
+Warto jednak zauważyć, że zwiększanie liczby neuronów dość szybko przestaje poprawiać rezultaty, a coraz bardziej zwiększa czas uczenia.
+
+Istnieją znaczne różnice między wynikami aplikacji w Matlabie i Pythonie. Ta pierwsza jest skuteczniejsza, ale druga jest szybsza. Pokazuje to, że niewielkie różnice w implementacji (rozdział \ref{porownanie_aplikacji}) znacznie zmieniają działanie aplikacji.
+
+Prowadzi to do kolejnego wniosku - istnieją niesprecyzowane w pracach detale algorytmu, które mogą zauważalnie wpłynąć na wyniki.
+Należą do nich:
+\begin{itemize}
+\item sposób normalizacji danych, 
+\item metoda losowania wag wejściowych,
+\item funkcje aktywacji.
+\end{itemize}
+Możliwe są dalsze eksperymenty, sprawdzające różne warianty implementacji ELM, być może prowadzące do jeszcze lepszych wyników.
 \clearpage
 \addcontentsline{toc}{section}{Bibliografia}
 
