@@ -327,7 +327,15 @@ We wszystkich dalszych testach przyjęte zostało 80\% danych treningowych. Do t
 Zestaw 1 był używany przy testach aplikacji w Pythonie, a zestaw 2 przy testach aplikacji w Matlabie.
 \subsection{Przewidywanie wyniku meczu w grze \textit{Dota 2}}
 \subsubsection{Opis}
-Dane dotyczące meczów w grze \textit{Dota 2} zostały udostępnione przez Devina Anzelmo na stronie Kaggle. Struktura danych jest relacyjna -- czyli bez wstępnego przetworzenia zbyt złożona dla ELM -- więc w eksperymentach została wykorzystana tylko część danych. Zbiór danych obejmuje 50000 próbek, gdzie każda próbka charakteryzuje jeden mecz. Każda rozgrywka kończy się zwycięstwem dokładnie jednej z dwóch drużyn (o nazwach \textit{Radiant} i \textit{Dire}) -- remisy nie są możliwe. Wynikiem dla każdej próbki jest jedna z dwóch klas -- 0, gdy wygrała drużyna \textit{Dire} i 1, gdy wygrała drużyna \textit{Radiant}. Próbki zawierają następujące cechy każdego meczu:
+\textit{Dota 2} to internetowa, drużynowa gra komputerowa, w której dwa pięcioosobowe zespoły, nazwane \textit{Radiant} i \textit{Dire}, starają się zniszczyć bazę przeciwnika. Każda rozgrywka kończy się zwycięstwem dokładnie jednej z dwóch drużyn -- remisy nie są możliwe. W celu zniszczenia głównej bazy przeciwnika, oznaczonej na mapie (rysunek \ref{dota2_map}) gwiazdką, trzeba zniszczyć dwie wieże (oznaczone kółkiem) znajdujące się bezpośrednio przy niej, a także wszystkie przeciwne wieże i koszary (oznaczone trójkątem) na przynajmniej jednej z trzech widocznych ścieżek.
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{dota2_map.png}
+\caption[Opisana mapa w grze \textit{Dota 2}]{Opisana mapa w grze \textit{Dota 2} \cite{dota2_map_src}} 
+\label{dota2_map}
+\end{figure}
+
+Dane dotyczące meczów w grze \textit{Dota 2} zostały udostępnione przez Devina Anzelmo na stronie Kaggle \cite{dota2}. Struktura danych jest relacyjna -- czyli bez wstępnego przetworzenia zbyt złożona dla ELM -- więc w eksperymentach została wykorzystana tylko część danych. Zbiór danych obejmuje 50000 próbek, gdzie każda próbka charakteryzuje jeden mecz.  Wynikiem dla każdej próbki jest jedna z dwóch klas -- 0, gdy wygrała drużyna \textit{Dire} i 1, gdy wygrała drużyna \textit{Radiant}. Próbki zawierają następujące cechy każdego meczu:
 \begin{enumerate}
 \item czas trwania meczu,
 \item status wież należących do drużyny \textit{Radiant}, zakodowany w 16-bitowej liczbie całkowitej,
@@ -340,9 +348,25 @@ Dane dotyczące meczów w grze \textit{Dota 2} zostały udostępnione przez Devi
 \item liczba pozytywnych głosów oddanych przez graczy na dany mecz,
 \item grupa serwerów, na których rozgrywany był mecz.
 \end{enumerate}
-Więcej informacji dotyczących danych jest dostępna na stronie będącej źródłem danych, a wyjaśnienia dotyczące struktury danych (na przykład kodowanie statusu wież) są dostępne w dokumentacji WebAPI gry \textit{Dota 2}.
+Więcej informacji dotyczących danych jest dostępna na stronie będącej źródłem danych \cite{dota2}, a wyjaśnienia dotyczące struktury danych (na przykład kodowanie statusu wież) są dostępne w dokumentacji WebAPI gry \textit{Dota 2} \cite{dota2_webapi}. W tabeli \ref{dota2_first_5} przedstawione jest 5 przykładowych nieznormalizowanych próbek, zgodnych z powyższym opisem.
+\begin{table}[H]
+\caption{Przykładowe dane do przewidywania zwycięzcy}
+\label{dota2_first_5}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} \\
+\hline
+2375 & 1982 & 4 & 3 & 63 & 1 & 22 & 0 & 1 & 155 \\
+2582 & 0 & 1846 & 63 & 0 & 221 & 22 & 0 & 2 & 154 \\
+2716 & 256 & 1972 & 63 & 48 & 190 & 22 & 0 & 0 & 132 \\
+3085 & 4 & 1924 & 51 & 3 & 40 & 22 & 0 & 0 & 191 \\
+1887 & 2047 & 0 & 0 & 63 & 58 & 22 & 0 & 0 & 156 \\
+\hline
+\end{tabular}
+\end{table}
 
-Ten zestaw danych można uznać za łatwy, ponieważ ze względu na charakter rozgrywki w większości przypadków sam status wież należących do danej drużyny jest wystarczającym wskaźnikiem zwycięstwa -- drużyna, która straciła wszystkie swoje wieże, wygrywa bardzo rzadko.
+Ten zestaw danych można uznać za łatwy, ponieważ ze względu na opisany wcześniej charakter rozgrywki, w większości przypadków sam status wież należących do danej drużyny jest wystarczającym wskaźnikiem zwycięstwa -- drużyna, która straciła wszystkie swoje wieże, wygrywa bardzo rzadko.
 \subsubsection{Trening sieci ELM w Pythonie}
 Niezależnie od wyboru funkcji aktywacji, nawet przy liczbach neuronów tak niskich jak 10, po wytrenowaniu poprawnie sklasyfikowanych zostało około 99\% meczów, a dodawanie większej ich liczby jedynie wydłuża czas treningu. 
 
@@ -376,7 +400,7 @@ Jak widać, dodawanie neuronów przy większych wartościach wciąż nie zwięks
 \end{itemize}
 \subsection{Klasyfikacja pokrycia lasu ze względu na dominujący gatunek drzew}
 \subsubsection{Opis}
-Benchmark polegający na klasyfikacji pokrycia lasu ze względu na dominujący gatunek drzew został dostarczony przez Jocka A. Blackarda i Colorado State University na potrzeby konkursu zorganizowanego w 2014 roku przez Kaggle. Obejmuje 15120 próbek, gdzie każda próbka opisuje obszar 30 na 30 metrów w Roosevelt National Forest w Kolorado. Próbki pochodzą jedynie z obszarów chronionych przed działalnością człowieka w celu wyeliminowania zewnętrznych czynników, takich jak sadzenie drzew przez ludzi. Klasyfikacja polega na przypisaniu każdemu obszarowi dominującego w nim gatunku drzew opisanego za pomocą liczby:
+Benchmark polegający na klasyfikacji pokrycia lasu ze względu na dominujący gatunek drzew został dostarczony przez Jocka A. Blackarda i Colorado State University na potrzeby konkursu zorganizowanego w 2014 roku przez Kaggle \cite{forest_cover}. Obejmuje 15120 próbek, gdzie każda próbka opisuje obszar 30 na 30 metrów w Roosevelt National Forest w Kolorado. Próbki pochodzą jedynie z obszarów chronionych przed działalnością człowieka w celu wyeliminowania zewnętrznych czynników, takich jak sadzenie drzew przez ludzi. Klasyfikacja polega na przypisaniu każdemu obszarowi dominującego w nim gatunku drzew opisanego za pomocą liczby:
 \begin{enumerate}
 \item świerk/jodła,
 \item sosna wydmowa,
@@ -401,7 +425,23 @@ Dane wejściowe składają się z kolumn opisujących następujące cechy:
 \item 4 binarne kolumny opisujące przynależność do poszczególnych obszarów chronionych przed działalnością człowieka,
 \item 40 binarnych kolumn charakteryzujących glebę.
 \end{enumerate}
-Dokładniejsze informacje dotyczące danych (w tym dokładne wyjaśnienia binarnych kolumn) są dostępne na stronie będącej źródłem danych. 
+Dokładniejsze informacje dotyczące danych (w tym dokładne wyjaśnienia binarnych kolumn) są dostępne na stronie będącej źródłem danych. W tabeli \ref{forest_first_5} znajduje się 5 przykładowych próbek, z pominięciem wspomnianych 44 kolumn binarnych.
+\begin{table}[H]
+\caption{Przykładowe dane dla klasyfikacji lasów}
+\label{forest_first_5}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} \\
+\hline
+2596 & 51 & 3 & 258 & 0 & 510 & 221 & 232 & 148 & 6279 \\
+2590 & 56 & 2 & 212 & -6 & 390 & 220 & 235 & 151 & 6225 \\
+2804 & 139 & 9 & 268 & 65 & 3180 & 234 & 238 & 135 & 6121 \\
+2785 & 155 & 18 & 242 & 118 & 3090 & 238 & 238 & 122 & 6211 \\
+2595 & 45 & 2 & 153 & -1 & 391 & 220 & 234 & 150 & 6172 \\
+\hline
+\end{tabular}
+\end{table}
 
 Warto zauważyć, że dane są dosyć nietypowe, ze względu na obecność licznych kolumn binarnych, których istotność może być nawet znikoma.
 \subsubsection{Trening sieci ELM w Pythonie}
@@ -513,6 +553,9 @@ TODO dobre referencje
   
 \bibitem{dota2_webapi}
   \emph{https://wiki.teamfortress.com/wiki/WebAPI/GetMatchDetails}
+  
+\bibitem{dota2_map_src}
+  \emph{http://dota2.gamepedia.com/File:Labelled\textunderscore Map.png}
 
 \bibitem{forest_cover}
   \emph{https://www.kaggle.com/c/forest-cover-type-prediction/data}
