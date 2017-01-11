@@ -76,11 +76,11 @@ W 2015 roku metoda została również ostro skrytykowana przez Yanna LeCuna, jed
 
 Teorię o niedostosowaniu ELM do zastosowań big data podważa wydana kilka miesięcy później praca \textit{High-Performance Extreme Learning Machines: A Complete Toolbox for Big Data Applications} autorstwa Antona Akusoka, Kaj-Mikaela Bj\"orka, Yoaba Miche i Amaury'ego Lendasse. Prezentuje ona obiecujące wyniki zastosowania ELM na big data -- dla testowanych danych błąd jest porównywalny, podczas gdy czas uczenia jest mniejszy (od kilku razy dla niektórych metod, nawet do kilku tysięcy razy dla innych). Praca opisuje również udostępniony przez autorów toolbox, implementujący ELM.
 \subsection{Założenia dla sieci neuronowych klasy ELM}
-Rozważane tu ELM zaliczają się do kategorii SLFN -- poza warstwą wejściową i wyjściową posiadają tylko jedną warstwę ukrytą. Od innych SLFN odróżnia je to, że ELM opierają się na losowym generowaniu neuronów warstwy ukrytej bez późniejszego ich dostosowywania do danych -- dzięki temu, że wszystkie ich parametry, takie jak np. wagi wejściowe, mogą zostać dobrane losowo, są one niezależne od danych trenujących, a w przeciwieństwie do metody BP, wagi wyjściowe są niezależne od wag wejściowych, co pozwala na nieiteracyjne ich wyznaczenie. Takie rozwiązanie zapewnia o kilka rzędów wielkości szybszy czas działania od innych metod, takich jak BP, MLP i SVM. 
-%dodać cytowanie Akusoka
+Rozważane tu ELM zaliczają się do kategorii SLFN -- poza warstwą wejściową i wyjściową posiadają tylko jedną warstwę ukrytą (patrz rys. \ref{schemat_elm}). Od innych SLFN odróżnia je to, że ELM opierają się na losowym generowaniu neuronów warstwy ukrytej bez późniejszego ich dostosowywania do danych -- dzięki temu, że wszystkie ich parametry, takie jak np. wagi wejściowe, mogą zostać dobrane losowo, są one niezależne od danych trenujących, a w przeciwieństwie do metody BP, wagi wyjściowe są niezależne od wag wejściowych, co pozwala na nieiteracyjne ich wyznaczenie. Takie rozwiązanie zapewnia o kilka rzędów wielkości szybszy czas działania od innych metod, takich jak BP, MLP i SVM \cite{akusok-hpelm}.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{schemat_sieci.png}
 \caption{Schemat SLFN typu ELM}
+\label{schemat_elm}
 \end{figure}
 
 Niech $N$ to liczba próbek danych trenujących postaci $(\bm{x}_i, \bm{t}_i) \in \mathbb{R}^n \times \mathbb{R}^m$, gdzie $\bm{x}_i = [x_{i1}, x_{i2}, \dots,  x_{in}]^T$ to dane wejściowe, a $\bm{t}_i = [t_{i1}, t_{i2}, \dots,  t_{im}]^T$ to oczekiwane wyniki. Wtedy dla SLFN z $\bar{N}$ ukrytymi neuronami wyjście dla i-tej próbki danych $(i=1,\dots,N)$ można zapisać jako:
@@ -105,7 +105,7 @@ W macierzy $\bm{H}$ i-ta kolumna (macierzy wyjścia warstwy ukrytej) to wyjście
 \bm{H} = [\bm{H}_1 | \bm{H}_2] = [g_1(\bm{XW}_1 + \bm{b}_1) | g_2(\bm{XW}_2 + \bm{b}_2)]. 
 \end{equation}
 
-Sposób rozwiązania równania $\bm{H}\bm{\beta}=\bm{T}$ jest zależny od liczby próbek $N$ i liczby neuronów warstwy ukrytej $\bar{N}$. W przypadku, gdy $N \leq \bar{N}$, należy zastosować regularyzację w celu otrzymania satysfakcjonującej wydajności. W najczęstszym przypadku $N \gg \bar{N}$ jednak należy zastosować pseudoinwersję Moore'a-Penrose'a:
+Sposób rozwiązania równania $\bm{H}\bm{\beta}=\bm{T}$ jest zależny od liczby próbek $N$ i liczby neuronów warstwy ukrytej $\bar{N}$. W przypadku, gdy $N \leq \bar{N}$, należy zastosować regularyzację w celu otrzymania satysfakcjonującej wydajności \cite{akusok-hpelm}. W najczęstszym przypadku $N \gg \bar{N}$ jednak należy zastosować pseudoinwersję Moore'a-Penrose'a \cite{huang-elm-base:ta}:
 \begin{equation}
 \bm{H}\bm{\beta}=\bm{T} \implies \bm{\beta}=\bm{H}^{\dagger}\bm{T},
 \end{equation}
@@ -113,10 +113,9 @@ gdzie
 \begin{equation}
 {H}^{\dagger} = (\bm{H}^T \bm{H})^{-1}\bm{H}^T.
 \end{equation}
-Błąd trenowania jest wyznaczany za pomocą normy euklidesowej.
 %dodać cytowanie Huanga
 
-Możliwości uczenia się ELM zależą między innymi od doboru funkcji transformacji -- w szczególności ważne jest, żeby była ona nieliniowa, ponieważ to jedyne miejsce w całym modelu, w którym może być wykorzystane jakiekolwiek nieliniowe przekształcenie. Możliwe jest wykorzystanie różnych funkcji w różnych neuronach. Dla optymalnej jakości uczenia ważne jest również znormalizowanie danych wejściowych -- jeśli charakterystyki danych wejściowych mają różne rzędy wielkości, relatywnie drobne zmiany większej wartości mogą mieć większe znaczenie niż stosunkowo duże zmiany mniejszych wartości. Normalizacja pozwala na zrównanie wagi zmian wszystkich charakterystyk. \par
+Możliwości uczenia się ELM zależą między innymi od doboru funkcji transformacji -- w szczególności ważne jest, żeby była ona nieliniowa, ponieważ to jedyne miejsce w całym modelu, w którym może być wykorzystane jakiekolwiek nieliniowe przekształcenie \cite{akusok-hpelm}. Możliwe jest wykorzystanie różnych funkcji w różnych neuronach. Dla optymalnej jakości uczenia ważne jest również znormalizowanie danych wejściowych -- jeśli charakterystyki danych wejściowych mają różne rzędy wielkości, relatywnie drobne zmiany większej wartości mogą mieć większe znaczenie niż stosunkowo duże zmiany mniejszych wartości. Normalizacja pozwala na zrównanie wagi zmian wszystkich charakterystyk. \par
 
 W przypadku problemu klasyfikacji, który jest rozważany w tej pracy, rozwiązaniem jest kategoria, dla której wartość na węźle wyjściowym była największa. 
 \subsection{Wnioski i uwagi}
@@ -136,14 +135,16 @@ Aplikacje udostępniają następujące funkcjonalności:
 \item Analiza jakości klasyfikacji i  czasu trwania treningu,
 \item Interfejs graficzny.
 \end{itemize}
-Poniższy diagram UML przedstawia zbiór przypadków użycia aplikacji z punktu widzenia użytkownika i systemu, a w następnej tabeli znajduje się ich uszczegółowienie.
+Diagram UML na rysunku \ref{use_case} przedstawia zbiór przypadków użycia aplikacji z punktu widzenia użytkownika i systemu, a w tabeli \ref{use_case_tab} znajduje się ich uszczegółowienie.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{use_case.png}
 \caption{Diagram przypadków użycia}
+\label{use_case}
 \end{figure}
 
 \begin{table}[H]
 \caption{Opisy przypadków użycia}
+\label{use_case_tab}
 \begin{tabular}{|p{3.4cm}|p{5cm}|p{4cm}|}
 \hline
 \textbf{Nazwa} & \textbf{Opis} & \textbf{Odpowiedź systemu} \\
@@ -156,9 +157,10 @@ Uruchomienie testów & Uruchomienie testów sieci wytrenowanej wcześniej schema
 \end{tabular}
 \end{table}
 
-Wymagania niefunkcjonalne aplikacji zostały określone następująco:
+Wymagania niefunkcjonalne aplikacji zostały określone w tabeli \ref{niefunkcjonalne}.
 \begin{table}[H]
 \caption{Lista wymagań niefunkcjonalnych}
+\label{niefunkcjonalne}
 \begin{tabular}{|l|l|p{9.4cm}|}
 \hline
 \textbf{Obszar} & \textbf{Numer} & \textbf{Opis} \\
@@ -174,49 +176,53 @@ Inne & 5 & Wykonanie aplikacji w językach Python i MATLAB \\
 \end{tabular}
 \end{table}
 \subsection{Analiza wykorzystywanych narzędzi}
-W związku ze wspomnianą wcześniej pracą \textit{High-Performance Extreme Learning Machines: A Complete Toolbox for Big Data Applications} Anton Akusok napisał w Pythonie i udostępnił dwie biblioteki wykorzystujące ELM, w tym wykorzystywaną tutaj bibliotekę \textit{HP-ELM}.
+W związku ze wspomnianą wcześniej pracą \textit{High-Performance Extreme Learning Machines: A Complete Toolbox for Big Data Applications} Anton Akusok napisał w Pythonie i udostępnił dwie biblioteki wykorzystujące ELM, w tym wykorzystywaną tutaj bibliotekę \textit{HP-ELM} \cite{hpelm}.
 
 Projekt \textit{HP-ELM}, czyli \textit{High Performance toolbox for Extreme Learning Machines} prezentuje kompleksowe podejście do wykorzystania ELM. Zapewnia następujące funkcjonalności:
 \begin{itemize}
-\item Wczytywanie plików z danymi,
-\item Tworzenie sieci na podstawie danych,
-\item Dodawanie neuronów z wybranymi funkcjami aktywacji (spośród funkcji liniowej, sigmoidalnej, tangensa hiperbolicznego i funkcji klasy RBF z różnymi normami),
-\item Trening sieci,
-\item Klasyfikacja lub regresja danych przez wytrenowaną sieć,
-\item Obliczanie błędu średniokwadratowego.
+\item wczytywanie plików z danymi,
+\item tworzenie sieci na podstawie danych,
+\item dodawanie neuronów z wybranymi funkcjami aktywacji (spośród funkcji liniowej, sigmoidalnej, tangensa hiperbolicznego i funkcji klasy RBF z różnymi normami),
+\item trening sieci,
+\item klasyfikacja lub regresja danych przez wytrenowaną sieć,
+\item obliczanie błędu średniokwadratowego.
 \end{itemize}
 Dodatkowo dostępne są liczne udogodnienia:
 \begin{itemize}
-\item Efektywne przechowywanie danych (w formacie HDF5),
-\item Możliwość wykorzystywania zbiorów danych niemieszczących się w pamięci operacyjnej.
+\item efektywne przechowywanie danych (w formacie HDF5),
+\item możliwość wykorzystywania zbiorów danych niemieszczących się w pamięci operacyjnej.
 \end{itemize}
 \subsection{Projekt aplikacji sieci ELM w Pythonie}
 Aplikacja w Pythonie wykorzystuje omówioną wcześniej bibliotekę i dodaje następujące funkcjonalności:
 \begin{itemize}
-\item Normalizację danych,
-\item Podział danych na treningowe i testowe,
-\item Obliczanie procenta poprawnie sklasyfikowanych próbek,
-\item Pomiar czasu treningu,
-\item Interfejs graficzny,
-\item Projektowanie benchmarków i ich podział na grupy,
-\item Rysowanie wykresów (zależności błędu średniokwadratowego, procenta sklasyfikowanych próbek i czasu treningu w zależności od liczby neuronów) z podziałem na grupy.
+\item normalizację danych,
+\item podział danych na treningowe i testowe,
+\item obliczanie procenta poprawnie sklasyfikowanych próbek,
+\item pomiar czasu treningu,
+\item interfejs graficzny,
+\item projektowanie benchmarków i ich podział na grupy,
+\item rysowanie wykresów (zależności błędu średniokwadratowego, procenta sklasyfikowanych próbek i czasu treningu w zależności od liczby neuronów) z podziałem na grupy.
 \end{itemize}
 Jako dane wejściowe aplikacja przyjmuje dwa pliki -- plik z danymi wejściowymi oraz plik z oczekiwanymi wynikami. Oferowane są możliwości przetwarzania dwóch typów plików: \textit{csv} oraz \textit{hdf5}. 
 
-\textit{Csv} to najczęstszy format stosowany do danych tego typu -- informacje są wczytywane za pomocą biblioteki \textit{numpy} (która jest również wykorzystywana do ogólnego przetwarzania macierzy, na przykład przy wyznaczaniu błędu) do pamięci jako macierz, którą dalej biblioteka \textit{HP-ELM} jest już w stanie bezpośrednio przetwarzać. Ograniczeniem (w celu utrzymania prostoty interfejsu) jest wymóg, aby dane były oddzielone przecinkami -- jednak nie powinno być to problemem ze względu na liczbę powszechnie stosowanych aplikacji pozwalające dostosować te pliki (np. pakiet \textit{Office}). Dane wczytane z plików \textit{csv} są traktowane jako \textit{small data} i wykorzystują implementację wczytującą dane do pamięci w całości. 
+\textit{Csv} to najczęstszy format stosowany do danych tego typu -- informacje są wczytywane za pomocą biblioteki \textit{numpy} \cite{numpy} (która jest również wykorzystywana do ogólnego przetwarzania macierzy, na przykład przy wyznaczaniu błędu) do pamięci jako macierz, którą dalej biblioteka \textit{HP-ELM} jest już w stanie bezpośrednio przetwarzać. Ograniczeniem (w celu utrzymania prostoty interfejsu) jest wymóg, aby dane były oddzielone przecinkami -- jednak nie powinno być to problemem ze względu na liczbę powszechnie stosowanych aplikacji pozwalające dostosować te pliki (np. pakiet \textit{Office}). Dane wczytane z plików \textit{csv} są traktowane jako \textit{small data} i wykorzystują implementację wczytującą dane do pamięci w całości. 
 
-\textit{Hdf5} (rozszerzenie \textit{h5}) to format zaprojektowany w celu przechowywania i organizowania dużych ilości danych. Biblioteka \textit{HP-ELM} przyjmuje tylko specyficzne pliki \textit{hdf5} i nie wykorzystuje wszystkich możliwości tego formatu (dotyczących organizacji). Narzucona jest prosta struktura, w której dane znajdują się w zbiorze o nazwie \textit{data} -- jednak nic więcej nie jest potrzebne do wykorzystania ELM. W celu odczytywania i przetwarzania plików \textit{hdf5} wykorzystywana jest biblioteka \textit{h5py}. Dane wczytane jako \textit{hdf5} traktowane są jako \textit{big data} i przetwarzane są bez wczytywania całości danych do pamięci, co umożliwia przetwarzanie zbiorów danych, które przekraczają rozmiarem ilość dostępnej pamięci RAM. Udostępniona została możliwość konwersji plików \textit{csv} na pliki \textit{hdf5} zgodne z aplikacją, co pozwala zasymulować działanie \textit{big data} nawet dla niewielkich zbiorów danych.  
+\textit{Hdf5} (rozszerzenie \textit{h5}) to format zaprojektowany w celu przechowywania i organizowania dużych ilości danych \cite{hdf5}. Biblioteka \textit{HP-ELM} przyjmuje tylko specyficzne pliki \textit{hdf5} i nie wykorzystuje wszystkich możliwości tego formatu (dotyczących organizacji). Narzucona jest prosta struktura, w której dane znajdują się w zbiorze o nazwie \textit{data} -- jednak nic więcej nie jest potrzebne do wykorzystania ELM. W celu odczytywania i przetwarzania plików \textit{hdf5} wykorzystywana jest biblioteka \textit{h5py} \cite{h5py}. Dane wczytane jako \textit{hdf5} traktowane są jako \textit{big data} i przetwarzane są bez wczytywania całości danych do pamięci, co umożliwia przetwarzanie zbiorów danych, które przekraczają rozmiarem ilość dostępnej pamięci RAM. Udostępniona została możliwość konwersji plików \textit{csv} na pliki \textit{hdf5} zgodne z aplikacją, co pozwala zasymulować działanie \textit{big data} nawet dla niewielkich zbiorów danych.  
 
-Do normalizacji została użyta biblioteka \textit{sklearn} -- o ile implementacja własnej normalizacji jest prosta, lepszym pomysłem jest wykorzystanie sprawdzonego rozwiązania.
+Do normalizacji została użyta biblioteka \textit{sklearn} \cite{sklearn} -- o ile implementacja własnej normalizacji jest prosta, lepszym pomysłem jest wykorzystanie sprawdzonego rozwiązania.
 
 Interfejs graficzny został stworzony z wykorzystaniem biblioteki \textit{Tkinter}. Oprócz wczytania danych i uruchomienia umożliwia on projektowanie benchmarków i łączenie ich w grupy. Możliwe jest dodawanie neuronów, których funkcja aktywacji jest jedną z predefiniowanych funkcji udostępnionych w bibliotece \textit{HP-ELM}. W jednym benchmarku mogą być neurony z różnymi funkcjami aktywacji. 
 
-Funkcjonalność łączenia benchmarków w grupy została wprowadzona w celu umożliwienia tworzenia wykresów porównujących na przykład różne funkcje aktywacji. Dane wyjściowe benchmarków znajdujących się w tej samej grupie zostaną potraktowane jako pojedyncza seria danych przy rysowaniu wykresu -- tak więc stworzenie kilku grup pozwala na otrzymanie kilku serii danych na jednym wykresie, co jest przydatne szczególnie w celu porównywania wyników.  
+Funkcjonalność łączenia benchmarków w grupy została wprowadzona w celu umożliwienia tworzenia wykresów porównujących na przykład różne funkcje aktywacji. Dane wyjściowe benchmarków znajdujących się w tej samej grupie zostaną potraktowane jako pojedyncza seria danych przy rysowaniu wykresu -- tak więc stworzenie kilku grup pozwala na otrzymanie kilku serii danych na jednym wykresie, co jest przydatne szczególnie w celu porównywania wyników. 
+
+Na rysunku \ref{przykladowy} jest przedstawiony przykładowy wykres zależności procenta poprawnie przewidzianych klas w zależności od liczby neuronów dla dwóch grup -- grupa 1 składa się z czterech benchmarków zawierających jedynie neurony z sigmoidalną funkcją aktywacji, a w skład grupy 2 wchodzą cztery benchmarki, w których neurony oparte są o tangens hiperboliczny. 
+ 
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{przykladowy_wykres.png}
 \caption{Przykładowy wykres z dwiema grupami danych}
+\label{przykladowy}
 \end{figure}
-Na powyższym rysunku jest przedstawiony wykres zależności procenta poprawnie przewidzianych klas w zależności od liczby neuronów dla dwóch grup -- grupa 1 składa się z czterech benchmarków zawierających jedynie neurony z sigmoidalną funkcją aktywacji, a w skład grupy 2 wchodzą cztery benchmarki, w których neurony oparte są o tangens hiperboliczny. 
+
 
 Wykresy są rysowane przy użyciu biblioteki \textit{matplotlib} i są ostatecznym rezultatem działania programu.
 
@@ -320,38 +326,68 @@ We wszystkich dalszych testach przyjęte zostało 80\% danych treningowych. Do t
 Zestaw 1 był używany przy testach aplikacji w Pythonie, a zestaw 2 przy testach aplikacji w Matlabie.
 \subsection{Przewidywanie wyniku meczu w grze \textit{Dota 2}}
 \subsubsection{Opis}
-Dane dotyczące meczów w grze \textit{Dota 2} zostały udostępnione przez Devina Anzelmo na stronie Kaggle. Struktura danych jest relacyjna -- czyli bez wstępnego przetworzenia zbyt złożona dla ELM -- więc w eksperymentach została wykorzystana tylko część danych. Zbiór danych obejmuje 50000 próbek, gdzie każda próbka charakteryzuje jeden mecz. Każda rozgrywka kończy się zwycięstwem dokładnie jednej z dwóch drużyn (o nazwach \textit{Radiant} i \textit{Dire}) -- remisy nie są możliwe. Wynikiem dla każdej próbki jest jedna z dwóch klas -- 0, gdy wygrała drużyna \textit{Dire} i 1, gdy wygrała drużyna \textit{Radiant}. Próbki zawierają następujące cechy każdego meczu:
-\begin{itemize}
-\item Czas trwania meczu,
-\item Status wież należących do drużyny \textit{Radiant}, zakodowany w 16-bitowej liczbie całkowitej,
-\item Status wież należących do drużyny \textit{Dire},
-\item Status koszarów należących do drużyny \textit{Dire}, zakodowany w 8-bitowej liczbie całkowitej,
-\item Status koszarów należących do drużyny \textit{Radiant},
-\item Czas pierwszego zabójstwa,
-\item Tryb gry, zapisany jako wartości od 1 do 22,
-\item Liczba negatywnych głosów oddanych przez graczy na dany mecz,
-\item Liczba pozytywnych głosów oddanych przez graczy na dany mecz,
-\item Grupa serwerów, na których rozgrywany był mecz.
-\end{itemize}
-Więcej informacji dotyczących danych jest dostępna na stronie będącej źródłem danych, a wyjaśnienia dotyczące struktury danych (na przykład kodowanie statusu wież) są dostępne w dokumentacji WebAPI gry \textit{Dota 2}.
+\textit{Dota 2} to internetowa, drużynowa gra komputerowa, w której dwa pięcioosobowe zespoły, nazwane \textit{Radiant} i \textit{Dire}, starają się zniszczyć bazę przeciwnika. Każda rozgrywka kończy się zwycięstwem dokładnie jednej z dwóch drużyn -- remisy nie są możliwe. W celu zniszczenia głównej bazy przeciwnika, oznaczonej na mapie (rysunek \ref{dota2_map}) gwiazdką, trzeba zniszczyć dwie wieże (oznaczone kółkiem) znajdujące się bezpośrednio przy niej, a także wszystkie przeciwne wieże i koszary (oznaczone trójkątem) na przynajmniej jednej z trzech widocznych ścieżek.
 
-Ten zestaw danych można uznać za łatwy, ponieważ ze względu na charakter rozgrywki w większości przypadków sam status wież należących do danej drużyny jest wystarczającym wskaźnikiem zwycięstwa -- drużyna, która straciła wszystkie swoje wieże, wygrywa bardzo rzadko.
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{dota2_map.png}
+\caption[Opisana mapa w grze \textit{Dota 2}]{Opisana mapa w grze \textit{Dota 2} \cite{dota2_map_src}} 
+\label{dota2_map}
+\end{figure}
+
+Dane dotyczące meczów w grze \textit{Dota 2} zostały udostępnione przez Devina Anzelmo na stronie Kaggle \cite{dota2}. Struktura danych jest relacyjna -- czyli bez wstępnego przetworzenia zbyt złożona dla ELM -- więc w eksperymentach została wykorzystana tylko część danych. Zbiór danych obejmuje 50000 próbek, gdzie każda próbka charakteryzuje jeden mecz.  Wynikiem dla każdej próbki jest jedna z dwóch klas -- 0, gdy wygrała drużyna \textit{Dire} i 1, gdy wygrała drużyna \textit{Radiant}. Próbki zawierają następujące cechy każdego meczu:
+\begin{enumerate}
+\item czas trwania meczu,
+\item status wież należących do drużyny \textit{Radiant}, zakodowany w 16-bitowej liczbie całkowitej,
+\item status wież należących do drużyny \textit{Dire},
+\item status koszarów należących do drużyny \textit{Dire}, zakodowany w 8-bitowej liczbie całkowitej,
+\item status koszarów należących do drużyny \textit{Radiant},
+\item czas pierwszego zabójstwa,
+\item tryb gry, zapisany jako wartości od 1 do 22,
+\item liczba negatywnych głosów oddanych przez graczy na dany mecz,
+\item liczba pozytywnych głosów oddanych przez graczy na dany mecz,
+\item grupa serwerów, na których rozgrywany był mecz.
+\end{enumerate}
+Więcej informacji dotyczących danych jest dostępna na stronie będącej źródłem danych \cite{dota2}, a wyjaśnienia dotyczące struktury danych (na przykład kodowanie statusu wież) są dostępne w dokumentacji WebAPI gry \textit{Dota 2} \cite{dota2_webapi}. W tabeli \ref{dota2_first_5} przedstawione jest 5 przykładowych nieznormalizowanych próbek, zgodnych z powyższym opisem.
+\begin{table}[H]
+\caption{Przykładowe dane do przewidywania zwycięzcy}
+\label{dota2_first_5}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} \\
+\hline
+2375 & 1982 & 4 & 3 & 63 & 1 & 22 & 0 & 1 & 155 \\
+2582 & 0 & 1846 & 63 & 0 & 221 & 22 & 0 & 2 & 154 \\
+2716 & 256 & 1972 & 63 & 48 & 190 & 22 & 0 & 0 & 132 \\
+3085 & 4 & 1924 & 51 & 3 & 40 & 22 & 0 & 0 & 191 \\
+1887 & 2047 & 0 & 0 & 63 & 58 & 22 & 0 & 0 & 156 \\
+\hline
+\end{tabular}
+\end{table}
+
+Ten zestaw danych można uznać za łatwy, ponieważ ze względu na opisany wcześniej charakter rozgrywki, w większości przypadków sam status wież należących do danej drużyny jest wystarczającym wskaźnikiem zwycięstwa -- drużyna, która straciła wszystkie swoje wieże, wygrywa bardzo rzadko.
 \subsubsection{Trening sieci ELM w Pythonie}
 Niezależnie od wyboru funkcji aktywacji, nawet przy liczbach neuronów tak niskich jak 10, po wytrenowaniu poprawnie sklasyfikowanych zostało około 99\% meczów, a dodawanie większej ich liczby jedynie wydłuża czas treningu. 
+
+Na rysunku \ref{wyniki_dota2_python} grupa 1 to benchmarki wykorzystujące sigmoidalną funkcję aktywacji, a benchmarki z grupy 2 używały tangensa hiperbolicznego.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{wyniki_dota2_python.png}
 \caption{Wyniki dla niewielkiej liczby neuronów}
+\label{wyniki_dota2_python}
 \end{figure}
-Na powyższym obrazku grupa 1 to benchmarki wykorzystujące sigmoidalną funkcję aktywacji, a benchmarki z grupy 2 używały tangensa hiperbolicznego. Jak widać, różnica między funkcjami jest bardzo niewielka. Zwiększanie liczby neuronów również nie wpływa zauważalnie na rozwiązanie. Czas treningu, zgodnie z zapewnieniami twórców ELM, jest bardzo niewielki -- wszystkie pokazane tu benchmarki zajęły łącznie mniej niż sekundę, mimo dużej liczby danych trenujących. 
+Jak widać, różnica między funkcjami jest bardzo niewielka. Zwiększanie liczby neuronów również nie wpływa zauważalnie na rozwiązanie. Czas treningu, zgodnie z zapewnieniami twórców ELM, jest bardzo niewielki -- wszystkie pokazane tu benchmarki zajęły łącznie mniej niż sekundę, mimo dużej liczby danych trenujących. 
 
+
+Na rysunku \ref{wyniki_dota2_python_performance} uwzględniona została tylko funkcja sigmoidalna, na większej liczbie neuronów.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{wyniki_dota2_python_performance.png}
 \caption{Wyniki dla dużej liczby neuronów liczby neuronów}
+\label{wyniki_dota2_python_performance}
 \end{figure}
-Tutaj uwzględniona została tylko funkcja sigmoidalna. Jak widać, dodawanie neuronów przy większych wartościach wciąż nie zwiększyło jakości treningu, a wręcz przeciwnie -- neurony dodane powyżej 200 zaczęły już tylko pogarszać wyniki. Zależność czasu trwania treningu od liczby neuronów jest liniowa przy takich rzędach wielkości neuronów. Dla 900 neuronów (i 40000 próbek danych treningowych) czas treningu to niewiele ponad 3 sekundy -- tak więc główna cecha wyróżniająca ELM, czyli wydajność, jest widoczna również dla większych problemów. Przy znaczącym zwiększeniu liczby neuronów -- z 900 do 10000 -- okazało się, że liniowa zależność jest jedynie pozorna, gdyż obliczenia nie skończyły się po 10 minutach, a w przypadku liniowej relacji trening nie powinien trwać więcej niż minuty.
+Jak widać, dodawanie neuronów przy większych wartościach wciąż nie zwiększyło jakości treningu, a wręcz przeciwnie -- neurony dodane powyżej 200 zaczęły już tylko pogarszać wyniki. Zależność czasu trwania treningu od liczby neuronów jest liniowa przy takich rzędach wielkości neuronów. Dla 900 neuronów (i 40000 próbek danych treningowych) czas treningu to niewiele ponad 3 sekundy -- tak więc główna cecha wyróżniająca ELM, czyli wydajność, jest widoczna również dla większych problemów. Przy znaczącym zwiększeniu liczby neuronów -- z 900 do 10000 -- okazało się, że liniowa zależność jest jedynie pozorna, gdyż obliczenia nie skończyły się po 10 minutach, a w przypadku liniowej relacji trening nie powinien trwać więcej niż minuty.
 \label{10000_dota2}
 
 \subsubsection{Trening sieci ELM w Matlabie}
@@ -383,37 +419,53 @@ Dla liczby neuronów, dla której wynik był najlepszy (150) czas uczenia to oko
 \end{itemize}
 \subsection{Klasyfikacja pokrycia lasu ze względu na dominujący gatunek drzew}
 \subsubsection{Opis}
-Benchmark polegający na klasyfikacji pokrycia lasu ze względu na dominujący gatunek drzew został dostarczony przez Jocka A. Blackarda i Colorado State University na potrzeby konkursu zorganizowanego w 2014 roku przez Kaggle. Obejmuje 15120 próbek, gdzie każda próbka opisuje obszar 30 na 30 metrów w Roosevelt National Forest w Kolorado. Próbki pochodzą jedynie z obszarów chronionych przed działalnością człowieka w celu wyeliminowania zewnętrznych czynników, takich jak sadzenie drzew przez ludzi. Klasyfikacja polega na przypisaniu każdemu obszarowi dominującego w nim gatunku drzew opisanego za pomocą liczby:
+Benchmark polegający na klasyfikacji pokrycia lasu ze względu na dominujący gatunek drzew został dostarczony przez Jocka A. Blackarda i Colorado State University na potrzeby konkursu zorganizowanego w 2014 roku przez Kaggle \cite{forest_cover}. Obejmuje 15120 próbek, gdzie każda próbka opisuje obszar 30 na 30 metrów w Roosevelt National Forest w Kolorado. Próbki pochodzą jedynie z obszarów chronionych przed działalnością człowieka w celu wyeliminowania zewnętrznych czynników, takich jak sadzenie drzew przez ludzi. Klasyfikacja polega na przypisaniu każdemu obszarowi dominującego w nim gatunku drzew opisanego za pomocą liczby:
 \begin{enumerate}
-\item Świerk/jodła,
-\item Sosna wydmowa,
-\item Sosna żółta,
-\item Topola/wierzba,
-\item Osika,
-\item Daglezja zielona,
-\item \textit{Krummholz}, czyli pewna specyficzna formacja drzew różnych gatunków.
+\item świerk/jodła,
+\item sosna wydmowa,
+\item sosna żółta,
+\item topola/wierzba,
+\item osika,
+\item daglezja zielona,
+\item \textit{krummholz}, czyli pewna specyficzna formacja drzew różnych gatunków.
 \end{enumerate}
 Dane wejściowe składają się z kolumn opisujących następujące cechy:
-\begin{itemize}
-\item Elewacja w metrach,
-\item Kierunek nachylenia w stopniach,
-\item Kąt nachylenia w stopniach,
-\item Pozioma odległość od najbliższego zbiornika wodnego,
-\item Pionowa odległość od najbliższego zbiornika wodnego,
-\item Pozioma odległość od najbliższej jezdni,
-\item Zacienienie o 9.00 w przesilenie letnie,
-\item Zacienienie o 12.00 w przesilenie letnie,
-\item Zacienienie o 15.00 w przesilenie letnie,
-\item Pozioma odległość od najbliższego punktu podatnego na pożary,
+\begin{enumerate}
+\item elewacja w metrach,
+\item kierunek nachylenia w stopniach,
+\item kąt nachylenia w stopniach,
+\item pozioma odległość od najbliższego zbiornika wodnego,
+\item pionowa odległość od najbliższego zbiornika wodnego,
+\item pozioma odległość od najbliższej jezdni,
+\item zacienienie o 9.00 w przesilenie letnie,
+\item zacienienie o 12.00 w przesilenie letnie,
+\item zacienienie o 15.00 w przesilenie letnie,
+\item pozioma odległość od najbliższego punktu podatnego na pożary,
 \item 4 binarne kolumny opisujące przynależność do poszczególnych obszarów chronionych przed działalnością człowieka,
 \item 40 binarnych kolumn charakteryzujących glebę.
-\end{itemize}
-Dokładniejsze informacje dotyczące danych (w tym dokładne wyjaśnienia binarnych kolumn) są dostępne na stronie będącej źródłem danych. 
+\end{enumerate}
+Dokładniejsze informacje dotyczące danych (w tym dokładne wyjaśnienia binarnych kolumn) są dostępne na stronie będącej źródłem danych. W tabeli \ref{forest_first_5} znajduje się 5 przykładowych próbek, z pominięciem wspomnianych 44 kolumn binarnych.
+\begin{table}[H]
+\caption{Przykładowe dane dla klasyfikacji lasów}
+\label{forest_first_5}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} \\
+\hline
+2596 & 51 & 3 & 258 & 0 & 510 & 221 & 232 & 148 & 6279 \\
+2590 & 56 & 2 & 212 & -6 & 390 & 220 & 235 & 151 & 6225 \\
+2804 & 139 & 9 & 268 & 65 & 3180 & 234 & 238 & 135 & 6121 \\
+2785 & 155 & 18 & 242 & 118 & 3090 & 238 & 238 & 122 & 6211 \\
+2595 & 45 & 2 & 153 & -1 & 391 & 220 & 234 & 150 & 6172 \\
+\hline
+\end{tabular}
+\end{table}
 
 Warto zauważyć, że dane są dosyć nietypowe, ze względu na obecność licznych kolumn binarnych, których istotność może być nawet znikoma.
 \subsubsection{Trening sieci ELM w Pythonie}
 Aplikacja w Pythonie osiąga dosyć niewielką skuteczność. Zarówno dla funkcji sigmoidalnej, jak i dla tangensa hiperbolicznego, maksimum skuteczności (44\%) jest osiągane przy 1800 neuronach -- przy czym dalej procent poprawnie sklasyfikowanych próbek pozostaje na stałym poziomie, a błąd średniokwadratowy wzrasta, co wskazuje na to, że większa liczba neuronów jedynie pogłębia różnice między klasami przypisanymi do źle przydzielonych próbek, a oczekiwanymi rezultatami, jednocześnie nie wpływając na wynik poprawnej klasyfikacji. Co istotne, nawet dla 2400 neuronów trening potrwał jedynie 5 sekund, zgodnie z tezą o szybkim działaniu ELM. 
-Na rysunku \ref{forest_python} zaprezentowane są wyniki dla sigmoidalnej funkcji aktywacji (grupa 1) i tangensa hiperbolicznego (grupa 2). Patrząc na wykres czasu uczenia w zależności od liczby neuronów, można już zauważyć, że wykres nie przedstawia linii prostej, a krzywą, której pochodna jest rosnąca, tak więc opisany w benchmarku z sekcji \ref{10000_dota2} przypadek 10000 neuronów jest oczekiwaną sytuacją. Podobne rezultaty występują również dla tych danych.
+Na rysunku \ref{forest_python} zaprezentowane są wyniki dla sigmoidalnej funkcji aktywacji (grupa 1) i tangensa hiperbolicznego (grupa 2). 
 
 \begin{figure}[H]
 \centering
@@ -421,6 +473,7 @@ Na rysunku \ref{forest_python} zaprezentowane są wyniki dla sigmoidalnej funkcj
 \caption{Wyniki dla niewielkiej liczby neuronów}
 \label{forest_python}
 \end{figure}
+Patrząc na wykres czasu uczenia w zależności od liczby neuronów, można już zauważyć, że wykres nie przedstawia linii prostej, a krzywą, której pochodna jest rosnąca, tak więc opisany w benchmarku z sekcji \ref{10000_dota2} przypadek 10000 neuronów jest oczekiwaną sytuacją. Podobne rezultaty występują również dla tych danych.
 \subsubsection{Trening sieci ELM w Matlabie}
 Przy odpowiednich parametrach aplikacja osiąga nawet do 76\% skuteczności. 
 Taki wynik jest otrzymywany przy zastosowaniu 800 neuronów z tangensem hiperbolicznym.
@@ -537,12 +590,27 @@ TODO dobre referencje
   
 \bibitem{hpelm} 
   \emph{https://github.com/akusok/hpelm}  
+  
+\bibitem{hdf5}
+  \emph{https://support.hdfgroup.org/HDF5/}  
+  
+\bibitem{h5py}
+  \emph{http://www.h5py.org/}
+  
+\bibitem{numpy}
+  \emph{http://www.numpy.org/}  
+  
+\bibitem{sklearn}
+  \emph{http://scikit-learn.org/}  
 
 \bibitem{dota2}
   \emph{https://www.kaggle.com/devinanzelmo/dota-2-matches}
   
 \bibitem{dota2_webapi}
   \emph{https://wiki.teamfortress.com/wiki/WebAPI/GetMatchDetails}
+  
+\bibitem{dota2_map_src}
+  \emph{http://dota2.gamepedia.com/File:Labelled\textunderscore Map.png}
 
 \bibitem{forest_cover}
   \emph{https://www.kaggle.com/c/forest-cover-type-prediction/data}
@@ -573,21 +641,21 @@ Bezpośrednio po uruchomieniu powinien pojawić się ekran jak na rysunku \ref{p
 \end{figure}
 Zawiera elementy oznaczone tu liczbami od 1 do 15:
 \begin{enumerate}
-\item Nazwa załadowanego pliku z danymi,
-\item Wybór danych -- uruchamia dwa okienka umożliwiające wybór pliku z danymi w formacie \textit{csv} (dla small data) i \textit{hdf5} (dla big data) -- pierwsze okienko to wybór danych wejściowych, a drugie okienko to wybór oczekiwanych wyników,
-\item Konwersja wczytanych danych do \textit{hdf5} -- pozwala na utworzenie plików \textit{hdf5} zgodnych z aplikacją, na przykład w celu zasymulowania obliczeń big data,
-\item Procent danych treningowych,
-\item Obecnie wybrany benchmark oraz kontrolki pozwalające przełączać się między benchmarkami,
-\item Liczba neuronów w obecnym benchmarku,
-\item Grupa, do której należy obecny benchmark,
-\item Liczba neuronów do dodania do obecnego benchmarku,
-\item Funkcja aktywacji dla neuronów do dodania do obecnego benchmarku,
-\item Dodanie określonych powyżej neuronów,
-\item Dodanie nowego benchmarku (przypisanego do tej samej grupy, co obecny benchmark),
-\item Usunięcie obecnego benchmarku,
-\item Usunięcie wszystkich neuronów z obecnego benchmarku,
-\item Usunięcie wszystkich benchmarków,
-\item Uruchomienie benchmarków.
+\item nazwa załadowanego pliku z danymi,
+\item wybór danych -- uruchamia dwa okienka umożliwiające wybór pliku z danymi w formacie \textit{csv} (dla small data) i \textit{hdf5} (dla big data) -- pierwsze okienko to wybór danych wejściowych, a drugie okienko to wybór oczekiwanych wyników,
+\item konwersja wczytanych danych do \textit{hdf5} -- pozwala na utworzenie plików \textit{hdf5} zgodnych z aplikacją, na przykład w celu zasymulowania obliczeń big data,
+\item procent danych treningowych,
+\item obecnie wybrany benchmark oraz kontrolki pozwalające przełączać się między benchmarkami,
+\item liczba neuronów w obecnym benchmarku,
+\item grupa, do której należy obecny benchmark,
+\item liczba neuronów do dodania do obecnego benchmarku,
+\item funkcja aktywacji dla neuronów do dodania do obecnego benchmarku,
+\item dodanie określonych powyżej neuronów,
+\item dodanie nowego benchmarku (przypisanego do tej samej grupy, co obecny benchmark),
+\item usunięcie obecnego benchmarku,
+\item usunięcie wszystkich neuronów z obecnego benchmarku,
+\item usunięcie wszystkich benchmarków,
+\item uruchomienie benchmarków.
 \end{enumerate}
 Aby skorzystać poprawnie z aplikacji, należy najpierw wybrać dane, ustalić procent danych treningowych, dodać tyle benchmarków, ile się chce (w każdym musi być co najmniej jeden neuron), przypisać im odpowiednie grupy, aby podzielić otrzymane wyniki na różne serie danych, a następnie wcisnąć przycisk \textit{Run benchmarks}. Efektem jest pojawienie się nowego okienka z wykresami opisującymi wyniki eksperymentu, jak na poniższym obrazku.
 \begin{figure}[H]
