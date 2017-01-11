@@ -76,8 +76,7 @@ W 2015 roku metoda została również ostro skrytykowana przez Yanna LeCuna, jed
 
 Teorię o niedostosowaniu ELM do zastosowań big data podważa wydana kilka miesięcy później praca \textit{High-Performance Extreme Learning Machines: A Complete Toolbox for Big Data Applications} autorstwa Antona Akusoka, Kaj-Mikaela Bj\"orka, Yoaba Miche i Amaury'ego Lendasse. Prezentuje ona obiecujące wyniki zastosowania ELM na big data -- dla testowanych danych błąd jest porównywalny, podczas gdy czas uczenia jest mniejszy (od kilku razy dla niektórych metod, nawet do kilku tysięcy razy dla innych). Praca opisuje również udostępniony przez autorów toolbox, implementujący ELM.
 \subsection{Założenia dla sieci neuronowych klasy ELM}
-Rozważane tu ELM zaliczają się do kategorii SLFN -- poza warstwą wejściową i wyjściową posiadają tylko jedną warstwę ukrytą (patrz rys. \ref{schemat_elm}). Od innych SLFN odróżnia je to, że ELM opierają się na losowym generowaniu neuronów warstwy ukrytej bez późniejszego ich dostosowywania do danych -- dzięki temu, że wszystkie ich parametry, takie jak np. wagi wejściowe, mogą zostać dobrane losowo, są one niezależne od danych trenujących, a w przeciwieństwie do metody BP, wagi wyjściowe są niezależne od wag wejściowych, co pozwala na nieiteracyjne ich wyznaczenie. Takie rozwiązanie zapewnia o kilka rzędów wielkości szybszy czas działania od innych metod, takich jak BP, MLP i SVM. 
-%dodać cytowanie Akusoka
+Rozważane tu ELM zaliczają się do kategorii SLFN -- poza warstwą wejściową i wyjściową posiadają tylko jedną warstwę ukrytą (patrz rys. \ref{schemat_elm}). Od innych SLFN odróżnia je to, że ELM opierają się na losowym generowaniu neuronów warstwy ukrytej bez późniejszego ich dostosowywania do danych -- dzięki temu, że wszystkie ich parametry, takie jak np. wagi wejściowe, mogą zostać dobrane losowo, są one niezależne od danych trenujących, a w przeciwieństwie do metody BP, wagi wyjściowe są niezależne od wag wejściowych, co pozwala na nieiteracyjne ich wyznaczenie. Takie rozwiązanie zapewnia o kilka rzędów wielkości szybszy czas działania od innych metod, takich jak BP, MLP i SVM \cite{akusok-hpelm}.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{schemat_sieci.png}
 \caption{Schemat SLFN typu ELM}
@@ -106,7 +105,7 @@ W macierzy $\bm{H}$ i-ta kolumna (macierzy wyjścia warstwy ukrytej) to wyjście
 \bm{H} = [\bm{H}_1 | \bm{H}_2] = [g_1(\bm{XW}_1 + \bm{b}_1) | g_2(\bm{XW}_2 + \bm{b}_2)]. 
 \end{equation}
 
-Sposób rozwiązania równania $\bm{H}\bm{\beta}=\bm{T}$ jest zależny od liczby próbek $N$ i liczby neuronów warstwy ukrytej $\bar{N}$. W przypadku, gdy $N \leq \bar{N}$, należy zastosować regularyzację w celu otrzymania satysfakcjonującej wydajności. W najczęstszym przypadku $N \gg \bar{N}$ jednak należy zastosować pseudoinwersję Moore'a-Penrose'a:
+Sposób rozwiązania równania $\bm{H}\bm{\beta}=\bm{T}$ jest zależny od liczby próbek $N$ i liczby neuronów warstwy ukrytej $\bar{N}$. W przypadku, gdy $N \leq \bar{N}$, należy zastosować regularyzację w celu otrzymania satysfakcjonującej wydajności \cite{akusok-hpelm}. W najczęstszym przypadku $N \gg \bar{N}$ jednak należy zastosować pseudoinwersję Moore'a-Penrose'a \cite{huang-elm-base:ta}:
 \begin{equation}
 \bm{H}\bm{\beta}=\bm{T} \implies \bm{\beta}=\bm{H}^{\dagger}\bm{T},
 \end{equation}
@@ -114,10 +113,9 @@ gdzie
 \begin{equation}
 {H}^{\dagger} = (\bm{H}^T \bm{H})^{-1}\bm{H}^T.
 \end{equation}
-Błąd trenowania jest wyznaczany za pomocą normy euklidesowej.
 %dodać cytowanie Huanga
 
-Możliwości uczenia się ELM zależą między innymi od doboru funkcji transformacji -- w szczególności ważne jest, żeby była ona nieliniowa, ponieważ to jedyne miejsce w całym modelu, w którym może być wykorzystane jakiekolwiek nieliniowe przekształcenie. Możliwe jest wykorzystanie różnych funkcji w różnych neuronach. Dla optymalnej jakości uczenia ważne jest również znormalizowanie danych wejściowych -- jeśli charakterystyki danych wejściowych mają różne rzędy wielkości, relatywnie drobne zmiany większej wartości mogą mieć większe znaczenie niż stosunkowo duże zmiany mniejszych wartości. Normalizacja pozwala na zrównanie wagi zmian wszystkich charakterystyk. \par
+Możliwości uczenia się ELM zależą między innymi od doboru funkcji transformacji -- w szczególności ważne jest, żeby była ona nieliniowa, ponieważ to jedyne miejsce w całym modelu, w którym może być wykorzystane jakiekolwiek nieliniowe przekształcenie \cite{akusok-hpelm}. Możliwe jest wykorzystanie różnych funkcji w różnych neuronach. Dla optymalnej jakości uczenia ważne jest również znormalizowanie danych wejściowych -- jeśli charakterystyki danych wejściowych mają różne rzędy wielkości, relatywnie drobne zmiany większej wartości mogą mieć większe znaczenie niż stosunkowo duże zmiany mniejszych wartości. Normalizacja pozwala na zrównanie wagi zmian wszystkich charakterystyk. \par
 
 W przypadku problemu klasyfikacji, który jest rozważany w tej pracy, rozwiązaniem jest kategoria, dla której wartość na węźle wyjściowym była największa. 
 \subsection{Wnioski i uwagi}
@@ -178,7 +176,7 @@ Inne & 5 & Wykonanie aplikacji w językach Python i MATLAB \\
 \end{tabular}
 \end{table}
 \subsection{Analiza wykorzystywanych narzędzi}
-W związku ze wspomnianą wcześniej pracą \textit{High-Performance Extreme Learning Machines: A Complete Toolbox for Big Data Applications} Anton Akusok napisał w Pythonie i udostępnił dwie biblioteki wykorzystujące ELM, w tym wykorzystywaną tutaj bibliotekę \textit{HP-ELM}.
+W związku ze wspomnianą wcześniej pracą \textit{High-Performance Extreme Learning Machines: A Complete Toolbox for Big Data Applications} Anton Akusok napisał w Pythonie i udostępnił dwie biblioteki wykorzystujące ELM, w tym wykorzystywaną tutaj bibliotekę \textit{HP-ELM} \cite{hpelm}.
 
 Projekt \textit{HP-ELM}, czyli \textit{High Performance toolbox for Extreme Learning Machines} prezentuje kompleksowe podejście do wykorzystania ELM. Zapewnia następujące funkcjonalności:
 \begin{itemize}
@@ -207,11 +205,11 @@ Aplikacja w Pythonie wykorzystuje omówioną wcześniej bibliotekę i dodaje nas
 \end{itemize}
 Jako dane wejściowe aplikacja przyjmuje dwa pliki -- plik z danymi wejściowymi oraz plik z oczekiwanymi wynikami. Oferowane są możliwości przetwarzania dwóch typów plików: \textit{csv} oraz \textit{hdf5}. 
 
-\textit{Csv} to najczęstszy format stosowany do danych tego typu -- informacje są wczytywane za pomocą biblioteki \textit{numpy} (która jest również wykorzystywana do ogólnego przetwarzania macierzy, na przykład przy wyznaczaniu błędu) do pamięci jako macierz, którą dalej biblioteka \textit{HP-ELM} jest już w stanie bezpośrednio przetwarzać. Ograniczeniem (w celu utrzymania prostoty interfejsu) jest wymóg, aby dane były oddzielone przecinkami -- jednak nie powinno być to problemem ze względu na liczbę powszechnie stosowanych aplikacji pozwalające dostosować te pliki (np. pakiet \textit{Office}). Dane wczytane z plików \textit{csv} są traktowane jako \textit{small data} i wykorzystują implementację wczytującą dane do pamięci w całości. 
+\textit{Csv} to najczęstszy format stosowany do danych tego typu -- informacje są wczytywane za pomocą biblioteki \textit{numpy} \cite{numpy} (która jest również wykorzystywana do ogólnego przetwarzania macierzy, na przykład przy wyznaczaniu błędu) do pamięci jako macierz, którą dalej biblioteka \textit{HP-ELM} jest już w stanie bezpośrednio przetwarzać. Ograniczeniem (w celu utrzymania prostoty interfejsu) jest wymóg, aby dane były oddzielone przecinkami -- jednak nie powinno być to problemem ze względu na liczbę powszechnie stosowanych aplikacji pozwalające dostosować te pliki (np. pakiet \textit{Office}). Dane wczytane z plików \textit{csv} są traktowane jako \textit{small data} i wykorzystują implementację wczytującą dane do pamięci w całości. 
 
-\textit{Hdf5} (rozszerzenie \textit{h5}) to format zaprojektowany w celu przechowywania i organizowania dużych ilości danych. Biblioteka \textit{HP-ELM} przyjmuje tylko specyficzne pliki \textit{hdf5} i nie wykorzystuje wszystkich możliwości tego formatu (dotyczących organizacji). Narzucona jest prosta struktura, w której dane znajdują się w zbiorze o nazwie \textit{data} -- jednak nic więcej nie jest potrzebne do wykorzystania ELM. W celu odczytywania i przetwarzania plików \textit{hdf5} wykorzystywana jest biblioteka \textit{h5py}. Dane wczytane jako \textit{hdf5} traktowane są jako \textit{big data} i przetwarzane są bez wczytywania całości danych do pamięci, co umożliwia przetwarzanie zbiorów danych, które przekraczają rozmiarem ilość dostępnej pamięci RAM. Udostępniona została możliwość konwersji plików \textit{csv} na pliki \textit{hdf5} zgodne z aplikacją, co pozwala zasymulować działanie \textit{big data} nawet dla niewielkich zbiorów danych.  
+\textit{Hdf5} (rozszerzenie \textit{h5}) to format zaprojektowany w celu przechowywania i organizowania dużych ilości danych \cite{hdf5}. Biblioteka \textit{HP-ELM} przyjmuje tylko specyficzne pliki \textit{hdf5} i nie wykorzystuje wszystkich możliwości tego formatu (dotyczących organizacji). Narzucona jest prosta struktura, w której dane znajdują się w zbiorze o nazwie \textit{data} -- jednak nic więcej nie jest potrzebne do wykorzystania ELM. W celu odczytywania i przetwarzania plików \textit{hdf5} wykorzystywana jest biblioteka \textit{h5py} \cite{h5py}. Dane wczytane jako \textit{hdf5} traktowane są jako \textit{big data} i przetwarzane są bez wczytywania całości danych do pamięci, co umożliwia przetwarzanie zbiorów danych, które przekraczają rozmiarem ilość dostępnej pamięci RAM. Udostępniona została możliwość konwersji plików \textit{csv} na pliki \textit{hdf5} zgodne z aplikacją, co pozwala zasymulować działanie \textit{big data} nawet dla niewielkich zbiorów danych.  
 
-Do normalizacji została użyta biblioteka \textit{sklearn} -- o ile implementacja własnej normalizacji jest prosta, lepszym pomysłem jest wykorzystanie sprawdzonego rozwiązania.
+Do normalizacji została użyta biblioteka \textit{sklearn} \cite{sklearn} -- o ile implementacja własnej normalizacji jest prosta, lepszym pomysłem jest wykorzystanie sprawdzonego rozwiązania.
 
 Interfejs graficzny został stworzony z wykorzystaniem biblioteki \textit{Tkinter}. Oprócz wczytania danych i uruchomienia umożliwia on projektowanie benchmarków i łączenie ich w grupy. Możliwe jest dodawanie neuronów, których funkcja aktywacji jest jedną z predefiniowanych funkcji udostępnionych w bibliotece \textit{HP-ELM}. W jednym benchmarku mogą być neurony z różnymi funkcjami aktywacji. 
 
@@ -547,6 +545,18 @@ TODO dobre referencje
   
 \bibitem{hpelm} 
   \emph{https://github.com/akusok/hpelm}  
+  
+\bibitem{hdf5}
+  \emph{https://support.hdfgroup.org/HDF5/}  
+  
+\bibitem{h5py}
+  \emph{http://www.h5py.org/}
+  
+\bibitem{numpy}
+  \emph{http://www.numpy.org/}  
+  
+\bibitem{sklearn}
+  \emph{http://scikit-learn.org/}  
 
 \bibitem{dota2}
   \emph{https://www.kaggle.com/devinanzelmo/dota-2-matches}
@@ -586,21 +596,21 @@ Bezpośrednio po uruchomieniu powinien pojawić się ekran jak na rysunku \ref{p
 \end{figure}
 Zawiera elementy oznaczone tu liczbami od 1 do 15:
 \begin{enumerate}
-\item Nazwa załadowanego pliku z danymi,
-\item Wybór danych -- uruchamia dwa okienka umożliwiające wybór pliku z danymi w formacie \textit{csv} (dla small data) i \textit{hdf5} (dla big data) -- pierwsze okienko to wybór danych wejściowych, a drugie okienko to wybór oczekiwanych wyników,
-\item Konwersja wczytanych danych do \textit{hdf5} -- pozwala na utworzenie plików \textit{hdf5} zgodnych z aplikacją, na przykład w celu zasymulowania obliczeń big data,
-\item Procent danych treningowych,
-\item Obecnie wybrany benchmark oraz kontrolki pozwalające przełączać się między benchmarkami,
-\item Liczba neuronów w obecnym benchmarku,
-\item Grupa, do której należy obecny benchmark,
-\item Liczba neuronów do dodania do obecnego benchmarku,
-\item Funkcja aktywacji dla neuronów do dodania do obecnego benchmarku,
-\item Dodanie określonych powyżej neuronów,
-\item Dodanie nowego benchmarku (przypisanego do tej samej grupy, co obecny benchmark),
-\item Usunięcie obecnego benchmarku,
-\item Usunięcie wszystkich neuronów z obecnego benchmarku,
-\item Usunięcie wszystkich benchmarków,
-\item Uruchomienie benchmarków.
+\item nazwa załadowanego pliku z danymi,
+\item wybór danych -- uruchamia dwa okienka umożliwiające wybór pliku z danymi w formacie \textit{csv} (dla small data) i \textit{hdf5} (dla big data) -- pierwsze okienko to wybór danych wejściowych, a drugie okienko to wybór oczekiwanych wyników,
+\item konwersja wczytanych danych do \textit{hdf5} -- pozwala na utworzenie plików \textit{hdf5} zgodnych z aplikacją, na przykład w celu zasymulowania obliczeń big data,
+\item procent danych treningowych,
+\item obecnie wybrany benchmark oraz kontrolki pozwalające przełączać się między benchmarkami,
+\item liczba neuronów w obecnym benchmarku,
+\item grupa, do której należy obecny benchmark,
+\item liczba neuronów do dodania do obecnego benchmarku,
+\item funkcja aktywacji dla neuronów do dodania do obecnego benchmarku,
+\item dodanie określonych powyżej neuronów,
+\item dodanie nowego benchmarku (przypisanego do tej samej grupy, co obecny benchmark),
+\item usunięcie obecnego benchmarku,
+\item usunięcie wszystkich neuronów z obecnego benchmarku,
+\item usunięcie wszystkich benchmarków,
+\item uruchomienie benchmarków.
 \end{enumerate}
 Aby skorzystać poprawnie z aplikacji, należy najpierw wybrać dane, ustalić procent danych treningowych, dodać tyle benchmarków, ile się chce (w każdym musi być co najmniej jeden neuron), przypisać im odpowiednie grupy, aby podzielić otrzymane wyniki na różne serie danych, a następnie wcisnąć przycisk \textit{Run benchmarks}. Efektem jest pojawienie się nowego okienka z wykresami opisującymi wyniki eksperymentu, jak na poniższym obrazku.
 \begin{figure}[H]
