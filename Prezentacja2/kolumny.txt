@@ -1,0 +1,29 @@
+-----
+Dota2
+-----
+Czas gry
+Status wie¿ zespo³u 1
+Status wie¿ zespo³u 2
+Status koszarów zespo³u 2
+Status koszarów zespo³u 1
+Czas first blooda
+Tryb gry
+Negatywne g³osy
+Pozytywne g³osy
+Klaster serwerów
+
+-----
+Lasy
+-----
+Elewacja w metrach
+Kierunek nachylenia w stopniach
+K¹t nachylenia w stopniach
+Pozioma odleg³oœæ od najbli¿szego zbiornika wodnego
+Pionowa odleg³oœæ od najbli¿szego zbiornika wodnego
+Pozioma odleg³oœæ od najbli¿szej jezdni
+Zacienienie o 9.00 w przesilenie letnie
+Zacienienie o 12.00 w przesilenie letnie
+Zacienienie o 15.00 w przesilenie letnie
+Pozioma odleg³oœæ od najbli¿szego punktu podatnego na po¿ary
+4 binarne kolumny opisuj¹ce przynale¿noœæ do poszczególnych obszarów chronionych przed dzia³alnoœci¹ cz³owieka
+40 binarnych kolumn charakteryzuj¹cych glebê
