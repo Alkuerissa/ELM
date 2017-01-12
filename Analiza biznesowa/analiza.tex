@@ -21,7 +21,7 @@ Wydział Matematyki i Nauk Informacyjnych Politechniki Warszawskiej
 \begin{center}
 \begin{minipage}{.9\textwidth}
 \maketitle
-\begin{center}Wersja 1.2\end{center}
+\begin{center}Wersja 1.8\end{center}
 \end{minipage}
 \end{center}
 \vfill % equivalent to \vspace{\fill}
@@ -43,6 +43,9 @@ Wydział Matematyki i Nauk Informacyjnych Politechniki Warszawskiej
 15.11.2016 & Ahmed Abdelkarim & Opis modelu wytwórczego & 1.3 \\
 15.11.2016 & Aleksandra Hernik & Architektura rozwiązania & 1.4 \\
 15.11.2016 & Ahmed Abdelkarim & Diagram klas & 1.5 \\
+12.01.2017 & Ahmed Abdelkarim & Instruckcja i dokumentacja kodu - Python & 1.6 \\
+12.01.2017 & Aleksandra Hernik & Instrukcja i dokumentacja kodu - Matlab & 1.7 \\
+12.01.2017 & Ahmed Abdelkarim & Przeprowadzone testy, zmiany & 1.8 \\
 \hline
 \end{tabular}
 \end{table}
@@ -97,7 +100,6 @@ Użyteczność & 1 & Aplikacje muszą działać na komputerach wydziałowych \\
 Wydajność & 4 & Działanie w oparciu o ELM powinno dawać o kilka rzędów wielkości szybszy czas uczenia niż tradycyjne metody \\
 \hline 
 Inne & 5 & Wykonanie aplikacji w językach Python i MATLAB \\
-& 6 & Dobrze udokumentowany kod \\
 \hline
 \end{tabular}
 \end{table}
@@ -122,7 +124,7 @@ Instrukcja użytkownika & 4 dni & 11.12.2016 & 14.12.2016 \\
 \end{tabular}
 \end{table}
 \subsection{Architektura rozwiązania}
-Zostaną przygotowane dwie niezależne aplikacje pełniące takie same funkcje -- jedna w języku MATLAB, a druga w języku Python. Aplikacje nie posiadają oddzielnych modułów. Opracowania w dalszym ciągu tego rozdziału dotyczy obu aplikacji.
+Zostaną przygotowane dwie niezależne aplikacje pełniące podobne funkcje -- jedna w języku MATLAB, a druga w języku Python. Aplikacje nie posiadają oddzielnych modułów. Aplikacja w MATLABie zostanie przygotowana w formie biblioteki, a aplikacja w Pythonie będzie mieć interfejs graficzny i wykorzystywać zewnętrzną bibliotekę \textit{HP-ELM}. Opracowanie w dalszym ciągu tego rozdziału dotyczy obu aplikacji.
 
 Komponentami aplikacji będą:
 \begin{itemize}
@@ -155,6 +157,165 @@ Wybranym modelem wytwórczym jest model ewolucyjny, ponieważ stworzenie program
 \item Wydajność jest raczej oczekiwaniem, nie wymaganiem. Z prac, na których bazowany jest projekt wynika, że metoda powinna być szybka, jednak założenia projektu polegają na sprawdzeniu, a nie przyjęciu tej tezy. Ponadto nie zostały zaimplementowane inne metody uczenia sieci neuronowych, więc precyzyjna ocena wydajności byłaby trudna.
 \item Ponieważ aplikacje nie są ze sobą połączone, a same również nie składają się z modułów, problem integracji zostaje pominięty.
 \end{itemize}
+\clearpage
+\section{Instrukcja użytkownika}
+\subsection{Aplikacja sieci ELM w Pythonie}
+\subsubsection*{Przygotowanie}
+Aplikacja sieci ELM w Pythonie wymaga zainstalowania najnowszej wersji Pythona 2 wraz ze standardowymi bibliotekami -- najprostszym sposobem jest zainstalowanie pakietu Anaconda. Oprócz tego, należy zainstalować bibliotekę \textit{HP-ELM} -- należy uruchomić konsolę z uprawnieniami administratora i wywołać polecenie \textit{pip install hpelm}. 
+\subsubsection*{Uruchomienie aplikacji}
+Aby uruchomić aplikację, należy za pomocą folderu przejsć do katalogu zawierającego pliki aplikacji i wywołać polecenie \textit{python test.py}. W przypadku niektórych systemów operacyjnych (na przykład Arch Linux) może być konieczne użycie zamiast tego polecenia \textit{python2 test.py}.
+\subsubsection*{Użytkowanie aplikacji}
+Bezpośrednio po uruchomieniu powinien pojawić się ekran jak na rysunku \ref{python_ekran}.
+\begin{figure}[H]
+\centering
+\includegraphics{instrukcja_python_start.png}
+\caption{Ekran aplikacji}
+\label{python_ekran}
+\end{figure}
+Zawiera elementy oznaczone tu liczbami od 1 do 15:
+\begin{enumerate}
+\item nazwa załadowanego pliku z danymi,
+\item wybór danych -- uruchamia dwa okienka umożliwiające wybór pliku z danymi w formacie \textit{csv} (dla small data) i \textit{hdf5} (dla big data) -- pierwsze okienko to wybór danych wejściowych, a drugie okienko to wybór oczekiwanych wyników,
+\item konwersja wczytanych danych do \textit{hdf5} -- pozwala na utworzenie plików \textit{hdf5} zgodnych z aplikacją, na przykład w celu zasymulowania obliczeń big data,
+\item procent danych treningowych,
+\item obecnie wybrany benchmark oraz kontrolki pozwalające przełączać się między benchmarkami,
+\item liczba neuronów w obecnym benchmarku,
+\item grupa, do której należy obecny benchmark,
+\item liczba neuronów do dodania do obecnego benchmarku,
+\item funkcja aktywacji dla neuronów do dodania do obecnego benchmarku,
+\item dodanie określonych powyżej neuronów,
+\item dodanie nowego benchmarku (przypisanego do tej samej grupy, co obecny benchmark),
+\item usunięcie obecnego benchmarku,
+\item usunięcie wszystkich neuronów z obecnego benchmarku,
+\item usunięcie wszystkich benchmarków,
+\item uruchomienie benchmarków.
+\end{enumerate}
+Aby skorzystać poprawnie z aplikacji, należy najpierw wybrać dane, ustalić procent danych treningowych, dodać tyle benchmarków, ile się chce (w każdym musi być co najmniej jeden neuron), przypisać im odpowiednie grupy, aby podzielić otrzymane wyniki na różne serie danych, a następnie wcisnąć przycisk \textit{Run benchmarks}. Efektem jest pojawienie się nowego okienka z wykresami opisującymi wyniki eksperymentu, jak na rysunku \ref{instrukcja_python_end}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{instrukcja_python_end.png}
+\caption{Przykładowe wyniki działania aplikacji}
+\label{instrukcja_python_end}
+\end{figure}
+\clearpage
+\subsection{Aplikacja sieci ELM w Matlabie}
+\subsubsection*{Przygotowanie}
+Aby uruchomić aplikację, należy skorzystać z programu Matlab.
+Aplikacja składa się z dwóch plików: klasy sieci, zawierającej implementację algorytmu (\textit{ELM.m}) i przykładowego skryptu wywołującego kolejne funkcje tej klasy (\textit{ELM\textunderscore run.m}).
+Konieczne jest ustawienie folderu roboczego na folder, w którym znajdują się te pliki.
+\subsubsection*{Użytkowanie aplikacji}
+Uruchomienie aplikacji polega na wywołaniu skryptu \textit{ELM\textunderscore run.m}, jednak najpierw należy ustawić wszystkie konieczne parametry. Rysunek \ref{elm_run} przedstawia kod skryptu \textit{ELM\textunderscore run.m} z pominięciem części odpowiedzialnej za komunikację z użytkownikiem.
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{elm_run.png}
+\label{elm_run}
+\caption{Skrypt \textit{ELM\textunderscore run.m}}
+\end{figure}
+Znaczenie i możliwe modyfikacje kolejnych linii:
+\begin{enumerate}
+\item Przygotowanie danych wejściowych.
+W tym wypadku dane są wczytywane z pliku csv, co nie jest konieczne.
+Wymagane jest jedynie, żeby dane wejściowe następnej funkcji były macierzą, w której $n$ kolumn oznacza cechy, a jedna (ostatnia) klasy, do których należą próbki. Wartości wszystkich cech i klas muszą być liczbami.
+\item Konstruktor klasy sieci. 
+Pierwszy argument to wspomniana wcześniej tablica. 
+Drugi oznacza procent danych przeznaczonych do treningu sieci.
+Pozostałe dane (w tym wypadku 10\%) to dane testowe.
+\item Dodawanie neuronów.
+Pierwszy argument to funkcja aktywacji.
+Może to być dowolny kod wykonywalny w Matlabie, gdzie zmienną jest x.
+Drugi argument to liczba neuronów tego typu.
+Ta funkcja może zostać wywołana dowolnie wiele razy, aby stworzyć neurony o różnych funkcjach aktywacji.
+\item Rozpoczęcie treningu sieci. 
+Funkcja wykorzystuje dane wybrane w drugim kroku jako treningowe.
+Należy ją wywołać po dodaniu wszystkich neuronów.
+\item Klasyfikacja danych testowych.
+Wynikiem jest wektor klas - po jednej dla każdego obiektu, należącego do danych testowych.
+\item Funkcja porównująca wynik uzyskany w poprzednim kroku z oczekiwaniami.
+Przyjmuje jako argumenty wektor z danymi oczekiwanymi (zapisany wcześniej przez aplikację jako pole klasy) i wektor wynikowy klasyfikacji.
+Funkcja zwraca liczbę z zakresu $[0, 1]$, oznaczającą jaka część próbek została sklasyfikowana poprawnie.
+\item Inna funkcja poprawności klasyfikacji, przyjmująca takie same argumenty.
+Zwraca średnią odległość klas przewidzianych od faktycznych.
+Ta miara może być użyteczna, jeśli klasy o bliskich numerach są bardziej zbliżone niż o dalekich.
+\end{enumerate}
+Po odpowiednim zmodyfikowaniu skryptu i uruchomieniu go otrzymujemy wynik (rys. \ref{elm_run_result}) - informacje o czasie trwania i skuteczności treningu.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{elm_results.PNG}
+\caption{Wynik wywołania skryptu}
+\label{elm_run_result}
+\end{figure}
+\clearpage
+\section{Dokumentacja kodu}
+\subsection{Aplikacja sieci ELM w Pythonie}
+Aplikacja sieci ELM w Pythonie składa się z plików:
+\begin{itemize}
+\item \textit{benchmark.py},
+\item \textit{error.py}, 
+\item \textit{preprocessor.py},
+\item \textit{test.py}.
+\end{itemize}
+Ponadto wykorzystywane są biblioteki:
+\begin{itemize}
+\item \textit{HP-ELM}
+\item \textit{numpy}
+\item \textit{sklearn}
+\item \textit{h5py}
+\item \textit{matplotlib}
+\end{itemize}
+Plik \textit{test.py} to główny plik aplikacji, w którym zdefiniowane jest rozmieszczenie interfejsu użytkownika oraz funkcje wywoływane przy naciśnięciu odpowiednich jego elementów, takie jak zapamiętywanie dodanych neuronów, uruchomienie testu i rysowanie wykresów.
+
+W pliku \textit{preprocessor.py} znajduje się zestaw funkcji odpowiedzialnych za wstępne przetwarzanie danych:
+\begin{itemize}
+\item \textbf{open\textunderscore csv}(\textit{path}) -- otwiera plik \textit{csv} (rozdzielony przecinkami) ze ścieżki \textit{path} i zwraca utworzoną na jego podstawie macierz
+\item \textbf{normalize}(\textit{data}) -- zwraca znormalizowane dane z macierzy \textit{data}
+\item \textbf{normalize\textunderscore hdf5}(\textit{data\textunderscore path}, \textit{output\textunderscore path}) -- normalizuje dane z pliku \textit{data\textunderscore path} w formacie \textit{hdf5} do pliku \textit{output\textunderscore path}.
+\item \textbf{split}(\textit{data}, \textit{results}, \textit{training\textunderscore percentage}) -- dzieli dane wskazane w macierzy \textit{data} i \textit{results} na dane i rezultaty treningowe oraz testowe w zależności od \textit{training\textunderscore percentage}, zwraca dane treningowe, dane testowe, rezultaty treningowe i rezultaty testowe.
+\item \textbf{split\textunderscore hdf5}(\textit{data\textunderscore path}, \textit{results\textunderscore path}, \textit{training\textunderscore percentage}, \textit{training\textunderscore data\textunderscore path}, \textit{test\textunderscore data\textunderscore path}, \textit{training\textunderscore results\textunderscore path}, \textit{test\textunderscore results\textunderscore path}) -- analogicznie do funkcji \textbf{split} dzieli dane znajdujące się w plikach \textit{hdf5} do odpowiednich plików wynikowych.
+\end{itemize}
+Plik \textit{error.py} rozszerza funkcjonalność biblioteki \textit{HP-ELM} o dodatkowy sposób liczenia błędu klasyfikacji za pomocą funkcji:
+\begin{itemize}
+\item \textbf{percentage}(\textit{expected}, \textit{actual}) -- zwraca procent poprawnie sklasyfikowanych próbek na podstawie macierzy \textit{expected} (oczekiwane wyniki) i \textit{actual} (rzeczywiste wyniki).
+\item \textbf{hdf5\textunderscore percentage}(\textit{expected\textunderscore path}, \textit{actual\textunderscore path} -- analogicznie do funkcji \textbf{percentage}, dla wskazanych plików \textit{hdf5}.
+\end{itemize}
+
+W pliku \textit{benchmark.py} zdefiniowana została klasa \textbf{Benchmark}, która automatyzuje uruchamianie testów i ma następujące metody:
+\begin{itemize}
+\item \textbf{\textunderscore \textunderscore init\textunderscore \textunderscore}(\textit{self}, \textit{name}, \textit{training\textunderscore percentage}, \textit{neurons}) -- konstruktor, tworzący instancję klasy \textbf{Benchmark} z uzupełnionymi odpowiednimi polami. Nie powinien być wywoływany bezpośrednio.
+\item \textbf{small\textunderscore benchmark}(\textit{name}, \textit{training\textunderscore percentage}, \textit{neurons}, \textit{data}, \textit{results}) -- statyczna metoda tworząca obiekt klasy \textbf{Benchmark} przystosowany do obliczeń small data (na macierzach w pamięci, wczytanych z plików \textit{csv}). Ustawia nazwę, procent danych treningowych, zestaw benchmarków (listę zawierająca zestawy neuronów dla każdego z nich), dane i oczekiwane wyniki.
+\item \textbf{big\textunderscore benchmark}(\textit{name}, \textit{training\textunderscore percentage}, \textit{neurons}, \textit{data\textunderscore path}, \textit{results\textunderscore path}, \textit{output\textunderscore path}) -- statyczna metoda działająca analogicznie do \textbf{small\textunderscore benchmark}, ale dla obliczeń big data (na plikach \textit{hdf5}). 
+\item \textbf{run}(\textit{self}) -- uruchamia benchmark i zwraca błędy średniokwadratowe, procent poprawnie sklasyfikowanych danych i czas trwania treningu.
+\end{itemize}
+\subsection{Aplikacja sieci ELM w Matlabie}
+Aplikacja sieci ELM w Matlabie składa się z dwóch plików: \textit{ELM.m}, zawierającego implementację sieci neuronowej, oraz skryptu \textit{ELM\textunderscore run.m}, służącego jako przykładowe wywołanie -- opisany dokładnie został w instrukcji użytkownika.
+
+W pliku \textit{ELM.m} zaimplementowała została klasa \textbf{ELM}, która zapewnia wszystkie funkcjonalności biblioteki. Zawiera metody:
+\begin{itemize}
+\item \textbf{ELM}(\textit{data}, \textit{trainingPercentage}) -- tworzy obiekt klasy ELM z danymi \textit{data} -- macierzą, która w ostatniej kolumnie zawiera oczekiwane wyniki, dzieląc je na dane treningowe i testowe według \textit{trainingPercentage}.
+\item \textbf{addNeurons}(\textit{obj}, \textit{funcStr}, \textit{num}) -- dodaje do sieci \textit{num} neuronów z funkcją aktywacji opisaną w \textit{funcStr} (napis opisujący dowolną funkcja od zmiennej x, na przykład 'x * x').  
+\item \textbf{normalize}(\textit{~}, \textit{data}) -- zwraca znormalizowane dane z macierzy \textit{data}.
+\item \textbf{train}(\textit{obj}) -- trenuje sieć.
+\item \textbf{predict}(\textit{obj}) -- uruchamia test (wymaga uprzedniego wytrenowania sieci).
+\item \textbf{exactCompare}(\textit{~}, \textit{actualT}, \textit{predictedT}) -- zwraca część (liczbę od 0 do 1) poprawnie sklasyfikowanych próbek, gdzie \textit{actualT} i \textit{predictedT} to odpowiednio rzeczywiste i otrzymane wyniki.
+\item \textbf{meanDistanceCompare}(\textit{~}, \textit{actualT}, \textit{predictedT}) -- zwraca średni moduł z różnicy między rzeczywistymi i otrzymanymi wynikami.
+\item \textbf{parseData}(\textit{~}, \textit{d}) -- przetwarza macierz \textit{d}, zwracając \textit{X} -- dane wejściowe i \textit{T} -- oczekiwane wyniki, znajdujące się w ostatniej kolumnie \textit{d}.
+\item \textbf{createH}(\textit{obj}, \textit{X}) -- wyznacza macierz \textit{H}, używaną w wewnętrznych obliczeniach ELM -- dokładny opis celu i sposobu obliczania \textit{H} znajduje się w pracy inżynierskiej.
+\end{itemize}
+\clearpage
+\section{Przeprowadzone testy}
+Obie aplikacje były testowane na dwóch zestawach danych: zestawie 50000 próbek składających się z 10 cech i zestawie 15120 próbek składających się z 54 cech. Przeprowadzane testy obejmowały uruchamianie sieci przy różnych liczbach neuronów (z zakresu od 1 do 2400, a także próba dla 10000 neuronów) i funkcjach aktywacji -- w tym mieszanych (na przykład 10 neuronów liniowych i 5 neuronów sigmoidalnych). Dla żadnej kombinacji neuronów w żadnej z aplikacji nie wystąpił błąd, a obliczenia nie zajmowały więcej niż kilkanaście sekund, z wyjątkiem testu 10000 neuronów, który nie zakończył się po 10 minutach -- jest to jednak zgodne z oczekiwaniami wobec ELM. Dokładne wyniki dostępne są w pracy inżynierskiej.
+\clearpage
+\section{Zmiany w stosunku do pierwotnych założeń}
+Główną zmianą w stosunku do początkowych założeń było stworzenie aplikacji w MATLABie jako biblioteki z własną implementacją ELM, a nie identycznej aplikacji jak w Pythonie -- związku z tym nie było potrzeby tworzenia klasy \textbf{Benchmark} w tej implementacji.
+
+Wszystkie zaplanowane funkcjonalności zostały zaimplementowane, a ponadto aplikacja w Pythonie została rozszerzona o:
+\begin{itemize}
+\item wczytywanie plików \textit{hdf5},
+\item konwersja danych z \textit{csv} do \textit{hdf5}
+\item planowanie wielu testów naraz.
+\end{itemize}
+Spełnione zostały również wszystkie wymagania niefunkcjonalne, z wyjątkiem przejrzystego interfejsu graficznego w przypadku aplikacji w MATLABie (ze względu na zmianę jej charakteru).
+
+Uległ zmianie harmonogram -- implementacja i napisanie drugiego rozdziału pracy przedłużyła się do 14.12.2016, instrukcja użytkownika została napisana przed stworzeniem i wykonaniem testów, które z kolei zajęły tylko tydzień. Dalszy czas został poświęcony na dopracowanie pracy.
 \clearpage
 \section{Wykaz ważniejszych oznaczeń i akronimów}
 \begin{itemize}[label={},leftmargin=*]
