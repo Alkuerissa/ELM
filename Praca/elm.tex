@@ -63,7 +63,7 @@ Teorię o~niedostosowaniu ELM do zastosowań big data podważa wydana kilka mies
 Rozważane tu ELM zaliczają się do kategorii SLFN -- poza warstwą wejściową i~wyjściową posiadają tylko jedną warstwę ukrytą (patrz rys. \ref{schemat_elm}). Od innych SLFN odróżnia je to, że ELM opierają się na losowym generowaniu neuronów warstwy ukrytej bez późniejszego ich dostosowywania do danych -- dzięki temu, że wszystkie ich parametry, takie jak np. wagi wejściowe, mogą zostać dobrane losowo, są one niezależne od danych trenujących, a~w przeciwieństwie do metody BP, wagi wyjściowe są niezależne od wag wejściowych, co pozwala na nieiteracyjne ich wyznaczenie. Takie rozwiązanie zapewnia o~kilka rzędów wielkości szybszy czas działania od innych metod, takich jak BP, MLP i~SVM \cite{akusok-hpelm}.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{schemat_sieci.png}
-\caption{Schemat SLFN typu ELM}
+\caption[Schemat SLFN typu ELM]{Schemat SLFN typu ELM (opracowanie własne)}
 \label{schemat_elm}
 \end{figure}
 
@@ -122,7 +122,7 @@ Aplikacje udostępniają następujące funkcjonalności:
 Diagram UML na rysunku \ref{use_case} przedstawia zbiór przypadków użycia aplikacji z~punktu widzenia użytkownika i~systemu, a~w tabeli \ref{use_case_tab} znajduje się ich uszczegółowienie.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{use_case.png}
-\caption{Diagram przypadków użycia}
+\caption[Diagram przypadków użycia]{Diagram przypadków użycia (opracowanie własne)}
 \label{use_case}
 \end{figure}
 
@@ -203,7 +203,7 @@ Na rysunku \ref{przykladowy} jest przedstawiony przykładowy wykres zależności
  
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{przykladowy_wykres.png}
-\caption{Przykładowy wykres z~dwiema grupami danych}
+\caption[Przykładowy wykres z~dwiema grupami danych]{Przykładowy wykres z~dwiema grupami danych (opracowanie własne)}
 \label{przykladowy}
 \end{figure}
 
@@ -414,7 +414,7 @@ Na rysunku \ref{wyniki_dota2_python} grupa 1 to benchmarki wykorzystujące sigmo
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{wyniki_dota2_python.png}
-\caption{Wyniki dla niewielkiej liczby neuronów}
+\caption[Wyniki dla niewielkiej liczby neuronów]{Wyniki dla niewielkiej liczby neuronów (opracowanie własne)}
 \label{wyniki_dota2_python}
 \end{figure}
 Jak widać, różnica między funkcjami jest bardzo niewielka. Zwiększanie liczby neuronów również nie wpływa zauważalnie na rozwiązanie. Czas treningu, zgodnie z~zapewnieniami twórców ELM, jest bardzo niewielki -- wszystkie pokazane tu benchmarki zajęły łącznie mniej niż sekundę, mimo dużej liczby danych trenujących. 
@@ -424,7 +424,7 @@ Na rysunku \ref{wyniki_dota2_python_performance} uwzględniona została tylko fu
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{wyniki_dota2_python_performance.png}
-\caption{Wyniki dla dużej liczby neuronów liczby neuronów}
+\caption[Wyniki dla dużej liczby neuronów liczby neuronów]{Wyniki dla dużej liczby neuronów liczby neuronów (opracowanie własne)}
 \label{wyniki_dota2_python_performance}
 \end{figure}
 Jak widać, dodawanie neuronów przy większych wartościach wciąż nie zwiększyło jakości treningu, a~wręcz przeciwnie -- neurony dodane powyżej 200 zaczęły już tylko pogarszać wyniki. Zależność czasu trwania treningu od liczby neuronów jest liniowa przy takich rzędach wielkości neuronów. Dla 900 neuronów (i~40000 próbek danych treningowych) czas treningu to niewiele ponad 3 sekundy -- tak więc główna cecha wyróżniająca ELM, czyli wydajność, jest widoczna również dla większych problemów. Przy znaczącym zwiększeniu liczby neuronów -- z~900 do 10000 -- okazało się, że liniowa zależność jest jedynie pozorna, gdyż obliczenia nie skończyły się po 10 minutach, a~w przypadku liniowej relacji trening nie powinien trwać więcej niż minuty.
@@ -438,7 +438,7 @@ Jednak najlepsze wyniki są zadowalające -- niektóre ponad 99\%.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{dota_liczba_neuronow.png}
-\caption{Wykres zależności jakości uczenia od liczby neuronów}
+\caption[Wykres zależności jakości uczenia od liczby neuronów]{Wykres zależności jakości uczenia od liczby neuronów (opracowanie własne)}
 \label{dota_liczba_neuronow}
 \end{figure}
 
@@ -447,7 +447,7 @@ Dla liczby neuronów, dla której wynik był najlepszy (150) czas uczenia to oko
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{dota_wydajnosc.png}
-\caption{Wykres zależności czasu uczenia od liczby neuronów}
+\caption[Wykres zależności czasu uczenia od liczby neuronów]{Wykres zależności czasu uczenia od liczby neuronów (opracowanie własne)}
 \label{dota_wydajnosc}
 \end{figure}
 
@@ -510,7 +510,7 @@ Na rysunku \ref{forest_python} zaprezentowane są wyniki dla sigmoidalnej funkcj
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{wyniki_forest_python.png}
-\caption{Wyniki dla niewielkiej liczby neuronów}
+\caption[Wyniki dla niewielkiej liczby neuronów]{Wyniki dla niewielkiej liczby neuronów (opracowanie własne)}
 \label{forest_python}
 \end{figure}
 Patrząc na wykres czasu uczenia w~zależności od liczby neuronów, można już zauważyć, że wykres nie przedstawia linii prostej, a~krzywą, której pochodna jest rosnąca, tak więc opisany w~benchmarku z~sekcji \ref{10000_dota2} przypadek 10000 neuronów jest oczekiwaną sytuacją. Podobne rezultaty występują również dla tych danych.
@@ -526,7 +526,7 @@ Jak widać w~przypadku obu funkcji jakość klasyfikacji rosła, ale coraz wolni
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{forest_liczba_neuronow.png}
-\caption{Wykres zależności jakości uczenia od liczby neuronów}
+\caption[Wykres zależności jakości uczenia od liczby neuronów]{Wykres zależności jakości uczenia od liczby neuronów (opracowanie własne)}
 \label{forest_liczba_neuronow}
 \end{figure}
 
@@ -540,7 +540,7 @@ Warto zauważyć, że użyta funkcja nie ma istotnego wpływu na czas uczenia, p
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{forest_wydajnosc.png}
-\caption{Wykres zależności czasu uczenia od liczby neuronów}
+\caption[Wykres zależności czasu uczenia od liczby neuronów]{Wykres zależności czasu uczenia od liczby neuronów (opracowanie własne)}
 \label{forest_wydajnosc}
 \end{figure}
 
@@ -722,7 +722,7 @@ Bezpośrednio po uruchomieniu powinien pojawić się ekran jak na rysunku \ref{p
 \begin{figure}[H]
 \centering
 \includegraphics{instrukcja_python_start.png}
-\caption{Ekran aplikacji}
+\caption[Ekran aplikacji]{Ekran aplikacji (opracowanie własne)}
 \label{python_ekran}
 \end{figure}
 Zawiera elementy oznaczone tu liczbami od 1 do 15:
@@ -747,7 +747,7 @@ Aby skorzystać poprawnie z~aplikacji, należy najpierw wybrać dane, ustalić p
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{instrukcja_python_end.png}
-\caption{Przykładowe wyniki działania aplikacji}
+\caption[Przykładowe wyniki działania aplikacji]{Przykładowe wyniki działania aplikacji (opracowanie własne)}
 \label{instrukcja_python_end}
 \end{figure}
 \clearpage
@@ -762,7 +762,7 @@ Uruchomienie aplikacji polega na wywołaniu skryptu \textit{ELM\textunderscore r
 \centering
 \includegraphics[width=1\textwidth]{elm_run.png}
 \label{elm_run}
-\caption{Skrypt \textit{ELM\textunderscore run.m}}
+\caption[Skrypt \textit{ELM\textunderscore run.m}]{Skrypt \textit{ELM\textunderscore run.m} (opracowanie własne)}
 \end{figure}
 Znaczenie i~możliwe modyfikacje kolejnych linii:
 \begin{enumerate}
@@ -794,7 +794,7 @@ Po odpowiednim zmodyfikowaniu skryptu i~uruchomieniu go otrzymujemy wynik (rys. 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth]{elm_results.PNG}
-\caption{Wynik wywołania skryptu}
+\caption[Wynik wywołania skryptu]{Wynik wywołania skryptu (opracowanie własne)}
 \label{elm_run_result}
 \end{figure}
 \end{document}
