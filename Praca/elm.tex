@@ -49,23 +49,19 @@
 %\selectlanguage{polish}
 \begin{abstract}
 \setcounter{page}{1}
+Celem pracy "Projekt aplikacji do ekstremalnego uczenia maszynowego do klasyfikacji big data" jest przeanalizowanie stosunkowo nowej i~niezbadanej architektury sieci neuronowej, ze szczególnym uwzględnieniem jej możliwych zastosowań w~problemach big data.
+Jest on osiągany poprzez stworzenie dwóch aplikacji -- w~Pythonie, korzystającej z~gotowej biblioteki i~w~Matlabie, będącej własną implementacją algorytmu.\\
 
-Streszczam. Blebleble.
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.\\
-
-\noindent \textbf{Słowa kluczowe:} slowo1, slowo2, ...
+\noindent \textbf{Słowa kluczowe:} big data, ekstremalne uczenie maszynowe, klasyfikacja, Matlab, Python, sieci neuronowe, uczenie maszynowe
 \end{abstract}
 
 
 {\selectlanguage{english}
 \begin{abstract}
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.\\
 
-\noindent \textbf{Keywords:} keyword1, keyword2, ...
+\noindent \textbf{Keywords:} big data, classification, extreme learning machine, neural network, machine learning, Matlab, Python
 \end{abstract}}
 
 % 2. Oświadczenie o autorstwie pracy - w innym pliku
@@ -83,7 +79,7 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod t
 
 \chapter*{Wprowadzenie}
 %\addcontentsline{toc}{chapter}{Wprowadzenie}
-Celem pracy jest przetestowanie ELM na wybranych zestawach small data, a~następnie big data, przy użyciu służących do tego, istniejących już bibliotek do Pythona i~Matlaba.
+Celem pracy jest przetestowanie ELM na wybranych zestawach danych, przy użyciu służącej do tego, istniejącej już biblioteki do Pythona i~stworzenie własnej implementacji w Matlabie, a następnie przeanalizowanie otrzymanych wyników.
 
 Ahmed Abdelkarim zajmował się porównywaniem wyników dla big data i~small data przy użyciu Pythona.
 Aleksandra Hernik sprawdzała dokładność i~wydajność uczenia dla big data za pomocą Matlaba.
@@ -93,17 +89,17 @@ Aleksandra Hernik sprawdzała dokładność i~wydajność uczenia dla big data z
 \section{Rys historyczny}
 Sieci neuronowe znajdują coraz to nowe zastosowania i~stają się jednym z~najważniejszych kierunków rozwoju informatyki. Jednak ograniczeniem tej metody jest długotrwały proces uczenia.
 
-W 2004 roku w~pracy \textit{Extreme Learning Machine: A~New Learning Scheme of Feedforward Neural Networks} Guang-Bin Huang, Qin-Yu Zhu i~Chee-Kheong Siew zaproponowali koncepcję ELM, mającą być rozwiązaniem tego problemu. Publikacja ta dotyczyła zastosowania ELM w~SLFN. Przedstawiała podstawy teoretyczne do zastosowania tej metody, a~także dowodziła zalet tego rozwiązania. Pierwszą jest wspomniana prędkość uczenia. Ponadto w~przeciwieństwie do tradycyjnych opartych na gradientach metod, ELM dąży do minimalizacji norm wag, a~nie tylko błędu, dzięki czemu osiąga lepszą generalizację. Kolejną istotną własnością ELM jest dopuszczanie zastosowania nieróżniczkowalnych funkcji aktywacji (co nie jest możliwe w~tradycyjnych metodach). ELM unika również problemów z~minimami lokalnymi i~przeuczeniem. 
+W 2004 roku w~pracy \textit{Extreme Learning Machine: A~New Learning Scheme of Feedforward Neural Networks} \cite{huang-elm-base} Guang-Bin Huang, Qin-Yu Zhu i~Chee-Kheong Siew zaproponowali koncepcję ELM, mającą być rozwiązaniem tego problemu. Publikacja ta dotyczyła zastosowania ELM w~SLFN. Przedstawiała podstawy teoretyczne do zastosowania tej metody, a~także dowodziła zalet tego rozwiązania. Pierwszą z nich jest wspomniana prędkość uczenia. Ponadto w~przeciwieństwie do tradycyjnych opartych na gradientach metod, ELM dąży do minimalizacji norm wag, a~nie tylko błędu, dzięki czemu osiąga lepszą generalizację. Kolejną istotną własnością ELM jest dopuszczanie zastosowania nieróżniczkowalnych funkcji aktywacji (co nie jest możliwe w~tradycyjnych metodach). ELM unika również problemów z~minimami lokalnymi i~przeuczeniem. 
 
-W tym samym roku Guang-Bin Huang i~Chee-Kheong Siew zaproponowali również w~artykule \textit{Extreme Learning Machine: RBF Network Case} wariant ELM dla sieci radialnych, których nie dotyczy ta praca. 
+W tym samym roku Guang-Bin Huang i~Chee-Kheong Siew zaproponowali również w~artykule \textit{Extreme Learning Machine: RBF Network Case} \cite{huang-elm-rbf} wariant ELM dla sieci radialnych, których nie dotyczy ta praca. 
 
-Kolejną istotnym wkładem tych autorów do tematu ELM jest opublikowany w~2005 artykuł \textit{Extreme Learning Machine: Theory and Applications}. Prezentowane są w~nim wyniki ELM dla testowych danych, które pokazują, że metoda ta pozwala na dobrą klasyfikację, a~może działać nawet kilka tysięcy razy szybciej niż tradycyjne metody.
+Kolejnym istotnym wkładem tych autorów do tematu ELM jest opublikowany w~2005 artykuł \textit{Extreme Learning Machine: Theory and Applications} \cite{huang-elm-tap}. Prezentowane są w~nim wyniki ELM dla testowych danych, które pokazują, że metoda ta pozwala na dobrą klasyfikację, a~może działać nawet kilka tysięcy razy szybciej niż tradycyjne metody.
 
-Z wyżej wymienionymi pracami związane są kontrowersje dotyczące rzeczywistej innowacyjności rozwiązania Huanga i~innych, a~także oskarżenia dotyczące plagiatowania i~nieuwzględniania w~bibliografii rzeczywistych głównych źródeł pracy -- według nich artykuł dotyczący SLFN opiera się głównie na pracy \textit{Feed Forward Neural Networks With Random Weights} Woutera Schmidta, Martina Kraaijvelda i~Roberta Duina z~1992, a~artykuł dotyczący sieci radialnych wzoruje się na \textit{Multivariable Functional Interpolation and Adaptive Networks} Davida Broomheada i~Davida Lowe'a. Huang wskazał pewne różnice między tymi pracami.
+Z wyżej wymienionymi pracami związane są kontrowersje dotyczące rzeczywistej innowacyjności rozwiązania Huanga i~innych, a~także oskarżenia dotyczące plagiatowania i~nieuwzględniania w~bibliografii rzeczywistych głównych źródeł pracy \cite{originofelm} -- według nich artykuł dotyczący SLFN opiera się głównie na pracy \textit{Feed Forward Neural Networks With Random Weights} Woutera Schmidta, Martina Kraaijvelda i~Roberta Duina z~1992, a~artykuł dotyczący sieci radialnych wzoruje się na \textit{Multivariable Functional Interpolation and Adaptive Networks} Davida Broomheada i~Davida Lowe'a. Huang wskazał pewne różnice między tymi pracami.
 
-W 2015 roku metoda została również ostro skrytykowana przez Yanna LeCuna, jednego z~czołowych specjalistów od sieci neuronowych. Zarzucał pomysłowi prostotę, wskazywał na jego podobieństwo do wcześniejszych pomysłów i~wątpił w~skuteczność dla większych zestawów danych. Nie odniósł się jednak do wyników zaprezentowanych przez autorów, które pokazują, że rozwiązanie mimo swojej prostoty działa bardzo dobrze.
+W 2015 roku metoda została również ostro skrytykowana przez Yanna LeCuna, jednego z~czołowych specjalistów od sieci neuronowych. Zarzucał on pomysłowi prostotę, wskazywał na jego podobieństwo do wcześniejszych pomysłów i~wątpił w~skuteczność dla większych zestawów danych. Nie odniósł się jednak do wyników zaprezentowanych przez autorów, które pokazują, że rozwiązanie mimo swojej prostoty działa bardzo dobrze.
 
-Teorię o~niedostosowaniu ELM do zastosowań big data podważa wydana kilka miesięcy później praca \textit{High-Performance Extreme Learning Machines: A~Complete Toolbox for Big Data Applications} autorstwa Antona Akusoka, Kaj-Mikaela Bj\"orka, Yoaba Miche i~Amaury'ego Lendasse. Prezentuje ona obiecujące wyniki zastosowania ELM na big data -- dla testowanych danych błąd jest porównywalny, podczas gdy czas uczenia jest mniejszy (od kilku razy dla niektórych metod, nawet do kilku tysięcy razy dla innych). Praca opisuje również udostępniony przez autorów toolbox, implementujący ELM.
+Teorię o~niedostosowaniu ELM do zastosowań big data podważa wydana kilka miesięcy później praca \textit{High-Performance Extreme Learning Machines: A~Complete Toolbox for Big Data Applications} \cite{akusok-hpelm} autorstwa Antona Akusoka, Kaj-Mikaela Bj\"orka, Yoaba Miche i~Amaury'ego Lendasse. Prezentuje ona obiecujące wyniki zastosowania ELM na big data -- dla testowanych danych błąd jest porównywalny, podczas gdy czas uczenia jest mniejszy (od kilku razy dla niektórych metod, nawet do kilku tysięcy razy dla innych). Praca opisuje również udostępniony przez autorów toolbox, implementujący ELM.
 
 \section{Założenia dla sieci neuronowych klasy ELM}
 Rozważane tu ELM zaliczają się do kategorii SLFN -- poza warstwą wejściową i~wyjściową posiadają tylko jedną warstwę ukrytą (patrz rys. \ref{schemat_elm}). Od innych SLFN odróżnia je to, że ELM opierają się na losowym generowaniu neuronów warstwy ukrytej bez późniejszego ich dostosowywania do danych -- dzięki temu, że wszystkie ich parametry, takie jak np. wagi wejściowe, mogą zostać dobrane losowo, są one niezależne od danych trenujących, a~w przeciwieństwie do metody BP, wagi wyjściowe są niezależne od wag wejściowych, co pozwala na nieiteracyjne ich wyznaczenie. Takie rozwiązanie zapewnia o~kilka rzędów wielkości szybszy czas działania od innych metod, takich jak BP, MLP i~SVM \cite{akusok-hpelm}.
@@ -135,7 +131,7 @@ W macierzy $\bm{H}$ i-ta kolumna (macierzy wyjścia warstwy ukrytej) to wyjście
 \bm{H} = [\bm{H}_1 | \bm{H}_2] = [g_1(\bm{XW}_1 + \bm{b}_1) | g_2(\bm{XW}_2 + \bm{b}_2)]. 
 \end{equation}
 
-Sposób rozwiązania równania $\bm{H}\bm{\beta}=\bm{T}$ jest zależny od liczby próbek $N$ i~liczby neuronów warstwy ukrytej $\bar{N}$. W~przypadku, gdy $N \leq \bar{N}$, należy zastosować regularyzację w~celu otrzymania satysfakcjonującej wydajności \cite{akusok-hpelm}. W~najczęstszym przypadku $N \gg \bar{N}$ jednak należy zastosować pseudoinwersję Moore'a-Penrose'a \cite{huang-elm-base:ta}:
+Sposób rozwiązania równania $\bm{H}\bm{\beta}=\bm{T}$ jest zależny od liczby próbek $N$ i~liczby neuronów warstwy ukrytej $\bar{N}$. W~przypadku, gdy $N \leq \bar{N}$, należy zastosować regularyzację w~celu otrzymania satysfakcjonującej wydajności \cite{akusok-hpelm}. W~najczęstszym przypadku $N \gg \bar{N}$ jednak należy zastosować pseudoinwersję Moore'a-Penrose'a \cite{huang-elm-base}:
 \begin{equation}
 \bm{H}\bm{\beta}=\bm{T} \implies \bm{\beta}=\bm{H}^{\dagger}\bm{T},
 \end{equation}
@@ -149,7 +145,7 @@ Możliwości uczenia się ELM zależą między innymi od doboru funkcji transfor
 
 W przypadku problemu klasyfikacji, który jest rozważany w~tej pracy, rozwiązaniem jest kategoria, dla której wartość na węźle wyjściowym była największa. 
 \section{Wnioski i~uwagi}
-Ponieważ ELM jest bardzo szybką metodą, naturalne jest zastosowanie jej do big data -- przy czym tutaj big data oznacza dane takie, że liczba próbek jest wystarczająca, żeby wytrenować sieć bez przeuczania jej, a~ograniczeniem jest tylko czas. W~przypadku small data próbek jest za mało, żeby sieć mogła dokładnie nauczyć się modelu bez przeuczania. Szybkość uczenia w~przypadku big data jest dodatkowo ograniczona sprzętowo -- danych jest zbyt dużo, żeby wszystkie zmieścić do pamięci operacyjnej komputera, co spowalnia dostęp do nich.
+Ponieważ ELM jest bardzo szybką metodą, naturalne jest zastosowanie jej do big data -- rozumiejąc big data jako dane takie, że liczba próbek jest wystarczająca, żeby wytrenować sieć bez przeuczania jej, a~ograniczeniem jest tylko czas. W~przypadku small data próbek jest za mało, żeby sieć mogła dokładnie nauczyć się modelu bez przeuczania. Szybkość uczenia w~przypadku big data jest dodatkowo ograniczona sprzętowo -- danych jest zbyt dużo, żeby wszystkie zmieścić do pamięci operacyjnej komputera, co spowalnia dostęp do nich.
 
 \clearpage
 \chapter{Wykonanie implementacji ELM w~Pythonie i~Matlabie}
@@ -236,13 +232,13 @@ Aplikacja w~Pythonie wykorzystuje omówioną wcześniej bibliotekę i~dodaje nas
 \end{itemize}
 Jako dane wejściowe aplikacja przyjmuje dwa pliki -- plik z~danymi wejściowymi oraz plik z~oczekiwanymi wynikami. Oferowane są możliwości przetwarzania dwóch typów plików: \textit{csv} oraz \textit{hdf5}. 
 
-\textit{Csv} to najczęstszy format stosowany do danych tego typu -- informacje są wczytywane za pomocą biblioteki \textit{numpy} \cite{numpy} (która jest również wykorzystywana do ogólnego przetwarzania macierzy, na przykład przy wyznaczaniu błędu) do pamięci jako macierz, którą dalej biblioteka \textit{HP-ELM} jest już w~stanie bezpośrednio przetwarzać. Ograniczeniem (w~celu utrzymania prostoty interfejsu) jest wymóg, aby dane były oddzielone przecinkami -- jednak nie powinno być to problemem ze względu na liczbę powszechnie stosowanych aplikacji pozwalające dostosować te pliki (np. pakiet \textit{Office}). Dane wczytane z~plików \textit{csv} są traktowane jako \textit{small data} i~wykorzystują implementację wczytującą dane do pamięci w~całości. 
+\textit{Csv} to najczęstszy format stosowany do danych tego typu -- informacje są wczytywane za pomocą biblioteki \textit{numpy} \cite{numpy} (która jest również wykorzystywana do ogólnego przetwarzania macierzy, na przykład przy wyznaczaniu błędu) do pamięci jako macierz, którą dalej biblioteka \textit{HP-ELM} jest już w~stanie bezpośrednio przetwarzać. Ograniczeniem (w~celu utrzymania prostoty interfejsu) jest wymóg, aby dane były oddzielone przecinkami -- jednak nie powinno być to problemem ze względu na liczbę powszechnie stosowanych aplikacji pozwalających dostosować te pliki (np. pakiet \textit{Office}). Dane wczytane z~plików \textit{csv} są traktowane jako \textit{small data} i~wykorzystują implementację wczytującą dane do pamięci w~całości. 
 
 \textit{Hdf5} (rozszerzenie \textit{h5}) to format zaprojektowany w~celu przechowywania i~organizowania dużych ilości danych \cite{hdf5}. Biblioteka \textit{HP-ELM} przyjmuje tylko specyficzne pliki \textit{hdf5} i~nie wykorzystuje wszystkich możliwości tego formatu (dotyczących organizacji). Narzucona jest prosta struktura, w~której dane znajdują się w~zbiorze o~nazwie \textit{data} -- jednak nic więcej nie jest potrzebne do wykorzystania ELM. W~celu odczytywania i~przetwarzania plików \textit{hdf5} wykorzystywana jest biblioteka \textit{h5py} \cite{h5py}. Dane wczytane jako \textit{hdf5} traktowane są jako \textit{big data} i~przetwarzane są bez wczytywania całości danych do pamięci, co umożliwia przetwarzanie zbiorów danych, które przekraczają rozmiarem ilość dostępnej pamięci RAM. Udostępniona została możliwość konwersji plików \textit{csv} na pliki \textit{hdf5} zgodne z~aplikacją, co pozwala zasymulować działanie \textit{big data} nawet dla niewielkich zbiorów danych.  
 
 Do normalizacji została użyta biblioteka \textit{sklearn} \cite{sklearn} -- o~ile implementacja własnej normalizacji jest prosta, lepszym pomysłem jest wykorzystanie sprawdzonego rozwiązania.
 
-Interfejs graficzny został stworzony z~wykorzystaniem biblioteki \textit{Tkinter}. Oprócz wczytania danych i~uruchomienia umożliwia on projektowanie benchmarków i~łączenie ich w~grupy. Możliwe jest dodawanie neuronów, których funkcja aktywacji jest jedną z~predefiniowanych funkcji udostępnionych w~bibliotece \textit{HP-ELM}. W~jednym benchmarku mogą być neurony z~różnymi funkcjami aktywacji. 
+Interfejs graficzny został stworzony z~wykorzystaniem biblioteki \textit{Tkinter}. Oprócz wczytania danych i~uruchomienia umożliwia on projektowanie benchmarków i~łączenie ich w~grupy. Możliwe jest dodawanie neuronów, których funkcja aktywacji jest jedną z~predefiniowanych funkcji udostępnionych w~bibliotece \textit{HP-ELM}. W~jednym benchmarku mogą zostać wykorzystane neurony z~różnymi funkcjami aktywacji. 
 
 Funkcjonalność łączenia benchmarków w~grupy została wprowadzona w~celu umożliwienia tworzenia wykresów porównujących na przykład różne funkcje aktywacji. Dane wyjściowe benchmarków znajdujących się w~tej samej grupie zostaną potraktowane jako pojedyncza seria danych przy rysowaniu wykresu -- tak więc stworzenie kilku grup pozwala na otrzymanie kilku serii danych na jednym wykresie, co jest przydatne szczególnie w~celu porównywania wyników. 
 
@@ -326,7 +322,7 @@ powstanie macierz:
 \[ \begin{bmatrix} 1&0&0&0 \\ 0&0&0&1 \\ 1&0&0&0 \\ 0&1&0&0 \end{bmatrix}.\]
 Można zauważyć, że prosta modyfikacja pozwoliłaby na przyjmowanie zbiorów danych, w~których jedna obserwacja należy w~różnym stopniu do kilku klas.
 
-Ukrytym etapem przygotowywania danych jest ich normalizacja. 
+Ukrytym (odbywającym się podczas inicjalizacji obiektu klasy) etapem przygotowywania danych jest ich normalizacja. 
 Polega ona na sprowadzeniu wartości wszystkich cech do przedziału $[0, 1]$, korzystając z~wzoru:
 \[(element - min(kolumna))/(max(kolumna) - min(kolumna)).\]
 
@@ -343,8 +339,8 @@ Gdy zostaną dodane neurony można rozpocząć uczenie sieci.
 Składają się na nie przygotowanie macierzy na podstawie danych i~neuronów i~pseudoinwersja tej macierzy. 
 Gdy sieć jest nauczona, można rozpocząć klasyfikację danych testowych.
 Algorytmy treningu i~klasyfikacji zostały dokładniej opisane w~rozdziale 1.2.
-Pośrednim wynikiem klasyfikacji jest macierz o~wymiarach liczba klas na liczbę obserwacji.
-Dla każdej obserwacji zawiera wartości informujące o~tym, w~jakim stopniu należy ona do każdej z~klas.
+Pośrednim wynikiem klasyfikacji jest macierz o~wymiarach: liczba klas na liczbę obserwacji.
+Dla każdej obserwacji zawiera ona wartości informujące o~tym, w~jakim stopniu należy ona do każdej z~klas.
 Aby wynikiem dla każdej obserwacji była jedna klasa, wybierana jest klasa, dla której ta wartość jest największa.
 Na przykład jeśli pośrednim wynikiem była macierz:
 \[ \begin{bmatrix} 1&4&2&6 \\ 3&1&0&1 \\ 2&8&4&3 \\ 3&1&1&1 \end{bmatrix},\]
@@ -356,10 +352,10 @@ Następnie wyniki otrzymane można porównać z~oczekiwanymi za pomocą dwóch f
 \section{Dokumentacja kodu w~Matlabie}
 Aplikacja sieci ELM w~Matlabie składa się z~dwóch plików: \textit{ELM.m}, zawierającego implementację sieci neuronowej, oraz skryptu \textit{ELM\textunderscore run.m}, służącego jako przykładowe wywołanie -- opisany dokładnie został w~instrukcji użytkownika.
 
-W pliku \textit{ELM.m} zaimplementowała została klasa \textbf{ELM}, która zapewnia wszystkie funkcjonalności biblioteki. Zawiera metody:
+W pliku \textit{ELM.m} zaimplementowana została klasa \textbf{ELM}, która zapewnia wszystkie funkcjonalności biblioteki. Zawiera metody:
 \begin{itemize}
 \item \textbf{ELM}(\textit{data}, \textit{trainingPercentage}) -- tworzy obiekt klasy ELM z~danymi \textit{data} -- macierzą, która w~ostatniej kolumnie zawiera oczekiwane wyniki, dzieląc je na dane treningowe i~testowe według \textit{trainingPercentage}.
-\item \textbf{addNeurons}(\textit{obj}, \textit{funcStr}, \textit{num}) -- dodaje do sieci \textit{num} neuronów z~funkcją aktywacji opisaną w~\textit{funcStr} (napis opisujący dowolną funkcja od zmiennej x, na przykład 'x * x').  
+\item \textbf{addNeurons}(\textit{obj}, \textit{funcStr}, \textit{num}) -- dodaje do sieci \textit{num} neuronów z~funkcją aktywacji opisaną w~\textit{funcStr} (napis opisujący dowolną funkcję od zmiennej x, na przykład 'x * x').  
 \item \textbf{normalize}(\textit{\~}, \textit{data}) -- zwraca znormalizowane dane z~macierzy \textit{data}.
 \item \textbf{train}(\textit{obj}) -- trenuje sieć.
 \item \textbf{predict}(\textit{obj}) -- uruchamia test (wymaga uprzedniego wytrenowania sieci).
@@ -372,24 +368,24 @@ W pliku \textit{ELM.m} zaimplementowała została klasa \textbf{ELM}, która zap
 \section{Aplikacje w~Matlabie i~Pythonie -- różnice}
 \label{porownanie_aplikacji}
 Implementacje algorytmu w~obu aplikacjach różnią się. 
-Niektóre różnice mogą mieć wpływ na różnice w~wynikach aplikacji.
+Niektóre z tych różnic mogą być przyczyną rozbieżności w~wynikach aplikacji.
 Główne różnice są następujące:
 \begin{enumerate}
 \item W~dokumentacji biblioteki w~Pythonie nie zostało wspomniane wykorzystywanie wyrazów wolnych w~sieci.
 W Matlabie są one losowane i~wykorzystywane podczas uczenia.
 \item Zastosowano różne algorytmy normalizacji danych.
 \item W~Matlabie nie występuje ograniczenie na liczbę neuronów liniowych.
-\item W~obu implementacjach została stworzona funkcja wyliczająca procent trafionych danych, ale każda aplikacja ma również po po jednej dodatkowej funkcji -- w~Pythonie błąd średniokwadratowy, w~Matlabie suma modułów różnicy prawidłowej i~otrzymanej odpowiedzi.
+\item W~obu implementacjach została stworzona funkcja wyliczająca procent trafionych danych, ale każda aplikacja ma również po jednej dodatkowej funkcji -- w~Pythonie błąd średniokwadratowy, w~Matlabie suma modułów różnicy prawidłowej i~otrzymanej odpowiedzi.
 \item W~Pythonie możliwy jest wybór wyłącznie z~predefiniowanych funkcji aktywacji. 
-W Matlabie można wprowadzić dowolną funkcję, co daje większe możliwości, ale nakłada na użytkownika odpowiedzialność zadbania o~to, żeby podana funkcja spełniała założenia ELM.
+W Matlabie można wprowadzić dowolną funkcję, co daje większe możliwości, ale nakłada na użytkownika obowiązek zadbania o~to, żeby podana funkcja spełniała założenia ELM.
 \end{enumerate}
 
 \section{Wnioski i~uwagi}
 \begin{itemize}
 \item Automatyczne testy, sprawdzające główną funkcjonalność programu -- trening sieci -- nie zostaną utworzone. Istotą projektu jest przeanalizowanie otrzymywanych, a~nie otrzymanie z~góry zaplanowanych wyników.
 \item Nie zostały postawione wymagania związane z~niezawodnością i~utrzymaniem. Aplikacje służą wyłącznie jako narzędzia do przetestowania nowej technologii, więc jedynym wymaganiem jest działanie w~momencie przeprowadzania testów. Ta kwestia może ulec zmianie, jeśli testy wypadną korzystnie dla ELM.
-\item Wydajność jest raczej oczekiwaniem, nie wymaganiem. Z~prac, na których bazowany jest projekt wynika, że metoda powinna być szybka, jednak założenia projektu polegają na sprawdzeniu, a~nie przyjęciu tej tezy. Ponadto nie zostały zaimplementowane inne metody uczenia sieci neuronowych, więc precyzyjna ocena wydajności byłaby trudna.
-\item Funkcjonalność normalizacji danych oferowana przez wykorzystywaną bibliotekę \textit{HP-ELM} wydaje się nie działać i~została zastąpiona inną implementacją, która nieznacznie poprawia wyniki.
+\item Wydajność jest raczej oczekiwaniem, nie wymaganiem. Z~prac, na których bazuje projekt wynika, że metoda powinna być szybka, jednak założenia projektu polegają na sprawdzeniu, a~nie przyjęciu tej tezy. Ponadto nie zostały zaimplementowane inne metody uczenia sieci neuronowych, więc precyzyjna ocena wydajności byłaby trudna.
+\item Funkcjonalność normalizacji danych oferowana przez wykorzystywaną bibliotekę \textit{HP-ELM} nie działa (po jej zastosowaniu dane nie zmieniają się) i~została zastąpiona inną implementacją, która nieznacznie poprawia wyniki.
 \item Biblioteka \textit{HP-ELM} nie pozwala na dodanie liczby neuronów liniowych większej od liczby cech próbek -- na przykład w~przypadku próbki z~50 cechami próba dodania 2000 neuronów liniowych skończy się faktycznym dodaniem jedynie 50, o~czym dokumentacja biblioteki nie wspomina.
 \item W~aplikacji sieci ELM w~Pythonie, w~przypadku danych typu \textit{hdf5}, ze względu na konieczność przetwarzania danych na dysku, tworzone są pliki pośrednie -- dla pliku o~nazwie \textit{plik.h5}, w~katalogu \textit{plik\textunderscore test\textunderscore results/plik/} powstaną pliki:
 \begin{itemize}
@@ -667,17 +663,17 @@ Możliwe są dalsze eksperymenty, sprawdzające różne warianty implementacji E
   \emph{High-Performance Extreme Learning Machines: A~Complete Toolbox for Big Data Applications.}
   IEEE Access 3 (2015): 1011-1025.
 
-\bibitem{huang-elm-base:ta}
+\bibitem{huang-elm-base}
   A. G.-B. Huang, L. Chen, C.-K. Siew, 
   \emph{Extreme Learning Machine: A~new Learning Scheme of Feedforward Neural Networks.}
    Neural Networks, 2004. Proceedings. 2004 IEEE International Joint Conference on. Vol. 2. IEEE, 2004.
 
-\bibitem{huang-elm-rbf:ta}
+\bibitem{huang-elm-rbf}
   A. G.-B. Huang, C.-K. Siew, 
   \emph{Extreme Learning Machine: RBF Network Case.} 
   Control, Automation, Robotics and Vision Conference, 2004. ICARCV 2004 8th. Vol. 2. IEEE, 2004.
 
-\bibitem{huang-elm-tap:ta}
+\bibitem{huang-elm-tap}
   A. G.-B. Huang, L. Chen, C.-K. Siew, 
   \emph{Extreme Learning Machine: Theory and Applications.} 
   Neurocomputing 70.1 (2006): 489-501.
