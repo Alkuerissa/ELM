@@ -444,7 +444,7 @@ numer pracy według wydziałowej ewidencji prac .......
 
 	%\par\vspace{10mm}
 	Oświadczam, że pracę \@type ką pod
-	tytułem ,,\@titleaux '', której promotorem jest 	\@supervisor\ ,
+	tytułem ,,\@titleaux '', której promotorem jest 	\@supervisor ,
 	wykonał{\ifthenelse{\boolean{lady}}{a}{e}}m
 	samodzielnie, co poświadczam własnoręcznym podpisem.
 	\vspace{2cm}
