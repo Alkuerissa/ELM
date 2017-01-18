@@ -425,7 +425,7 @@ Na rysunku \ref{wyniki_dota2_python_performance} uwzględniona została tylko fu
 \caption[Wyniki dla dużej liczby neuronów liczby neuronów]{Wyniki dla dużej liczby neuronów liczby neuronów (opracowanie własne)}
 \label{wyniki_dota2_python_performance}
 \end{figure}
-Jak widać, dodawanie neuronów przy większych wartościach wciąż nie zwiększyło jakości treningu, a~wręcz przeciwnie -- neurony dodane powyżej 200 zaczęły już tylko pogarszać wyniki. Zależność czasu trwania treningu od liczby neuronów jest liniowa przy takich rzędach wielkości neuronów. Dla 900 neuronów (i~40000 próbek danych treningowych) czas treningu to niewiele ponad 3 sekundy -- tak więc główna cecha wyróżniająca ELM, czyli wydajność, jest widoczna również dla większych problemów. Przy znaczącym zwiększeniu liczby neuronów -- z~900 do 10000 -- okazało się, że liniowa zależność jest jedynie pozorna, gdyż obliczenia nie skończyły się po 10 minutach, a~w przypadku liniowej relacji trening nie powinien trwać więcej niż minuty.
+Jak widać, dodawanie neuronów przy większych wartościach wciąż nie zwiększyło jakości treningu, a~wręcz przeciwnie -- neurony dodane powyżej 200 zaczęły już tylko pogarszać wyniki. Zależność czasu trwania treningu od liczby neuronów jest liniowa przy takich rzędach wielkości neuronów. Dla 900 neuronów (i~40000 próbek danych treningowych) czas treningu to niewiele ponad 3 sekundy -- tak więc główna cecha wyróżniająca ELM, czyli wydajność, jest widoczna również dla większych problemów. Przy znaczącym zwiększeniu liczby neuronów -- z~900 do 10000 -- okazało się, że liniowa zależność jest jedynie pozorna, gdyż obliczenia nie skończyły się po 10 minutach, a~w przypadku liniowej relacji trening nie powinien trwać dłużej niż minutę.
 \label{10000_dota2}
 
 \subsection{Trening sieci ELM w~Matlabie}
@@ -458,7 +458,7 @@ Dla liczby neuronów, dla której wynik był najlepszy (150) czas uczenia to oko
 \clearpage
 \section{Klasyfikacja pokrycia lasu ze względu na dominujący gatunek drzew}
 \subsection{Opis}
-Benchmark polegający na klasyfikacji pokrycia lasu ze względu na dominujący gatunek drzew został dostarczony przez Jocka A. Blackarda i~Colorado State University na potrzeby konkursu zorganizowanego w~2014 roku przez Kaggle \cite{forest_cover}. Obejmuje 15120 próbek, gdzie każda próbka opisuje obszar 30 na 30 metrów w~Roosevelt National Forest w~Kolorado. Próbki pochodzą jedynie z~obszarów chronionych przed działalnością człowieka w~celu wyeliminowania zewnętrznych czynników, takich jak sadzenie drzew przez ludzi. Klasyfikacja polega na przypisaniu każdemu obszarowi dominującego w~nim gatunku drzew opisanego za pomocą liczby:
+Benchmark polegający na klasyfikacji pokrycia lasu ze względu na dominujący gatunek drzew został dostarczony przez Jocka A. Blackarda i~Colorado State University na potrzeby konkursu zorganizowanego w~2014 roku przez Kaggle \cite{forest_cover} -- instytucję zajmującą się organizacją konkursów z dziedziny analizy danych. Obejmuje 15120 próbek, gdzie każda próbka opisuje obszar 30 na 30 metrów w~Roosevelt National Forest w~Kolorado. Próbki pochodzą jedynie z~obszarów chronionych przed działalnością człowieka w~celu wyeliminowania zewnętrznych czynników, takich jak sadzenie drzew przez ludzi. Klasyfikacja polega na przypisaniu każdemu obszarowi dominującego w~nim gatunku drzew opisanego za pomocą liczby:
 \begin{enumerate}
 \item świerk/jodła,
 \item sosna wydmowa,
@@ -476,9 +476,9 @@ Dane wejściowe składają się z~kolumn opisujących następujące cechy:
 \item pozioma odległość od najbliższego zbiornika wodnego,
 \item pionowa odległość od najbliższego zbiornika wodnego,
 \item pozioma odległość od najbliższej jezdni,
-\item zacienienie o~9.00 w~przesilenie letnie,
-\item zacienienie o~12.00 w~przesilenie letnie,
-\item zacienienie o~15.00 w~przesilenie letnie,
+\item zacienienie o~9.00 podczas przesilenia letniego,
+\item zacienienie o~12.00 podczas przesilenia letniego,
+\item zacienienie o~15.00 podczas przesilenia letniego,
 \item pozioma odległość od najbliższego punktu podatnego na pożary,
 \item 4 binarne kolumny opisujące przynależność do poszczególnych obszarów chronionych przed działalnością człowieka,
 \item 40 binarnych kolumn charakteryzujących glebę.
@@ -553,7 +553,7 @@ Na przykładzie powyższego zbioru danych został również przeprowadzony ekspe
 W tabeli \ref{tab_norm} zostały przedstawione wyniki klasyfikacji, przeprowadzonej dla każdej z~wybranych funkcji aktywacji dwa razy: najpierw nie korzystając, a~potem korzystając z~normalizacji.
 Można zauważyć, że jedynie dla funkcji liniowej wyniki są porównywalne.
 W przypadku pozostałych funkcji zrezygnowanie z~normalizacji pogarsza skuteczność od 3 aż do 5 razy.
-W przypadku funkcji Gaussa, osiągającej dobry wynik przy zastosowaniu normalizacji, skuteczność uczenie bez jej zastosowania jest porównywalna z~losową klasyfikacją.
+W przypadku funkcji Gaussa, osiągającej dobry wynik przy zastosowaniu normalizacji, skuteczność uczenia bez jej zastosowania jest porównywalna z~losową klasyfikacją.
 \begin{table}[H]
 \caption{Skuteczność (w~procentach) klasyfikacji z~normalizacją i~bez dla przykładowych funkcji aktywacji}
 \label{tab_norm}
@@ -573,7 +573,7 @@ Można wywnioskować, że w~tej implementacji zastosowanie normalizacji jest kon
 Jako że polega ona na zastosowaniu jedynie kilku prostych operacji arytmetycznych na macierzy, jej koszt jest bardzo niewielki -- pomijalny w~stosunku do czasu trwania całego algorytmu.
 
 Wyniki można uznać za zadowalające -- skuteczność jest całkiem wysoka, a~czas uczenia niski.
-Dzięki temu, że dane pochodzą z~konkursu można porównać otrzymany wynik z~nadesłanymi rozwiązaniami.
+Dzięki temu, że dane pochodzą z~konkursu Kaggle, można porównać otrzymany wynik z~nadesłanymi rozwiązaniami.
 Uzyskany rezultat plasuje się około pięćsetnego miejsca na 1694 nadesłane odpowiedzi.
 Można to uznać za sukces tej metody, jeśli wziąć pod uwagę dwa fakty.
 Po pierwsze algorytm nie był w~żaden sposób optymalizowany pod kątem tych danych, co prawdopodobnie miało miejsce w~przypadku większości przesłanych odpowiedzi.
