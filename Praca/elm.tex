@@ -43,23 +43,7 @@ Ahmed Abdelkarim zajmował się porównywaniem wyników dla big data i~small dat
 Aleksandra Hernik sprawdzała dokładność i~wydajność uczenia dla big data za pomocą Matlaba.
 
 \clearpage
-\section*{Wykaz ważniejszych oznaczeń i akronimów}
-\addcontentsline{toc}{section}{Wykaz ważniejszych oznaczeń i akronimów}
-\begin{itemize}[label={},leftmargin=*]
-\item Benchmark -- test wydajności i jakości treningu
-\item Bias -- wyraz wolny, czyli dodatkowy neuron w warstwie wejściowej niewynikający z danych wejściowych, generujący zawsze +1, ale posiadający wagę
-\item Big Data -- dane z liczbą próbek tak dużą, że nie występuje efekt przeuczenia
-\item BP -- \textbf{B}ack-\textbf{p}ropagation - propagacja wsteczna
-\item ELM -- \textbf{E}xtreme \textbf{L}earning \textbf{M}achine - ekstremalne uczenie maszynowe
-\item GPU -- \textbf{G}raphics \textbf{P}rocessing \textbf{U}nit - procesor graficzny
-\item MLP -- \textbf{M}ulti\textbf{l}ayer \textbf{P}erceptron - perceptron wielowarstwowy
-\item RBF -- \textbf{R}adial \textbf{B}asis \textbf{F}unction, czyli radialna funkcja bazowa - funkcja rzeczywista, której wartość zależy tylko od odległości od pewnego punktu
-\item SLFN -- \textbf{S}ingle-\textbf{L}ayer \textbf{F}eed-forward \textbf{N}etwork - jednowarstwowa jednokierunkowa sieć neuronowa
-\item Small Data -- dane, dla których jest za mało próbek, aby sieć poznała dokładnie model bez przeuczenia
-\item SVM -- \textbf{S}upport \textbf{V}ector \textbf{M}achine - maszyna wektorów nośnych
-\item Toolbox -- zbiór funkcji stworzonych we wspólnym celu; biblioteka
-\end{itemize}
-\clearpage
+
 \section{Opracowanie modelu pracy sieci do ekstremalnego uczenia maszynowego ELM}
 \subsection{Rys historyczny}
 Sieci neuronowe znajdują coraz to nowe zastosowania i stają się jednym z najważniejszych kierunków rozwoju informatyki. Jednak ograniczeniem tej metody jest długotrwały proces uczenia.
@@ -566,64 +550,110 @@ Możliwe są dalsze eksperymenty, sprawdzające różne warianty implementacji E
 \clearpage
 \addcontentsline{toc}{section}{Bibliografia}
 
-TODO dobre referencje
 \begin{thebibliography}{9}
 \bibitem{akusok-hpelm}
   A. Akusok, K.-M. Björk, Y. Miche, A. Lendasse,
-  \emph{High-Performance Extreme Learning Machines: A Complete Toolbox for Big Data Applications}
-
+  \emph{High-Performance Extreme Learning Machines: A Complete Toolbox for Big Data Applications.}
+  IEEE Access 3 (2015): 1011-1025.
 
 \bibitem{huang-elm-base:ta}
   A. G.-B. Huang, L. Chen, C.-K. Siew, 
-  \emph{Extreme Learning Machine: A New Learning Scheme of Feedforward Neural Networks}
-  
+  \emph{Extreme Learning Machine: A New Learning Scheme of Feedforward Neural Networks.}
+   Neural Networks, 2004. Proceedings. 2004 IEEE International Joint Conference on. Vol. 2. IEEE, 2004.
+   
 \bibitem{huang-elm-rbf:ta}
   A. G.-B. Huang, C.-K. Siew, 
-  \emph{Extreme Learning Machine: RBF Network Case} 
+  \emph{Extreme Learning Machine: RBF Network Case.} 
+  Control, Automation, Robotics and Vision Conference, 2004. ICARCV 2004 8th. Vol. 2. IEEE, 2004.
 
 \bibitem{huang-elm-tap:ta}
   A. G.-B. Huang, L. Chen, C.-K. Siew, 
-  \emph{Extreme Learning Machine: Theory and Applications} 
+  \emph{Extreme Learning Machine: Theory and Applications.} 
+  Neurocomputing 70.1 (2006): 489-501.
   
 \bibitem{originofelm} 
-  \emph{http://elmorigin.wixsite.com/originofelm}  
+  Wixsite,
+  \emph{http://elmorigin.wixsite.com/originofelm.}
+  Accesed: 23 October 2016.
   
-\bibitem{hpelm} 
-  \emph{https://github.com/akusok/hpelm}  
+\bibitem{hpelm}
+  HPELM library on github,
+  \emph{https://github.com/akusok/hpelm}
+   Accesed: 30 October 2016.
+
   
 \bibitem{hdf5}
-  \emph{https://support.hdfgroup.org/HDF5/}  
+  HDF5 Support,
+  \emph{https://support.hdfgroup.org/HDF5/} 
+  Accesed: 15 November 2016.
+ 
   
 \bibitem{h5py}
+  HDF5 for Python documentation,
   \emph{http://www.h5py.org/}
-  
+  Accesed: 19 November 2016.
+
 \bibitem{numpy}
-  \emph{http://www.numpy.org/}  
+  Numpy documentation,
+  \emph{http://www.numpy.org/}
+  Accesed: 8 October 2016.  
   
 \bibitem{sklearn}
+  Sklearn documentation,
   \emph{http://scikit-learn.org/}  
-
+  Accesed: 10 October 2016.
+  
 \bibitem{dota2}
+  Kaggle,
   \emph{https://www.kaggle.com/devinanzelmo/dota-2-matches}
+  Accesed: 3 January 2017.
   
 \bibitem{dota2_webapi}
+  Dota 2 WebApi,
   \emph{https://wiki.teamfortress.com/wiki/WebAPI/GetMatchDetails}
+  Accesed: 3 January 2017.
   
 \bibitem{dota2_map_src}
+  Dota 2 Wiki,
   \emph{http://dota2.gamepedia.com/File:Labelled\textunderscore Map.png}
+  Accesed: 10 January 2017.
 
 \bibitem{forest_cover}
+  Kaggle,
   \emph{https://www.kaggle.com/c/forest-cover-type-prediction/data}
-  
+  Accesed: 12 December 2016.
+
 \end{thebibliography}
 
 \clearpage
+\section*{Wykaz ważniejszych oznaczeń i akronimów}
+\addcontentsline{toc}{section}{Wykaz ważniejszych oznaczeń i akronimów}
+\begin{itemize}[label={},leftmargin=*]
+\item Benchmark -- test wydajności i jakości treningu
+\item Bias -- wyraz wolny, czyli dodatkowy neuron w warstwie wejściowej niewynikający z danych wejściowych, generujący zawsze +1, ale posiadający wagę
+\item Big Data -- dane z liczbą próbek tak dużą, że nie występuje efekt przeuczenia
+\item BP -- \textbf{B}ack-\textbf{p}ropagation - propagacja wsteczna
+\item ELM -- \textbf{E}xtreme \textbf{L}earning \textbf{M}achine - ekstremalne uczenie maszynowe
+\item GPU -- \textbf{G}raphics \textbf{P}rocessing \textbf{U}nit - procesor graficzny
+\item MLP -- \textbf{M}ulti\textbf{l}ayer \textbf{P}erceptron - perceptron wielowarstwowy
+\item RBF -- \textbf{R}adial \textbf{B}asis \textbf{F}unction, czyli radialna funkcja bazowa - funkcja rzeczywista, której wartość zależy tylko od odległości od pewnego punktu
+\item SLFN -- \textbf{S}ingle-\textbf{L}ayer \textbf{F}eed-forward \textbf{N}etwork - jednowarstwowa jednokierunkowa sieć neuronowa
+\item Small Data -- dane, dla których jest za mało próbek, aby sieć poznała dokładnie model bez przeuczenia
+\item SVM -- \textbf{S}upport \textbf{V}ector \textbf{M}achine - maszyna wektorów nośnych
+\item Toolbox -- zbiór funkcji stworzonych we wspólnym celu; biblioteka
+\end{itemize}
+\clearpage
+
 \addcontentsline{toc}{section}{Wykaz rysunków}
 \listoffigures
 \clearpage
 \addcontentsline{toc}{section}{Wykaz tabel}
 \listoftables
 \clearpage
+
+\section*{Wykaz załączników}
+\clearpage
+
 \section*{Dodatek. Instrukcja obsługi aplikacji}
 \addcontentsline{toc}{section}{Dodatek. Instrukcja obsługi aplikacji}
 \subsection*{Aplikacja sieci ELM w Pythonie}
