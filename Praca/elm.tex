@@ -226,6 +226,46 @@ Na rysunku \ref{przykladowy} jest przedstawiony przykładowy wykres zależności
 
 Wykresy są rysowane przy użyciu biblioteki \textit{matplotlib} i są ostatecznym rezultatem działania programu.
 
+\subsection{Dokumentacja kodu w Pythonie}
+Aplikacja sieci ELM w Pythonie składa się z plików:
+\begin{itemize}
+\item \textit{benchmark.py},
+\item \textit{error.py}, 
+\item \textit{preprocessor.py},
+\item \textit{test.py}.
+\end{itemize}
+Ponadto wykorzystywane są biblioteki:
+\begin{itemize}
+\item \textit{HP-ELM}
+\item \textit{numpy}
+\item \textit{sklearn}
+\item \textit{h5py}
+\item \textit{matplotlib}
+\end{itemize}
+Plik \textit{test.py} to główny plik aplikacji, w którym zdefiniowane jest rozmieszczenie interfejsu użytkownika oraz funkcje wywoływane przy naciśnięciu odpowiednich jego elementów, takie jak zapamiętywanie dodanych neuronów, uruchomienie testu i rysowanie wykresów.
+
+W pliku \textit{preprocessor.py} znajduje się zestaw funkcji odpowiedzialnych za wstępne przetwarzanie danych:
+\begin{itemize}
+\item \textbf{open\textunderscore csv}(\textit{path}) -- otwiera plik \textit{csv} (rozdzielony przecinkami) ze ścieżki \textit{path} i zwraca utworzoną na jego podstawie macierz
+\item \textbf{normalize}(\textit{data}) -- zwraca znormalizowane dane z macierzy \textit{data}
+\item \textbf{normalize\textunderscore hdf5}(\textit{data\textunderscore path}, \textit{output\textunderscore path}) -- normalizuje dane z pliku \textit{data\textunderscore path} w formacie \textit{hdf5} do pliku \textit{output\textunderscore path}.
+\item \textbf{split}(\textit{data}, \textit{results}, \textit{training\textunderscore percentage}) -- dzieli dane wskazane w macierzy \textit{data} i \textit{results} na dane i rezultaty treningowe oraz testowe w zależności od \textit{training\textunderscore percentage}, zwraca dane treningowe, dane testowe, rezultaty treningowe i rezultaty testowe.
+\item \textbf{split\textunderscore hdf5}(\textit{data\textunderscore path}, \textit{results\textunderscore path}, \textit{training\textunderscore percentage}, \textit{training\textunderscore data\textunderscore path}, \textit{test\textunderscore data\textunderscore path}, \textit{training\textunderscore results\textunderscore path}, \textit{test\textunderscore results\textunderscore path}) -- analogicznie do funkcji \textbf{split} dzieli dane znajdujące się w plikach \textit{hdf5} do odpowiednich plików wynikowych.
+\end{itemize}
+Plik \textit{error.py} rozszerza funkcjonalność biblioteki \textit{HP-ELM} o dodatkowy sposób liczenia błędu klasyfikacji za pomocą funkcji:
+\begin{itemize}
+\item \textbf{percentage}(\textit{expected}, \textit{actual}) -- zwraca procent poprawnie sklasyfikowanych próbek na podstawie macierzy \textit{expected} (oczekiwane wyniki) i \textit{actual} (rzeczywiste wyniki).
+\item \textbf{hdf5\textunderscore percentage}(\textit{expected\textunderscore path}, \textit{actual\textunderscore path} -- analogicznie do funkcji \textbf{percentage}, dla wskazanych plików \textit{hdf5}.
+\end{itemize}
+
+W pliku \textit{benchmark.py} zdefiniowana została klasa \textbf{Benchmark}, która automatyzuje uruchamianie testów i ma następujące metody:
+\begin{itemize}
+\item \textbf{\textunderscore \textunderscore init\textunderscore \textunderscore}(\textit{self}, \textit{name}, \textit{training\textunderscore percentage}, \textit{neurons}) -- konstruktor, tworzący instancję klasy \textbf{Benchmark} z uzupełnionymi odpowiednimi polami. Nie powinien być wywoływany bezpośrednio.
+\item \textbf{small\textunderscore benchmark}(\textit{name}, \textit{training\textunderscore percentage}, \textit{neurons}, \textit{data}, \textit{results}) -- statyczna metoda tworząca obiekt klasy \textbf{Benchmark} przystosowany do obliczeń small data (na macierzach w pamięci, wczytanych z plików \textit{csv}). Ustawia nazwę, procent danych treningowych, zestaw benchmarków (listę zawierająca zestawy neuronów dla każdego z nich), dane i oczekiwane wyniki.
+\item \textbf{big\textunderscore benchmark}(\textit{name}, \textit{training\textunderscore percentage}, \textit{neurons}, \textit{data\textunderscore path}, \textit{results\textunderscore path}, \textit{output\textunderscore path}) -- statyczna metoda działająca analogicznie do \textbf{small\textunderscore benchmark}, ale dla obliczeń big data (na plikach \textit{hdf5}). 
+\item \textbf{run}(\textit{self}) -- uruchamia benchmark i zwraca błędy średniokwadratowe, procent poprawnie sklasyfikowanych danych i czas trwania treningu.
+\end{itemize}
+
 \subsection{Projekt aplikacji sieci ELM w Matlabie}
 W Matlabie powstała pełna implementacja algorytmów ELM w formie klasy, zawierającej wszystkie niezbędne funkcje.
 Pozwala na trenowanie i testowanie sieci dla wybranej liczby neuronów z dowolnymi funkcjami aktywacji. 
@@ -281,6 +321,22 @@ to ostatecznym wynikiem będzie wektor:
 \[ \begin{bmatrix} 4 \\ 1 \\ 2 \\ 1 \end{bmatrix}.\]
 
 Następnie wyniki otrzymane można porównać z oczekiwanymi za pomocą dwóch funkcji: średnia odległość od poprawnego wyniku i procent trafień.
+
+\subsection{Dokumentacja kodu w Matlabie}
+Aplikacja sieci ELM w Matlabie składa się z dwóch plików: \textit{ELM.m}, zawierającego implementację sieci neuronowej, oraz skryptu \textit{ELM\textunderscore run.m}, służącego jako przykładowe wywołanie -- opisany dokładnie został w instrukcji użytkownika.
+
+W pliku \textit{ELM.m} zaimplementowała została klasa \textbf{ELM}, która zapewnia wszystkie funkcjonalności biblioteki. Zawiera metody:
+\begin{itemize}
+\item \textbf{ELM}(\textit{data}, \textit{trainingPercentage}) -- tworzy obiekt klasy ELM z danymi \textit{data} -- macierzą, która w ostatniej kolumnie zawiera oczekiwane wyniki, dzieląc je na dane treningowe i testowe według \textit{trainingPercentage}.
+\item \textbf{addNeurons}(\textit{obj}, \textit{funcStr}, \textit{num}) -- dodaje do sieci \textit{num} neuronów z funkcją aktywacji opisaną w \textit{funcStr} (napis opisujący dowolną funkcja od zmiennej x, na przykład 'x * x').  
+\item \textbf{normalize}(\textit{\~}, \textit{data}) -- zwraca znormalizowane dane z macierzy \textit{data}.
+\item \textbf{train}(\textit{obj}) -- trenuje sieć.
+\item \textbf{predict}(\textit{obj}) -- uruchamia test (wymaga uprzedniego wytrenowania sieci).
+\item \textbf{exactCompare}(\textit{\~}, \textit{actualT}, \textit{predictedT}) -- zwraca część (liczbę od 0 do 1) poprawnie sklasyfikowanych próbek, gdzie \textit{actualT} i \textit{predictedT} to odpowiednio rzeczywiste i otrzymane wyniki.
+\item \textbf{meanDistanceCompare}(\textit{\~}, \textit{actualT}, \textit{predictedT}) -- zwraca średni moduł z różnicy między rzeczywistymi i otrzymanymi wynikami.
+\item \textbf{parseData}(\textit{\~}, \textit{d}) -- przetwarza macierz \textit{d}, zwracając \textit{X} -- dane wejściowe i \textit{T} -- oczekiwane wyniki, znajdujące się w ostatniej kolumnie \textit{d}.
+\item \textbf{createH}(\textit{obj}, \textit{X}) -- wyznacza macierz \textit{H}, używaną w wewnętrznych obliczeniach ELM.
+\end{itemize}
 
 \subsection{Aplikacje w Matlabie i Pythonie - różnice}
 \label{porownanie_aplikacji}
