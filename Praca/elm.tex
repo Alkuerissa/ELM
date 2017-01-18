@@ -18,58 +18,11 @@
 \setlength{\parindent}{5mm} % wcięcie akapitowe 5mm, zarządzenie Rektora
 
 
-% ------------ Ustawienia autora pracy ---------------
-
-\setboolean{lady}{false} % kobiety wpisują true, mężczyźni - false
-
-\title{Praca dyplomowa} % nazwa pracy
-\titleaux{Projekt aplikacji do ekstremalnego uczenia maszynowego do klasyfikacji big data}
-\type{inżyniers} % licencjat = licencjac, inżynier = inżyniers
-\discipline{Informatyka} % kierunek
-\author{Ahmed Abdelkarim, Aleksandra Hernik}
-\album{262718, 262737}
-\supervisor{dr~hab~inż. Jerzy Balicki, prof. Politechniki Warszawskiej}
-\date{2018}
-% ----------------------------------------------------
-
 \begin{document}
 \sloppy
 
-% Nowy układ pracy dyplomowej
-
-% 1. Strona tytułowa - trzeba wydrukować z osobnego pliku
-%\maketitle
-
-
-
-% 2. Streszczenia
-% Streszczenie ma zawierać tytuł pracy i słowa kluczowe
-% if in English, English abstract goes first
-
-%\selectlanguage{polish}
-\begin{abstract}
-\setcounter{page}{1}
-Celem pracy "Projekt aplikacji do ekstremalnego uczenia maszynowego do klasyfikacji big data" jest przeanalizowanie stosunkowo nowej i~niezbadanej architektury sieci neuronowej, ze szczególnym uwzględnieniem jej możliwych zastosowań w~problemach big data.
-Jest on osiągany poprzez stworzenie dwóch aplikacji -- w~Pythonie, korzystającej z~gotowej biblioteki i~w~Matlabie, będącej własną implementacją algorytmu.\\
-
-\noindent \textbf{Słowa kluczowe:} big data, ekstremalne uczenie maszynowe, klasyfikacja, Matlab, Python, sieci neuronowe, uczenie maszynowe
-\end{abstract}
-
-
-{\selectlanguage{english}
-\begin{abstract}
-
-
-
-\noindent \textbf{Keywords:} big data, classification, extreme learning machine, neural network, machine learning, Matlab, Python
-\end{abstract}}
-
-% 2. Oświadczenie o autorstwie pracy - w innym pliku
-\makestatement
-
 
 % 4. Spis treści
-\cleardoublepage
 \tableofcontents
 
 % 5. Treść
