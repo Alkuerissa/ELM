@@ -124,7 +124,7 @@ Ponieważ ELM jest bardzo szybką metodą, naturalne jest zastosowanie jej do bi
 \clearpage
 \section{Wykonanie implementacji ELM w Pythonie i Matlabie}
 \subsection{Założenia dotyczące aplikacji}
-Projekt polega na przygotowaniu dwóch aplikacji. Pierwsza jest napisana w języku Python. Druga została stworzona w środowisku Matlab. Celem obu jest przetestowanie nowego modelu sieci neuronowych - Extreme Learning Machine. Programy zapewniają możliwość wytrenowania sieci neuronowej przy użyciu różnych danych i dostarczają informacje, dotyczące czasu trwania i jakości treningu. Dzięki temu będzie możliwe określenie, czy metoda ELM może być uważana za dobrą alternatywę dla tradycyjnych architektur sieci neuronowych, a także w jakich obszarach sprawdzi się najlepiej. Szczególny nacisk został położony na zbadanie działania dla Big Data.
+Projekt polega na przygotowaniu dwóch aplikacji. Pierwsza jest napisana w języku Python. Druga została stworzona w środowisku Matlab. Celem obu jest przetestowanie nowego modelu sieci neuronowych -- Extreme Learning Machine. Programy zapewniają możliwość wytrenowania sieci neuronowej przy użyciu różnych danych i dostarczają informacje, dotyczące czasu trwania i jakości treningu. Dzięki temu będzie możliwe określenie, czy metoda ELM może być uważana za dobrą alternatywę dla tradycyjnych architektur sieci neuronowych, a także w jakich obszarach sprawdzi się najlepiej. Szczególny nacisk został położony na zbadanie działania dla Big Data.
 
 Aplikacje udostępniają następujące funkcjonalności:
 \begin{itemize}
@@ -283,12 +283,12 @@ Tak może wyglądać wywołanie funkcji inicjalizującej sieć:
 \begin{lstlisting}
 	>> network = ELM(D, 90);
 \end{lstlisting}
-Pierwszy argument to macierz danych, a drugi - procent danych trenujących.
+Pierwszy argument to macierz danych, a drugi -- procent danych trenujących.
 
 Zbiór danych jest dzielony na część treningową i testową, zgodnie z wartością podaną przy tworzeniu sieci. 
-Ponadto dane są dzielone na dwie części - macierz cech i wektor klas.
+Ponadto dane są dzielone na dwie części -- macierz cech i wektor klas.
 Wektor klas jest przekształcany w macierz o wysokości równej liczbie obserwacji i szerokości równej liczbie klas.
-Macierz ta jest wypełniona zerami z wyjątkiem jednego miejsca w każdym wierszu - w kolumnie o numerze równym numerowi klasy, do której należy dana obserwacja, wpisane jest 1.
+Macierz ta jest wypełniona zerami z wyjątkiem jednego miejsca w każdym wierszu -- w kolumnie o numerze równym numerowi klasy, do której należy dana obserwacja, wpisane jest 1.
 Na przykład dla wektora:
 \[ \begin{bmatrix} 1 \\ 4 \\ 1 \\ 2 \end{bmatrix}\]
 powstanie macierz:
@@ -300,7 +300,7 @@ Polega ona na sprowadzeniu wartości wszystkich cech do przedziału $[0, 1]$, ko
 \[(element - min(kolumna))/(max(kolumna) - min(kolumna)).\]
 
 Następnie muszą zostać dodane neurony.
-Dodanie neuronów polega na wywołaniu funkcji, przyjmującej dwa argumenty - liczbę neuronów i funkcję aktywacji.
+Dodanie neuronów polega na wywołaniu funkcji, przyjmującej dwa argumenty -- liczbę neuronów i funkcję aktywacji.
 W przeciwieństwie do aplikacji w Pythonie, opisywana implementacja pozwala na wykorzystanie dowolnej funkcji.
 Na przykład wywołanie funkcji:
 \begin{lstlisting}
@@ -338,7 +338,7 @@ W pliku \textit{ELM.m} zaimplementowała została klasa \textbf{ELM}, która zap
 \item \textbf{createH}(\textit{obj}, \textit{X}) -- wyznacza macierz \textit{H}, używaną w wewnętrznych obliczeniach ELM.
 \end{itemize}
 
-\subsection{Aplikacje w Matlabie i Pythonie - różnice}
+\subsection{Aplikacje w Matlabie i Pythonie -- różnice}
 \label{porownanie_aplikacji}
 Implementacje algorytmu w obu aplikacjach różnią się. 
 Niektóre różnice mogą mieć wpływ na różnice w wynikach aplikacji.
@@ -348,14 +348,14 @@ Główne różnice są następujące:
 W Matlabie są one losowane i wykorzystywane podczas uczenia.
 \item Zastosowano różne algorytmy normalizacji danych.
 \item W Matlabie nie występuje ograniczenie na liczbę neuronów liniowych.
-\item W obu implementacjach została stworzona funkcja wyliczająca procent trafionych danych, ale każda aplikacja ma również po po jednej dodatkowej funkcji - w Pythonie błąd średniokwadratowy, w Matlabie suma modułów różnicy prawidłowej i otrzymanej odpowiedzi.
+\item W obu implementacjach została stworzona funkcja wyliczająca procent trafionych danych, ale każda aplikacja ma również po po jednej dodatkowej funkcji -- w Pythonie błąd średniokwadratowy, w Matlabie suma modułów różnicy prawidłowej i otrzymanej odpowiedzi.
 \item W Pythonie możliwy jest wybór wyłącznie z predefiniowanych funkcji aktywacji. 
 W Matlabie można wprowadzić dowolną funkcję, co daje większe możliwości, ale nakłada na użytkownika odpowiedzialność zadbania o to, żeby podana funkcja spełniała założenia ELM.
 \end{enumerate}
 
 \subsection{Wnioski i uwagi}
 \begin{itemize}
-\item Automatyczne testy, sprawdzające główną funkcjonalność programu - trening sieci - nie zostaną utworzone. Istotą projektu jest przeanalizowanie otrzymywanych, a nie otrzymanie z góry zaplanowanych wyników.
+\item Automatyczne testy, sprawdzające główną funkcjonalność programu -- trening sieci -- nie zostaną utworzone. Istotą projektu jest przeanalizowanie otrzymywanych, a nie otrzymanie z góry zaplanowanych wyników.
 \item Nie zostały postawione wymagania związane z niezawodnością i utrzymaniem. Aplikacje służą wyłącznie jako narzędzia do przetestowania nowej technologii, więc jedynym wymaganiem jest działanie w momencie przeprowadzania testów. Ta kwestia może ulec zmianie, jeśli testy wypadną korzystnie dla ELM.
 \item Wydajność jest raczej oczekiwaniem, nie wymaganiem. Z prac, na których bazowany jest projekt wynika, że metoda powinna być szybka, jednak założenia projektu polegają na sprawdzeniu, a nie przyjęciu tej tezy. Ponadto nie zostały zaimplementowane inne metody uczenia sieci neuronowych, więc precyzyjna ocena wydajności byłaby trudna.
 \item Funkcjonalność normalizacji danych oferowana przez wykorzystywaną bibliotekę \textit{HP-ELM} wydaje się nie działać i została zastąpiona inną implementacją, która nieznacznie poprawia wyniki.
@@ -450,7 +450,7 @@ Jak widać, dodawanie neuronów przy większych wartościach wciąż nie zwięks
 Na rysunku \ref{dota_liczba_neuronow} została przedstawiona skuteczność uczenia dla funkcji aktywacji sigmoidalnej i tangensa hiperbolicznego.
 Można zauważyć, że najlepsze wyniki są otrzymywane dla liczby neuronów od 50 do 300.
 Powyżej 300 rezultaty są gorsze, niektóre znacząco.
-Jednak najlepsze wyniki są zadowalające - niektóre ponad 99\%.
+Jednak najlepsze wyniki są zadowalające -- niektóre ponad 99\%.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{dota_liczba_neuronow.png}
@@ -458,7 +458,7 @@ Jednak najlepsze wyniki są zadowalające - niektóre ponad 99\%.
 \label{dota_liczba_neuronow}
 \end{figure}
 
-Przy wykonywaniu obliczeń został również zmierzony czas - uzyskane wyniki przedstawiono na rysunku \ref{dota_wydajnosc}.
+Przy wykonywaniu obliczeń został również zmierzony czas -- uzyskane wyniki przedstawiono na rysunku \ref{dota_wydajnosc}.
 Dla liczby neuronów, dla której wynik był najlepszy (150) czas uczenia to około 2 sekund, co jest bardzo dobrym wynikiem biorąc pod uwagę ilość przetwarzanych danych.
 \begin{figure}[H]
 \centering
@@ -533,8 +533,8 @@ Patrząc na wykres czasu uczenia w zależności od liczby neuronów, można już
 \subsubsection{Trening sieci ELM w Matlabie}
 Przy odpowiednich parametrach aplikacja osiąga nawet do 76\% skuteczności. 
 Taki wynik jest otrzymywany przy zastosowaniu 800 neuronów z tangensem hiperbolicznym.
-Przeprowadzone zostały również testy dla innych funkcji - liniowej, sinusa, tangensa hiperbolicznego i funkcji sigmoidalnej, a także przy użyciu dwóch zbiorów neuronów z różnymi funkcjami aktywacji.
-Wyniki były zbliżone - między 72\% a 76\%.
+Przeprowadzone zostały również testy dla innych funkcji -- liniowej, sinusa, tangensa hiperbolicznego i funkcji sigmoidalnej, a także przy użyciu dwóch zbiorów neuronów z różnymi funkcjami aktywacji.
+Wyniki były zbliżone -- między 72\% a 76\%.
 
 Został również zbadany wpływ liczby neuronów na jakość klasyfikacji.
 Rysunek \ref{forest_liczba_neuronow} pokazuje jak zmieniała się liczba poprawnie sklasyfikowanych obiektów przy zwiększaniu liczby neuronów dla funkcji aktywacji $sigmoid$ i $tanh$.
@@ -560,11 +560,11 @@ Warto zauważyć, że użyta funkcja nie ma istotnego wpływu na czas uczenia, p
 \label{forest_wydajnosc}
 \end{figure}
 
-Na przykładzie tego zbioru danych można zauważyć ciekawą cechę tego algorytmu - niedeterminizm.
-Występuje tu zmienny element - losowane wagi i wyrazy wolne.
+Na przykładzie tego zbioru danych można zauważyć ciekawą cechę tego algorytmu -- niedeterminizm.
+Występuje tu zmienny element -- losowane wagi i wyrazy wolne.
 Okazuje się, że ma to znaczący wpływ na wyniki.
 Przy uruchomieniu aplikacji kilka razy dla tych samych danych wejściowych różnice w skuteczności dochodzą nawet do 4 punktów procentowych.
-Ten fakt utrudnia porównywanie funkcji aktywacji - jedno uruchomienie nie wystarczy, żeby stwierdzić, że któraś funkcja była lepsza.
+Ten fakt utrudnia porównywanie funkcji aktywacji -- jedno uruchomienie nie wystarczy, żeby stwierdzić, że któraś funkcja była lepsza.
 
 Na przykładzie powyższego zbioru danych został również przeprowadzony eksperyment, dotyczący normalizacji.
 W tabeli \ref{tab_norm} zostały przedstawione wyniki klasyfikacji, przeprowadzonej dla każdej z wybranych funkcji aktywacji dwa razy: najpierw nie korzystając, a potem korzystając z normalizacji.
@@ -587,9 +587,9 @@ W przypadku funkcji Gaussa, osiągającej dobry wynik przy zastosowaniu normaliz
 \end{tabular}
 \end{table}
 Można wywnioskować, że w tej implementacji zastosowanie normalizacji jest koniecznością.
-Jako że polega ona na zastosowaniu jedynie kilku prostych operacji arytmetycznych na macierzy, jej koszt jest bardzo niewielki - pomijalny w stosunku do czasu trwania całego algorytmu.
+Jako że polega ona na zastosowaniu jedynie kilku prostych operacji arytmetycznych na macierzy, jej koszt jest bardzo niewielki -- pomijalny w stosunku do czasu trwania całego algorytmu.
 
-Wyniki można uznać za zadowalające - skuteczność jest całkiem wysoka, a czas uczenia niski.
+Wyniki można uznać za zadowalające -- skuteczność jest całkiem wysoka, a czas uczenia niski.
 Dzięki temu, że dane pochodzą z konkursu można porównać otrzymany wynik z nadesłanymi rozwiązaniami.
 Uzyskany rezultat plasuje się około pięćsetnego miejsca na 1694 nadesłane odpowiedzi.
 Można to uznać za sukces tej metody, jeśli wziąć pod uwagę dwa fakty.
@@ -611,7 +611,7 @@ Warto jednak zauważyć, że zwiększanie liczby neuronów dość szybko przesta
 
 Istnieją znaczne różnice między wynikami aplikacji w Matlabie i Pythonie. Ta pierwsza jest skuteczniejsza, ale druga jest szybsza. Pokazuje to, że niewielkie różnice w implementacji (rozdział \ref{porownanie_aplikacji}) znacznie zmieniają działanie aplikacji.
 
-Prowadzi to do kolejnego wniosku - istnieją niesprecyzowane w pracach detale algorytmu, które mogą zauważalnie wpłynąć na wyniki.
+Prowadzi to do kolejnego wniosku -- istnieją niesprecyzowane w pracach detale algorytmu, które mogą zauważalnie wpłynąć na wyniki.
 Należą do nich:
 \begin{itemize}
 \item sposób normalizacji danych, 
@@ -752,7 +752,7 @@ Ta funkcja może zostać wywołana dowolnie wiele razy, aby stworzyć neurony o 
 Funkcja wykorzystuje dane wybrane w drugim kroku jako treningowe.
 Należy ją wywołać po dodaniu wszystkich neuronów.
 \item Klasyfikacja danych testowych.
-Wynikiem jest wektor klas - po jednej dla każdego obiektu, należącego do danych testowych.
+Wynikiem jest wektor klas -- po jednej dla każdego obiektu, należącego do danych testowych.
 \item Funkcja porównująca wynik uzyskany w poprzednim kroku z oczekiwaniami.
 Przyjmuje jako argumenty wektor z danymi oczekiwanymi (zapisany wcześniej przez aplikację jako pole klasy) i wektor wynikowy klasyfikacji.
 Funkcja zwraca liczbę z zakresu $[0, 1]$, oznaczającą jaka część próbek została sklasyfikowana poprawnie.
@@ -760,7 +760,7 @@ Funkcja zwraca liczbę z zakresu $[0, 1]$, oznaczającą jaka część próbek z
 Zwraca średnią odległość klas przewidzianych od faktycznych.
 Ta miara może być użyteczna, jeśli klasy o bliskich numerach są bardziej zbliżone niż o dalekich.
 \end{enumerate}
-Po odpowiednim zmodyfikowaniu skryptu i uruchomieniu go otrzymujemy wynik (rys. \ref{elm_run_result}) - informacje o czasie trwania i skuteczności treningu.
+Po odpowiednim zmodyfikowaniu skryptu i uruchomieniu go otrzymujemy wynik (rys. \ref{elm_run_result}) -- informacje o czasie trwania i skuteczności treningu.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth]{elm_results.PNG}
