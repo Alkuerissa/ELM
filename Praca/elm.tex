@@ -1,51 +1,96 @@
-\documentclass{article}
-\usepackage[hidelinks]{hyperref}
+\documentclass[pl]{minipw} % wszystkie ustawienia szablonu są w minipw.cls; if in English, change [pl] to [en]
+\allowdisplaybreaks
+\usepackage{indentfirst}
+%\usepackage[hidelinks]{hyperref}
 \usepackage[all]{nowidow}
-%\usepackage{helvetica} % uses helvetica postscript font (download helvetica.sty)
-%\usepackage{newcent}   % uses new century schoolbook postscript font 
-%\setlength{\textwidth}{5.5in} % set width of text portion
+\usepackage{caption}
 \usepackage{graphicx}
+\usepackage{tabularx}
 \usepackage{polski}
 \usepackage{bm}
 \usepackage{amsfonts}
 \usepackage{amsmath}
-%\usepackage[polish, english]{babel}
-%\usepackage[T1]{fontenc} % T1, OT4
 \usepackage[utf8]{inputenc}
 \usepackage{indentfirst}
 \usepackage{float}
 \usepackage{enumitem}
 \usepackage{listings}
-\renewcommand\refname{Bibliografia}
-\title{Projekt aplikacji do ekstremalnego uczenia maszynowego do klasyfikacji big data}
-\author{Abdelkarim Ahmed, Hernik Aleksandra}
-\date{}
+\setlength{\parindent}{5mm} % wcięcie akapitowe 5mm, zarządzenie Rektora
+
+
+% ------------ Ustawienia autora pracy ---------------
+
+\setboolean{lady}{false} % kobiety wpisują true, mężczyźni - false
+
+\title{Praca dyplomowa} % nazwa pracy
+\titleaux{Projekt aplikacji do ekstremalnego uczenia maszynowego do klasyfikacji big data}
+\type{inżyniers} % licencjat = licencjac, inżynier = inżyniers
+\discipline{Informatyka} % kierunek
+\author{Ahmed Abdelkarim, Aleksandra Hernik}
+\album{262718, 262737}
+\supervisor{dr~hab~inż. Jerzy Balicki, prof. Politechniki Warszawskiej}
+\date{2018}
+% ----------------------------------------------------
+
 \begin{document}
-\renewcommand*\listfigurename{Wykaz rysunków}
-\renewcommand*\listtablename{Wykaz tabel}
-\clearpage
-\vspace*{\fill}
-\begin{center}
-\begin{minipage}{.9\textwidth}
-\maketitle
-\end{minipage}
-\end{center}
-\vfill
-\clearpage
+\sloppy
 
+% Nowy układ pracy dyplomowej
+
+% 1. Strona tytułowa - trzeba wydrukować z osobnego pliku
+%\maketitle
+
+
+
+% 2. Streszczenia
+% Streszczenie ma zawierać tytuł pracy i słowa kluczowe
+% if in English, English abstract goes first
+
+%\selectlanguage{polish}
+\begin{abstract}
+\setcounter{page}{1}
+
+Streszczam. Blebleble.
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.\\
+
+\noindent \textbf{Słowa kluczowe:} slowo1, slowo2, ...
+\end{abstract}
+
+
+{\selectlanguage{english}
+\begin{abstract}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.\\
+
+\noindent \textbf{Keywords:} keyword1, keyword2, ...
+\end{abstract}}
+
+% 2. Oświadczenie o autorstwie pracy - w innym pliku
+\makestatement
+
+
+% 4. Spis treści
+\cleardoublepage
 \tableofcontents
-\clearpage
 
-\section*{Wprowadzenie}
-\addcontentsline{toc}{section}{Wprowadzenie}
+% 5. Treść
+
+\cleardoublepage
+\pagestyle{fancy}
+
+\chapter*{Wprowadzenie}
+%\addcontentsline{toc}{chapter}{Wprowadzenie}
 Celem pracy jest przetestowanie ELM na wybranych zestawach small data, a~następnie big data, przy użyciu służących do tego, istniejących już bibliotek do Pythona i~Matlaba.
 
 Ahmed Abdelkarim zajmował się porównywaniem wyników dla big data i~small data przy użyciu Pythona.
 Aleksandra Hernik sprawdzała dokładność i~wydajność uczenia dla big data za pomocą Matlaba.
 
 \clearpage
-\section{Opracowanie modelu pracy sieci do ekstremalnego uczenia maszynowego ELM}
-\subsection{Rys historyczny}
+\chapter{Opracowanie modelu pracy sieci do ekstremalnego uczenia maszynowego ELM}
+\section{Rys historyczny}
 Sieci neuronowe znajdują coraz to nowe zastosowania i~stają się jednym z~najważniejszych kierunków rozwoju informatyki. Jednak ograniczeniem tej metody jest długotrwały proces uczenia.
 
 W 2004 roku w~pracy \textit{Extreme Learning Machine: A~New Learning Scheme of Feedforward Neural Networks} Guang-Bin Huang, Qin-Yu Zhu i~Chee-Kheong Siew zaproponowali koncepcję ELM, mającą być rozwiązaniem tego problemu. Publikacja ta dotyczyła zastosowania ELM w~SLFN. Przedstawiała podstawy teoretyczne do zastosowania tej metody, a~także dowodziła zalet tego rozwiązania. Pierwszą jest wspomniana prędkość uczenia. Ponadto w~przeciwieństwie do tradycyjnych opartych na gradientach metod, ELM dąży do minimalizacji norm wag, a~nie tylko błędu, dzięki czemu osiąga lepszą generalizację. Kolejną istotną własnością ELM jest dopuszczanie zastosowania nieróżniczkowalnych funkcji aktywacji (co nie jest możliwe w~tradycyjnych metodach). ELM unika również problemów z~minimami lokalnymi i~przeuczeniem. 
@@ -59,7 +104,8 @@ Z wyżej wymienionymi pracami związane są kontrowersje dotyczące rzeczywistej
 W 2015 roku metoda została również ostro skrytykowana przez Yanna LeCuna, jednego z~czołowych specjalistów od sieci neuronowych. Zarzucał pomysłowi prostotę, wskazywał na jego podobieństwo do wcześniejszych pomysłów i~wątpił w~skuteczność dla większych zestawów danych. Nie odniósł się jednak do wyników zaprezentowanych przez autorów, które pokazują, że rozwiązanie mimo swojej prostoty działa bardzo dobrze.
 
 Teorię o~niedostosowaniu ELM do zastosowań big data podważa wydana kilka miesięcy później praca \textit{High-Performance Extreme Learning Machines: A~Complete Toolbox for Big Data Applications} autorstwa Antona Akusoka, Kaj-Mikaela Bj\"orka, Yoaba Miche i~Amaury'ego Lendasse. Prezentuje ona obiecujące wyniki zastosowania ELM na big data -- dla testowanych danych błąd jest porównywalny, podczas gdy czas uczenia jest mniejszy (od kilku razy dla niektórych metod, nawet do kilku tysięcy razy dla innych). Praca opisuje również udostępniony przez autorów toolbox, implementujący ELM.
-\subsection{Założenia dla sieci neuronowych klasy ELM}
+
+\section{Założenia dla sieci neuronowych klasy ELM}
 Rozważane tu ELM zaliczają się do kategorii SLFN -- poza warstwą wejściową i~wyjściową posiadają tylko jedną warstwę ukrytą (patrz rys. \ref{schemat_elm}). Od innych SLFN odróżnia je to, że ELM opierają się na losowym generowaniu neuronów warstwy ukrytej bez późniejszego ich dostosowywania do danych -- dzięki temu, że wszystkie ich parametry, takie jak np. wagi wejściowe, mogą zostać dobrane losowo, są one niezależne od danych trenujących, a~w przeciwieństwie do metody BP, wagi wyjściowe są niezależne od wag wejściowych, co pozwala na nieiteracyjne ich wyznaczenie. Takie rozwiązanie zapewnia o~kilka rzędów wielkości szybszy czas działania od innych metod, takich jak BP, MLP i~SVM \cite{akusok-hpelm}.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{schemat_sieci.png}
@@ -102,12 +148,12 @@ gdzie
 Możliwości uczenia się ELM zależą między innymi od doboru funkcji transformacji -- w~szczególności ważne jest, żeby była ona nieliniowa, ponieważ to jedyne miejsce w~całym modelu, w~którym może być wykorzystane jakiekolwiek nieliniowe przekształcenie \cite{akusok-hpelm}. Możliwe jest wykorzystanie różnych funkcji w~różnych neuronach. Dla optymalnej jakości uczenia ważne jest również znormalizowanie danych wejściowych -- jeśli charakterystyki danych wejściowych mają różne rzędy wielkości, relatywnie drobne zmiany większej wartości mogą mieć większe znaczenie niż stosunkowo duże zmiany mniejszych wartości. Normalizacja pozwala na zrównanie wagi zmian wszystkich charakterystyk. \par
 
 W przypadku problemu klasyfikacji, który jest rozważany w~tej pracy, rozwiązaniem jest kategoria, dla której wartość na węźle wyjściowym była największa. 
-\subsection{Wnioski i~uwagi}
+\section{Wnioski i~uwagi}
 Ponieważ ELM jest bardzo szybką metodą, naturalne jest zastosowanie jej do big data -- przy czym tutaj big data oznacza dane takie, że liczba próbek jest wystarczająca, żeby wytrenować sieć bez przeuczania jej, a~ograniczeniem jest tylko czas. W~przypadku small data próbek jest za mało, żeby sieć mogła dokładnie nauczyć się modelu bez przeuczania. Szybkość uczenia w~przypadku big data jest dodatkowo ograniczona sprzętowo -- danych jest zbyt dużo, żeby wszystkie zmieścić do pamięci operacyjnej komputera, co spowalnia dostęp do nich.
 
 \clearpage
-\section{Wykonanie implementacji ELM w~Pythonie i~Matlabie}
-\subsection{Założenia dotyczące aplikacji}
+\chapter{Wykonanie implementacji ELM w~Pythonie i~Matlabie}
+\section{Założenia dotyczące aplikacji}
 Projekt polega na przygotowaniu dwóch aplikacji. Pierwsza jest napisana w~języku Python. Druga została stworzona w~środowisku Matlab. Celem obu jest przetestowanie nowego modelu sieci neuronowych -- Extreme Learning Machine. Programy zapewniają możliwość wytrenowania sieci neuronowej przy użyciu różnych danych i~dostarczają informacje, dotyczące czasu trwania i~jakości treningu. Dzięki temu będzie możliwe określenie, czy metoda ELM może być uważana za dobrą alternatywę dla tradycyjnych architektur sieci neuronowych, a~także w~jakich obszarach sprawdzi się najlepiej. Szczególny nacisk został położony na zbadanie działania dla Big Data.
 
 Aplikacje udostępniają następujące funkcjonalności:
@@ -129,6 +175,7 @@ Diagram UML na rysunku \ref{use_case} przedstawia zbiór przypadków użycia apl
 \begin{table}[H]
 \caption{Opisy przypadków użycia}
 \label{use_case_tab}
+\centering
 \begin{tabular}{|p{3.4cm}|p{5cm}|p{4cm}|}
 \hline
 \textbf{Nazwa} & \textbf{Opis} & \textbf{Odpowiedź systemu} \\
@@ -159,7 +206,7 @@ Inne & 5 & Wykonanie aplikacji w~językach Python i~MATLAB \\
 \hline
 \end{tabular}
 \end{table}
-\subsection{Analiza wykorzystywanych narzędzi}
+\section{Analiza wykorzystywanych narzędzi}
 W związku ze wspomnianą wcześniej pracą \textit{High-Performance Extreme Learning Machines: A~Complete Toolbox for Big Data Applications} Anton Akusok napisał w~Pythonie i~udostępnił dwie biblioteki wykorzystujące ELM, w~tym wykorzystywaną tutaj bibliotekę \textit{HP-ELM} \cite{hpelm}.
 
 Projekt \textit{HP-ELM}, czyli \textit{High Performance toolbox for Extreme Learning Machines} prezentuje kompleksowe podejście do wykorzystania ELM. Zapewnia następujące funkcjonalności:
@@ -176,7 +223,7 @@ Dodatkowo dostępne są liczne udogodnienia:
 \item efektywne przechowywanie danych (w~formacie HDF5),
 \item możliwość wykorzystywania zbiorów danych niemieszczących się w~pamięci operacyjnej.
 \end{itemize}
-\subsection{Projekt aplikacji sieci ELM w~Pythonie}
+\section{Projekt aplikacji sieci ELM w~Pythonie}
 Aplikacja w~Pythonie wykorzystuje omówioną wcześniej bibliotekę i~dodaje następujące funkcjonalności:
 \begin{itemize}
 \item normalizację danych,
@@ -210,7 +257,7 @@ Na rysunku \ref{przykladowy} jest przedstawiony przykładowy wykres zależności
 
 Wykresy są rysowane przy użyciu biblioteki \textit{matplotlib} i~są ostatecznym rezultatem działania programu.
 
-\subsection{Dokumentacja kodu w~Pythonie}
+\section{Dokumentacja kodu w~Pythonie}
 Aplikacja sieci ELM w~Pythonie składa się z~plików:
 \begin{itemize}
 \item \textit{benchmark.py},
@@ -250,7 +297,7 @@ W pliku \textit{benchmark.py} zdefiniowana została klasa \textbf{Benchmark}, kt
 \item \textbf{run}(\textit{self}) -- uruchamia benchmark i~zwraca błędy średniokwadratowe, procent poprawnie sklasyfikowanych danych i~czas trwania treningu.
 \end{itemize}
 
-\subsection{Projekt aplikacji sieci ELM w~Matlabie}
+\section{Projekt aplikacji sieci ELM w~Matlabie}
 W Matlabie powstała pełna implementacja algorytmów ELM w~formie klasy, zawierającej wszystkie niezbędne funkcje.
 Pozwala na trenowanie i~testowanie sieci dla wybranej liczby neuronów z~dowolnymi funkcjami aktywacji. 
 W celu umożliwienia maksymalnej elastyczności korzystanie z~aplikacji polega na wywoływaniu kolejnych funkcji klasy.
@@ -306,7 +353,7 @@ to ostatecznym wynikiem będzie wektor:
 
 Następnie wyniki otrzymane można porównać z~oczekiwanymi za pomocą dwóch funkcji: średnia odległość od poprawnego wyniku i~procent trafień.
 
-\subsection{Dokumentacja kodu w~Matlabie}
+\section{Dokumentacja kodu w~Matlabie}
 Aplikacja sieci ELM w~Matlabie składa się z~dwóch plików: \textit{ELM.m}, zawierającego implementację sieci neuronowej, oraz skryptu \textit{ELM\textunderscore run.m}, służącego jako przykładowe wywołanie -- opisany dokładnie został w~instrukcji użytkownika.
 
 W pliku \textit{ELM.m} zaimplementowała została klasa \textbf{ELM}, która zapewnia wszystkie funkcjonalności biblioteki. Zawiera metody:
@@ -322,7 +369,7 @@ W pliku \textit{ELM.m} zaimplementowała została klasa \textbf{ELM}, która zap
 \item \textbf{createH}(\textit{obj}, \textit{X}) -- wyznacza macierz \textit{H}, używaną w~wewnętrznych obliczeniach ELM.
 \end{itemize}
 
-\subsection{Aplikacje w~Matlabie i~Pythonie -- różnice}
+\section{Aplikacje w~Matlabie i~Pythonie -- różnice}
 \label{porownanie_aplikacji}
 Implementacje algorytmu w~obu aplikacjach różnią się. 
 Niektóre różnice mogą mieć wpływ na różnice w~wynikach aplikacji.
@@ -337,7 +384,7 @@ W Matlabie są one losowane i~wykorzystywane podczas uczenia.
 W Matlabie można wprowadzić dowolną funkcję, co daje większe możliwości, ale nakłada na użytkownika odpowiedzialność zadbania o~to, żeby podana funkcja spełniała założenia ELM.
 \end{enumerate}
 
-\subsection{Wnioski i~uwagi}
+\section{Wnioski i~uwagi}
 \begin{itemize}
 \item Automatyczne testy, sprawdzające główną funkcjonalność programu -- trening sieci -- nie zostaną utworzone. Istotą projektu jest przeanalizowanie otrzymywanych, a~nie otrzymanie z~góry zaplanowanych wyników.
 \item Nie zostały postawione wymagania związane z~niezawodnością i~utrzymaniem. Aplikacje służą wyłącznie jako narzędzia do przetestowania nowej technologii, więc jedynym wymaganiem jest działanie w~momencie przeprowadzania testów. Ta kwestia może ulec zmianie, jeśli testy wypadną korzystnie dla ELM.
@@ -356,16 +403,16 @@ W Matlabie można wprowadzić dowolną funkcję, co daje większe możliwości, 
 Nie są one usuwane automatycznie, gdyż umożliwiają dokładniejszy wgląd w~działanie aplikacji. Są jednak nadpisywane bez ostrzeżenia przy ponownym uruchomieniu programu.
 \end{itemize}
 \clearpage
-\section{Trening ELM dla wybranych benchmarków big data i~small data}
-\subsection{Założenia}
+\chapter{Trening ELM dla wybranych benchmarków big data i~small data}
+\section{Założenia}
 We wszystkich dalszych testach przyjęte zostało 80\% danych treningowych. Do testów wydajności dostępne były dwa zestawy:
 \begin{enumerate}
 \item AMD Phenom II X4 965 @ 3.4 GHz, 16 GB RAM,
 \item Intel Core i5 4200M @ 2.5 GHz, 8 GB RAM.
 \end{enumerate}
 Zestaw 1 był używany przy testach aplikacji w~Pythonie, a~zestaw 2 przy testach aplikacji w~Matlabie.
-\subsection{Przewidywanie wyniku meczu w~grze \textit{Dota 2}}
-\subsubsection{Opis}
+\section{Przewidywanie wyniku meczu w~grze \textit{Dota 2}}
+\subsection{Opis}
 \textit{Dota 2} to internetowa, drużynowa gra komputerowa, w~której dwa pięcioosobowe zespoły, nazwane \textit{Radiant} i~\textit{Dire}, starają się zniszczyć bazę przeciwnika. Każda rozgrywka kończy się zwycięstwem dokładnie jednej z~dwóch drużyn -- remisy nie są możliwe. W~celu zniszczenia głównej bazy przeciwnika, oznaczonej na mapie (rysunek \ref{dota2_map}) gwiazdką, trzeba zniszczyć dwie wieże (oznaczone kółkiem) znajdujące się bezpośrednio przy niej, a~także wszystkie przeciwne wieże i~koszary (oznaczone trójkątem) na przynajmniej jednej z~trzech widocznych ścieżek.
 
 \begin{figure}[H]
@@ -406,7 +453,7 @@ Więcej informacji dotyczących danych jest dostępna na stronie będącej źró
 \end{table}
 
 Ten zestaw danych można uznać za łatwy, ponieważ ze względu na opisany wcześniej charakter rozgrywki, w~większości przypadków sam status wież należących do danej drużyny jest wystarczającym wskaźnikiem zwycięstwa -- drużyna, która straciła wszystkie swoje wieże, wygrywa bardzo rzadko.
-\subsubsection{Trening sieci ELM w~Pythonie}
+\subsection{Trening sieci ELM w~Pythonie}
 Niezależnie od wyboru funkcji aktywacji, nawet przy liczbach neuronów tak niskich jak 10, po wytrenowaniu poprawnie sklasyfikowanych zostało około 99\% meczów, a~dodawanie większej ich liczby jedynie wydłuża czas treningu. 
 
 Na rysunku \ref{wyniki_dota2_python} grupa 1 to benchmarki wykorzystujące sigmoidalną funkcję aktywacji, a~benchmarki z~grupy 2 używały tangensa hiperbolicznego.
@@ -430,7 +477,7 @@ Na rysunku \ref{wyniki_dota2_python_performance} uwzględniona została tylko fu
 Jak widać, dodawanie neuronów przy większych wartościach wciąż nie zwiększyło jakości treningu, a~wręcz przeciwnie -- neurony dodane powyżej 200 zaczęły już tylko pogarszać wyniki. Zależność czasu trwania treningu od liczby neuronów jest liniowa przy takich rzędach wielkości neuronów. Dla 900 neuronów (i~40000 próbek danych treningowych) czas treningu to niewiele ponad 3 sekundy -- tak więc główna cecha wyróżniająca ELM, czyli wydajność, jest widoczna również dla większych problemów. Przy znaczącym zwiększeniu liczby neuronów -- z~900 do 10000 -- okazało się, że liniowa zależność jest jedynie pozorna, gdyż obliczenia nie skończyły się po 10 minutach, a~w przypadku liniowej relacji trening nie powinien trwać więcej niż minuty.
 \label{10000_dota2}
 
-\subsubsection{Trening sieci ELM w~Matlabie}
+\subsection{Trening sieci ELM w~Matlabie}
 Na rysunku \ref{dota_liczba_neuronow} została przedstawiona skuteczność uczenia dla funkcji aktywacji sigmoidalnej i~tangensa hiperbolicznego.
 Można zauważyć, że najlepsze wyniki są otrzymywane dla liczby neuronów od 50 do 300.
 Powyżej 300 rezultaty są gorsze, niektóre znacząco.
@@ -451,14 +498,14 @@ Dla liczby neuronów, dla której wynik był najlepszy (150) czas uczenia to oko
 \label{dota_wydajnosc}
 \end{figure}
 
-\subsubsection{Wnioski}
+\subsection{Wnioski}
 \begin{itemize}
 \item Sieci typu ELM są w~stanie spośród wielu kolumn danych wyłuskać oczywistą relację między niewielką liczbą cech a~wynikiem, nawet przy niewielkiej liczbie neuronów.
 \item Przy prostej relacji maksymalna jakość uczenia jest osiągana przy bardzo niskiej liczbie neuronów.
 \item Przy niewielkiej liczbie cech, dla liczby neuronów nieprzekraczającej znacznie 1000, długość treningu skaluje się liniowo z~liczbą neuronów. Próba dodania dużo większej liczby neuronów, na przykład 10000, znacznie spowalnia działanie i~pokazuje nieliniowość zależności.
 \end{itemize}
-\subsection{Klasyfikacja pokrycia lasu ze względu na dominujący gatunek drzew}
-\subsubsection{Opis}
+\section{Klasyfikacja pokrycia lasu ze względu na dominujący gatunek drzew}
+\subsection{Opis}
 Benchmark polegający na klasyfikacji pokrycia lasu ze względu na dominujący gatunek drzew został dostarczony przez Jocka A. Blackarda i~Colorado State University na potrzeby konkursu zorganizowanego w~2014 roku przez Kaggle \cite{forest_cover}. Obejmuje 15120 próbek, gdzie każda próbka opisuje obszar 30 na 30 metrów w~Roosevelt National Forest w~Kolorado. Próbki pochodzą jedynie z~obszarów chronionych przed działalnością człowieka w~celu wyeliminowania zewnętrznych czynników, takich jak sadzenie drzew przez ludzi. Klasyfikacja polega na przypisaniu każdemu obszarowi dominującego w~nim gatunku drzew opisanego za pomocą liczby:
 \begin{enumerate}
 \item świerk/jodła,
@@ -503,7 +550,7 @@ Dokładniejsze informacje dotyczące danych (w~tym dokładne wyjaśnienia binarn
 \end{table}
 
 Warto zauważyć, że dane są dosyć nietypowe, ze względu na obecność licznych kolumn binarnych, których istotność może być nawet znikoma.
-\subsubsection{Trening sieci ELM w~Pythonie}
+\subsection{Trening sieci ELM w~Pythonie}
 Aplikacja w~Pythonie osiąga dosyć niewielką skuteczność. Zarówno dla funkcji sigmoidalnej, jak i~dla tangensa hiperbolicznego, maksimum skuteczności (44\%) jest osiągane przy 1800 neuronach -- przy czym dalej procent poprawnie sklasyfikowanych próbek pozostaje na stałym poziomie, a~błąd średniokwadratowy wzrasta, co wskazuje na to, że większa liczba neuronów jedynie pogłębia różnice między klasami przypisanymi do źle przydzielonych próbek, a~oczekiwanymi rezultatami, jednocześnie nie wpływając na wynik poprawnej klasyfikacji. Co istotne, nawet dla 2400 neuronów trening potrwał jedynie 5 sekund, zgodnie z~tezą o~szybkim działaniu ELM. 
 Na rysunku \ref{forest_python} zaprezentowane są wyniki dla sigmoidalnej funkcji aktywacji (grupa 1) i~tangensa hiperbolicznego (grupa 2). 
 
@@ -514,7 +561,7 @@ Na rysunku \ref{forest_python} zaprezentowane są wyniki dla sigmoidalnej funkcj
 \label{forest_python}
 \end{figure}
 Patrząc na wykres czasu uczenia w~zależności od liczby neuronów, można już zauważyć, że wykres nie przedstawia linii prostej, a~krzywą, której pochodna jest rosnąca, tak więc opisany w~benchmarku z~sekcji \ref{10000_dota2} przypadek 10000 neuronów jest oczekiwaną sytuacją. Podobne rezultaty występują również dla tych danych.
-\subsubsection{Trening sieci ELM w~Matlabie}
+\subsection{Trening sieci ELM w~Matlabie}
 Przy odpowiednich parametrach aplikacja osiąga nawet do 76\% skuteczności. 
 Taki wynik jest otrzymywany przy zastosowaniu 800 neuronów z~tangensem hiperbolicznym.
 Przeprowadzone zostały również testy dla innych funkcji -- liniowej, sinusa, tangensa hiperbolicznego i~funkcji sigmoidalnej, a~także przy użyciu dwóch zbiorów neuronów z~różnymi funkcjami aktywacji.
@@ -579,14 +626,14 @@ Uzyskany rezultat plasuje się około pięćsetnego miejsca na 1694 nadesłane o
 Można to uznać za sukces tej metody, jeśli wziąć pod uwagę dwa fakty.
 Po pierwsze algorytm nie był w~żaden sposób optymalizowany pod kątem tych danych, co prawdopodobnie miało miejsce w~przypadku większości przesłanych odpowiedzi.
 Po drugie w~konkursie nie było wymagań związanych z~czasem uczenia, więc można było zastosować wolniejsze, ale skuteczniejsze metody.
-\subsubsection{Wnioski}
+\subsection{Wnioski}
 \begin{itemize}
 \item Dla dużej liczby cech, przy liczbach neuronów nieprzekraczających znacząco 1000, podobnie jak dla omawianego wcześniej przypadku mniejszej liczby cech, czas treningu jest liniowy. Przy większej liczbie neuronów widać już, że liniowość relacji była jedynie pozorna, a~w rzeczywistości wykres przedstawia krzywą rosnącej pochodnej.
 \item Wyniki implementacji ELM z~biblioteki \textit{HP-ELM} znacząco się różnią od wyników własnej implementacji w~Matlabie, która została stworzona jako bezpośrednie wdrożenie opisanej wcześniej części teoretycznej -- co sugeruje, że istnieją między nimi znaczące różnice. Znanymi różnicami między aplikacją w~Pythonie i~Matlabie jest normalizacja (w~Matlabie własna, a~w Pythonie została użyta w~tym celu biblioteka \textit{sklearn}) oraz sposób losowania wag (w~Matlabie wykorzystany rozkład normalny, w~\textit{HP-ELM} nie została podana metoda losowania). Jeśli różnice w~otrzymanych rezultatach nie są wynikiem którejś z~powyższych rozbieżności, sugerowałoby to, że implementacja \textit{HP-ELM} zawiera odstępstwa od teorii -- jednak najprawdopodobniej najistotniejszym czynnikiem powodującym różnice są wskazane kwestie, nieuwzględnione w~części teoretycznej.
 \end{itemize}
 \clearpage
-\section*{Podsumowanie}
-\addcontentsline{toc}{section}{Podsumowanie}
+\chapter*{Podsumowanie}
+%\addcontentsline{toc}{chapter}{Podsumowanie}
 Na podstawie eksperymentów przeprowadzonych przy użyciu obu aplikacji można wyciągnąć wnioski dotyczące sieci ELM, a~także detali implementacji.
 
 Uzyskane rezultaty są zgodne z~wnioskami przedstawionymi w~cytowanych pracach.
@@ -604,9 +651,17 @@ Należą do nich:
 \end{itemize}
 Możliwe są dalsze eksperymenty, sprawdzające różne warianty implementacji ELM, być może prowadzące do jeszcze lepszych wyników.
 \clearpage
-\addcontentsline{toc}{section}{Bibliografia}
 
-\begin{thebibliography}{9}
+
+
+
+% 6. Bibliografia
+% Bibliografia leksykograficznie wg nazwisk autorów
+
+\begin{thebibliography}{20}%jak ktoś ma więcej książek, to niech wpisze większą liczbę
+% \bibitem[numerek]{referencja} Autor, \emph{Tytuł}, Wydawnictwo, rok, strony
+% cytowanie: \cite{referencja1, referencja 2,...}
+
 \bibitem{akusok-hpelm}
   A. Akusok, K.-M. Björk, Y. Miche, A. Lendasse,
   \emph{High-Performance Extreme Learning Machines: A~Complete Toolbox for Big Data Applications.}
@@ -681,43 +736,51 @@ Możliwe są dalsze eksperymenty, sprawdzające różne warianty implementacji E
 
 \end{thebibliography}
 
-\clearpage
-\section*{Wykaz ważniejszych oznaczeń i~akronimów}
-\addcontentsline{toc}{section}{Wykaz ważniejszych oznaczeń i~akronimów}
-\begin{itemize}[label={},leftmargin=*]
-\item Benchmark -- test wydajności i~jakości treningu
-\item Bias -- wyraz wolny, czyli dodatkowy neuron w~warstwie wejściowej niewynikający z~danych wejściowych, generujący zawsze +1, ale posiadający wagę
-\item Big Data -- dane z~liczbą próbek tak dużą, że nie występuje efekt przeuczenia
-\item BP -- \textbf{B}ack-\textbf{p}ropagation - propagacja wsteczna
-\item ELM -- \textbf{E}xtreme \textbf{L}earning \textbf{M}achine - ekstremalne uczenie maszynowe
-\item GPU -- \textbf{G}raphics \textbf{P}rocessing \textbf{U}nit - procesor graficzny
-\item MLP -- \textbf{M}ulti\textbf{l}ayer \textbf{P}erceptron - perceptron wielowarstwowy
-\item RBF -- \textbf{R}adial \textbf{B}asis \textbf{F}unction, czyli radialna funkcja bazowa - funkcja rzeczywista, której wartość zależy tylko od odległości od pewnego punktu
-\item SLFN -- \textbf{S}ingle-\textbf{L}ayer \textbf{F}eed-forward \textbf{N}etwork - jednowarstwowa jednokierunkowa sieć neuronowa
-\item Small Data -- dane, dla których jest za mało próbek, aby sieć poznała dokładnie model bez przeuczenia
-\item SVM -- \textbf{S}upport \textbf{V}ector \textbf{M}achine - maszyna wektorów nośnych
-\item Toolbox -- zbiór funkcji stworzonych we wspólnym celu; biblioteka
-\end{itemize}
-\clearpage
 
-\addcontentsline{toc}{section}{Wykaz rysunków}
+
+% 7. Wykaz symboli i skrótów - jeśli nie ma, zakomentować
+\chapter*{Wykaz symboli i skrótów}
+
+\begin{tabularx}{\textwidth}{cX}
+\textbf{Benchmark} & test wydajności i~jakości treningu \\
+\textbf{Bias} & wyraz wolny, czyli dodatkowy neuron w~warstwie wejściowej niewynikający z~danych wejściowych, generujący zawsze +1, ale posiadający wagę \\
+\textbf{Big Data} & dane z~liczbą próbek tak dużą, że nie występuje efekt przeuczenia w~klasycznych sieciach neuronowych; dane, nie mieszczące się w~całości w~pamięci RAM \\ 
+\textbf{BP} & \textbf{B}ack-\textbf{p}ropagation -- propagacja wsteczna \\ 
+\textbf{ELM} & \textbf{E}xtreme \textbf{L}earning \textbf{M}achine -- ekstremalne uczenie maszynowe \\ 
+\textbf{GPU} & \textbf{G}raphics \textbf{P}rocessing \textbf{U}nit -- procesor graficzny \\ 
+\textbf{MLP} & \textbf{M}ulti\textbf{l}ayer \textbf{P}erceptron -- perceptron wielowarstwowy \\ 
+\textbf{RBF} & \textbf{R}adial \textbf{B}asis \textbf{F}unction -- radialna funkcja bazowa, czyli funkcja rzeczywista, której wartość zależy tylko od odległości od pewnego punktu \\ 
+\textbf{SLFN} & \textbf{S}ingle-\textbf{L}ayer \textbf{F}eed-forward \textbf{N}etwork -- jednowarstwowa jednokierunkowa sieć neuronowa \\ 
+\textbf{Small Data} & dane, dla których jest za mało próbek, aby klasyczna sieć poznała dokładnie model bez przeuczenia; mieszczące się w~pamięci RAM \\ 
+\textbf{SVM} & \textbf{S}upport \textbf{V}ector \textbf{M}achine -- maszyna wektorów nośnych \\ 
+\textbf{Toolbox} & zbiór funkcji stworzonych we wspólnym celu; biblioteka \\ 
+\end{tabularx}
+
+
+% 8. Spis rysunków - jeśli nie ma, zakomentować (ale być może po prostu się nie zrobi)
 \listoffigures
-\clearpage
-\addcontentsline{toc}{section}{Wykaz tabel}
+
+
+% 9. Spis tabel - jak wyżej
 \listoftables
-\clearpage
 
-\section*{Wykaz załączników}
-\clearpage
 
-\section*{Dodatek. Instrukcja obsługi aplikacji}
-\addcontentsline{toc}{section}{Dodatek. Instrukcja obsługi aplikacji}
-\subsection*{Aplikacja sieci ELM w~Pythonie}
-\subsubsection*{Przygotowanie}
+% 10. Spis załączników - jak nie ma załączników, to zakomentować lub usunąć
+\chapter*{Spis załączników}
+\begin{enumerate}
+\item[1.] Załącznik 1
+\item[2.] Załącznik 2
+\end{enumerate}
+
+% 11. Załączniki
+\chapter*{Dodatek. Instrukcja obsługi aplikacji}
+%\addcontentsline{toc}{chapter}{Dodatek. Instrukcja obsługi aplikacji}
+\section*{Aplikacja sieci ELM w~Pythonie}
+\subsection*{Przygotowanie}
 Aplikacja sieci ELM w~Pythonie wymaga zainstalowania najnowszej wersji Pythona 2 wraz ze standardowymi bibliotekami -- najprostszym sposobem jest zainstalowanie pakietu Anaconda. Oprócz tego, należy zainstalować bibliotekę \textit{HP-ELM} -- należy uruchomić konsolę z~uprawnieniami administratora i~wywołać polecenie \textit{pip install hpelm}. 
-\subsubsection*{Uruchomienie aplikacji}
+\subsection*{Uruchomienie aplikacji}
 Aby uruchomić aplikację, należy za pomocą folderu przejsć do katalogu zawierającego pliki aplikacji i~wywołać polecenie \textit{python test.py}. W~przypadku niektórych systemów operacyjnych (na przykład Arch Linux) może być konieczne użycie zamiast tego polecenia \textit{python2 test.py}.
-\subsubsection*{Użytkowanie aplikacji}
+\subsection*{Użytkowanie aplikacji}
 Bezpośrednio po uruchomieniu powinien pojawić się ekran jak na rysunku \ref{python_ekran}.
 \begin{figure}[H]
 \centering
@@ -751,12 +814,12 @@ Aby skorzystać poprawnie z~aplikacji, należy najpierw wybrać dane, ustalić p
 \label{instrukcja_python_end}
 \end{figure}
 \clearpage
-\subsection*{Aplikacja sieci ELM w~Matlabie}
-\subsubsection*{Przygotowanie}
+\section*{Aplikacja sieci ELM w~Matlabie}
+\subsection*{Przygotowanie}
 Aby uruchomić aplikację, należy skorzystać z~programu Matlab.
 Aplikacja składa się z~dwóch plików: klasy sieci, zawierającej implementację algorytmu (\textit{ELM.m}) i~przykładowego skryptu wywołującego kolejne funkcje tej klasy (\textit{ELM\textunderscore run.m}).
 Konieczne jest ustawienie folderu roboczego na folder, w~którym znajdują się te pliki.
-\subsubsection*{Użytkowanie aplikacji}
+\subsection*{Użytkowanie aplikacji}
 Uruchomienie aplikacji polega na wywołaniu skryptu \textit{ELM\textunderscore run.m}, jednak najpierw należy ustawić wszystkie konieczne parametry. Rysunek \ref{elm_run} przedstawia kod skryptu \textit{ELM\textunderscore run.m} z~pominięciem części odpowiedzialnej za komunikację z~użytkownikiem.
 \begin{figure}[H]
 \centering
@@ -798,6 +861,12 @@ Po odpowiednim zmodyfikowaniu skryptu i~uruchomieniu go otrzymujemy wynik (rys. 
 \label{elm_run_result}
 \end{figure}
 \end{document}
+
+
+
+
+
+
 
 
 
