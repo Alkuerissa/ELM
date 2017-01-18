@@ -101,10 +101,12 @@ W 2015 roku metoda została również ostro skrytykowana przez Yanna LeCuna, jed
 
 Teorię o~niedostosowaniu ELM do zastosowań big data podważa wydana kilka miesięcy później praca \textit{High-Performance Extreme Learning Machines: A~Complete Toolbox for Big Data Applications} \cite{akusok-hpelm} autorstwa Antona Akusoka, Kaj-Mikaela Bj\"orka, Yoaba Miche i~Amaury'ego Lendasse. Prezentuje ona obiecujące wyniki zastosowania ELM na big data -- dla testowanych danych błąd jest porównywalny, podczas gdy czas uczenia jest mniejszy (od kilku razy dla niektórych metod, nawet do kilku tysięcy razy dla innych). Praca opisuje również udostępniony przez autorów toolbox, implementujący ELM.
 
+\clearpage
 \section{Założenia dla sieci neuronowych klasy ELM}
 Rozważane tu ELM zaliczają się do kategorii SLFN -- poza warstwą wejściową i~wyjściową posiadają tylko jedną warstwę ukrytą (patrz rys. \ref{schemat_elm}). Od innych SLFN odróżnia je to, że ELM opierają się na losowym generowaniu neuronów warstwy ukrytej bez późniejszego ich dostosowywania do danych -- dzięki temu, że wszystkie ich parametry, takie jak np. wagi wejściowe, mogą zostać dobrane losowo, są one niezależne od danych trenujących, a~w przeciwieństwie do metody BP, wagi wyjściowe są niezależne od wag wejściowych, co pozwala na nieiteracyjne ich wyznaczenie. Takie rozwiązanie zapewnia o~kilka rzędów wielkości szybszy czas działania od innych metod, takich jak BP, MLP i~SVM \cite{akusok-hpelm}.
 \begin{figure}[H]
-\includegraphics[width=\textwidth]{schemat_sieci.png}
+\centering
+\includegraphics[width=0.9\textwidth]{schemat_sieci.png}
 \caption[Schemat SLFN typu ELM]{Schemat SLFN typu ELM (opracowanie własne)}
 \label{schemat_elm}
 \end{figure}
@@ -292,7 +294,7 @@ W pliku \textit{benchmark.py} zdefiniowana została klasa \textbf{Benchmark}, kt
 \item \textbf{big\textunderscore benchmark}(\textit{name}, \textit{training\textunderscore percentage}, \textit{neurons}, \textit{data\textunderscore path}, \textit{results\textunderscore path}, \textit{output\textunderscore path}) -- statyczna metoda działająca analogicznie do \textbf{small\textunderscore benchmark}, ale dla obliczeń big data (na plikach \textit{hdf5}). 
 \item \textbf{run}(\textit{self}) -- uruchamia benchmark i~zwraca błędy średniokwadratowe, procent poprawnie sklasyfikowanych danych i~czas trwania treningu.
 \end{itemize}
-
+\clearpage
 \section{Projekt aplikacji sieci ELM w~Matlabie}
 W Matlabie powstała pełna implementacja algorytmów ELM w~formie klasy, zawierającej wszystkie niezbędne funkcje.
 Pozwala na trenowanie i~testowanie sieci dla wybranej liczby neuronów z~dowolnymi funkcjami aktywacji. 
@@ -364,7 +366,7 @@ W pliku \textit{ELM.m} zaimplementowana została klasa \textbf{ELM}, która zape
 \item \textbf{parseData}(\textit{\~}, \textit{d}) -- przetwarza macierz \textit{d}, zwracając \textit{X} -- dane wejściowe i~\textit{T} -- oczekiwane wyniki, znajdujące się w~ostatniej kolumnie \textit{d}.
 \item \textbf{createH}(\textit{obj}, \textit{X}) -- wyznacza macierz \textit{H}, używaną w~wewnętrznych obliczeniach ELM.
 \end{itemize}
-
+\clearpage
 \section{Aplikacje w~Matlabie i~Pythonie -- różnice}
 \label{porownanie_aplikacji}
 Implementacje algorytmu w~obu aplikacjach różnią się. 
@@ -456,7 +458,7 @@ Na rysunku \ref{wyniki_dota2_python} grupa 1 to benchmarki wykorzystujące sigmo
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{wyniki_dota2_python.png}
+\includegraphics[width=0.8\textwidth]{wyniki_dota2_python.png}
 \caption[Wyniki dla niewielkiej liczby neuronów]{Wyniki dla niewielkiej liczby neuronów (opracowanie własne)}
 \label{wyniki_dota2_python}
 \end{figure}
@@ -466,7 +468,7 @@ Jak widać, różnica między funkcjami jest bardzo niewielka. Zwiększanie licz
 Na rysunku \ref{wyniki_dota2_python_performance} uwzględniona została tylko funkcja sigmoidalna, na większej liczbie neuronów.
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{wyniki_dota2_python_performance.png}
+\includegraphics[width=0.8\textwidth]{wyniki_dota2_python_performance.png}
 \caption[Wyniki dla dużej liczby neuronów liczby neuronów]{Wyniki dla dużej liczby neuronów liczby neuronów (opracowanie własne)}
 \label{wyniki_dota2_python_performance}
 \end{figure}
@@ -500,6 +502,7 @@ Dla liczby neuronów, dla której wynik był najlepszy (150) czas uczenia to oko
 \item Przy prostej relacji maksymalna jakość uczenia jest osiągana przy bardzo niskiej liczbie neuronów.
 \item Przy niewielkiej liczbie cech, dla liczby neuronów nieprzekraczającej znacznie 1000, długość treningu skaluje się liniowo z~liczbą neuronów. Próba dodania dużo większej liczby neuronów, na przykład 10000, znacznie spowalnia działanie i~pokazuje nieliniowość zależności.
 \end{itemize}
+\clearpage
 \section{Klasyfikacja pokrycia lasu ze względu na dominujący gatunek drzew}
 \subsection{Opis}
 Benchmark polegający na klasyfikacji pokrycia lasu ze względu na dominujący gatunek drzew został dostarczony przez Jocka A. Blackarda i~Colorado State University na potrzeby konkursu zorganizowanego w~2014 roku przez Kaggle \cite{forest_cover}. Obejmuje 15120 próbek, gdzie każda próbka opisuje obszar 30 na 30 metrów w~Roosevelt National Forest w~Kolorado. Próbki pochodzą jedynie z~obszarów chronionych przed działalnością człowieka w~celu wyeliminowania zewnętrznych czynników, takich jak sadzenie drzew przez ludzi. Klasyfikacja polega na przypisaniu każdemu obszarowi dominującego w~nim gatunku drzew opisanego za pomocą liczby:
@@ -776,11 +779,12 @@ Możliwe są dalsze eksperymenty, sprawdzające różne warianty implementacji E
 Aplikacja sieci ELM w~Pythonie wymaga zainstalowania najnowszej wersji Pythona 2 wraz ze standardowymi bibliotekami -- najprostszym sposobem jest zainstalowanie pakietu Anaconda. Oprócz tego, należy zainstalować bibliotekę \textit{HP-ELM} -- należy uruchomić konsolę z~uprawnieniami administratora i~wywołać polecenie \textit{pip install hpelm}. 
 \subsection*{Uruchomienie aplikacji}
 Aby uruchomić aplikację, należy za pomocą folderu przejsć do katalogu zawierającego pliki aplikacji i~wywołać polecenie \textit{python test.py}. W~przypadku niektórych systemów operacyjnych (na przykład Arch Linux) może być konieczne użycie zamiast tego polecenia \textit{python2 test.py}.
+\clearpage
 \subsection*{Użytkowanie aplikacji}
 Bezpośrednio po uruchomieniu powinien pojawić się ekran jak na rysunku \ref{python_ekran}.
 \begin{figure}[H]
 \centering
-\includegraphics{instrukcja_python_start.png}
+\includegraphics[width=0.4\textwidth]{instrukcja_python_start.png}
 \caption[Ekran aplikacji]{Ekran aplikacji (opracowanie własne)}
 \label{python_ekran}
 \end{figure}
