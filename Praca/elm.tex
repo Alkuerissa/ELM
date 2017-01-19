@@ -375,7 +375,7 @@ Nie są one usuwane automatycznie, gdyż umożliwiają dokładniejszy wgląd w~d
 \end{itemize}
 \label{wnioski2}
 \clearpage
-\chapter{Trening ELM dla wybranych benchmarków big data i~small data}
+\chapter{Trening ELM dla wybranych benchmarków}
 \section{Założenia}
 We wszystkich dalszych testach przyjęte zostało 80\% danych treningowych. Do testów wydajności dostępne były dwa zestawy:
 \begin{enumerate}
@@ -393,7 +393,7 @@ Zestaw 1 był używany przy testach aplikacji w~Pythonie, a~zestaw 2 przy testac
 \label{dota2_map}
 \end{figure}
 
-Dane dotyczące meczów w~grze \textit{Dota 2} zostały udostępnione przez Devina Anzelmo na stronie Kaggle \cite{dota2}. Struktura danych jest relacyjna -- czyli bez wstępnego przetworzenia zbyt złożona dla ELM -- więc w~eksperymentach została wykorzystana tylko część danych. Zbiór danych obejmuje 50000 próbek, gdzie każda próbka charakteryzuje jeden mecz.  Wynikiem dla każdej próbki jest jedna z~dwóch klas -- 0, gdy wygrała drużyna \textit{Dire} i~1, gdy wygrała drużyna \textit{Radiant}. Próbki zawierają następujące cechy każdego meczu:
+Dane dotyczące meczów w~grze \textit{Dota 2} zostały udostępnione przez Devina Anzelmo na stronie Kaggle \cite{dota2}. Struktura danych jest relacyjna -- czyli bez wstępnego przetworzenia zbyt złożona dla ELM -- więc w~eksperymentach została wykorzystana tylko część danych. Na potrzeby wcześniejszych rozważań dane zostały uznane za big data. Zbiór danych obejmuje 50000 próbek, gdzie każda próbka charakteryzuje jeden mecz. Wynikiem dla każdej próbki jest jedna z~dwóch klas -- 0, gdy wygrała drużyna \textit{Dire} i~1, gdy wygrała drużyna \textit{Radiant}. Próbki zawierają następujące cechy każdego meczu:
 \begin{enumerate}
 \item czas trwania meczu,
 \item status wież należących do drużyny \textit{Radiant}, zakodowany w~16-bitowej liczbie całkowitej,
@@ -426,7 +426,7 @@ Więcej informacji dotyczących danych jest dostępna na stronie będącej źró
 
 Ten zestaw danych można uznać za łatwy, ponieważ ze względu na opisany wcześniej charakter rozgrywki, w~większości przypadków sam status wież należących do danej drużyny jest wystarczającym wskaźnikiem zwycięstwa -- drużyna, która straciła wszystkie swoje wieże, wygrywa bardzo rzadko.
 \subsection{Trening sieci ELM w~Pythonie}
-Niezależnie od wyboru funkcji aktywacji, nawet przy liczbach neuronów tak niskich jak 10, po wytrenowaniu poprawnie sklasyfikowanych zostało około 99\% meczów, a~dodawanie większej ich liczby jedynie wydłuża czas treningu. 
+W tym benchmarku została wykorzystana funkcjonalność aplikacji pozwalająca na konwersję danych na format \textit{hdf5}, w celu potraktowania ich przez bibliotekę jako big data. Niezależnie od wyboru funkcji aktywacji, nawet przy liczbach neuronów tak niskich jak 10, po wytrenowaniu poprawnie sklasyfikowanych zostało około 99\% meczów, a~dodawanie większej ich liczby jedynie wydłuża czas treningu. 
 \label{python-dota}
 
 Na rysunku \ref{wyniki_dota2_python} grupa 1 to benchmarki wykorzystujące sigmoidalną funkcję aktywacji, a~benchmarki z~grupy 2 używały tangensa hiperbolicznego.
@@ -663,54 +663,54 @@ Możliwe są dalsze eksperymenty, sprawdzające różne warianty implementacji E
 \bibitem{originofelm} 
   ELM Origin,
   \emph{http://elmorigin.wixsite.com/originofelm.}
-  Accesed: 23 October 2016.
+  Accesed: 23~October~2016.
   
 \bibitem{hpelm}
   HP-ELM library on github,
   \emph{https://github.com/akusok/hpelm}
-   Accesed: 30 October 2016.
+   Accesed: 30~October~2016.
 
   
 \bibitem{hdf5}
   The HDF Group,
   \emph{https://support.hdfgroup.org/HDF5/} 
-  Accesed: 15 November 2016.
+  Accesed: 15~November~2016.
  
   
 \bibitem{h5py}
   HDF5 for Python documentation,
   \emph{http://www.h5py.org/}
-  Accesed: 19 November 2016.
+  Accesed: 19~November~2016.
 
 \bibitem{numpy}
   Numpy documentation,
   \emph{http://www.numpy.org/}
-  Accesed: 8 October 2016.  
+  Accesed: 8~November~2016.  
   
 \bibitem{sklearn}
   Scikit-learn documentation,
   \emph{http://scikit-learn.org/}  
-  Accesed: 10 October 2016.
+  Accesed: 10~November~2016.
   
 \bibitem{dota2}
   Kaggle,
   \emph{https://www.kaggle.com/devinanzelmo/dota-2-matches}
-  Accesed: 3 January 2017.
+  Accesed: 3~January~2017.
   
 \bibitem{dota2_webapi}
   Dota 2 WebAPI,
   \emph{https://wiki.teamfortress.com/wiki/WebAPI/GetMatchDetails}
-  Accesed: 3 January 2017.
+  Accesed: 3~January~2017.
   
 \bibitem{dota2_map_src}
   Dota 2 Wiki,
   \emph{http://dota2.gamepedia.com/File:Labelled\textunderscore Map.png}
-  Accesed: 10 January 2017.
+  Accesed: 10~January~2017.
 
 \bibitem{forest_cover}
   Kaggle,
   \emph{https://www.kaggle.com/c/forest-cover-type-prediction/data}
-  Accesed: 12 December 2016.
+  Accesed: 12~December~2016.
 
 \end{thebibliography}
 

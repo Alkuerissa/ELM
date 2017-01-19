@@ -26,8 +26,11 @@
 %\selectlanguage{polish}
 \begin{abstract}
 \setcounter{page}{1}
-Celem pracy "Projekt aplikacji do ekstremalnego uczenia maszynowego do klasyfikacji big data" jest przeanalizowanie stosunkowo nowej i~niezbadanej architektury sieci neuronowej, ze szczególnym uwzględnieniem jej możliwych zastosowań w~problemach big data.
-Jest on osiągany poprzez stworzenie dwóch aplikacji -- w~Pythonie, korzystającej z~gotowej biblioteki i~w~Matlabie, będącej własną implementacją algorytmu.\\
+Celem pracy \textit{Projekt aplikacji do ekstremalnego uczenia maszynowego do klasyfikacji big data} jest przeanalizowanie stosunkowo nowej i~niezbadanej architektury sieci neuronowej~w problemie klasyfikacji, ze szczególnym uwzględnieniem jej możliwych zastosowań w~problemach big data.
+Jest on osiągany poprzez stworzenie dwóch aplikacji -- w~Pythonie, korzystającej z~gotowej biblioteki \textit{HP-ELM} i~w~Matlabie, będącej własną implementacją algorytmu. \\
+Obie aplikacje zostały wykorzystane w~wybranych eksperymentach: przewidywaniu wyniku meczu~w grze \textit{Dota 2} na podstawie stanu gry w momencie zakończenia -- czyli podziale na dwie klasy (wygrana pierwszej lub drugiej drużyny) -- oraz klasyfikacji pokrycia lasu ze względu na dominujący gatunek drzew, spośród siedmiu możliwych gatunków, na podstawie informacji geograficznych o danym jego fragmencie. \\
+Eksperymenty potwierdziły tezę o~bardzo szybkim działaniu sieci ELM (rzędu kilku sekund dla 1000 neuronów i~kilkudziesięciu tysięcy próbek danych), a~także ich satysfakcjonującej skuteczności -- przy czym wystąpiły zauważalne rozbieżności między aplikacją w~Pythonie i~Matlabie -- własna implementacja sieci osiągnęła znacznie lepsze rezultaty w~klasyfikacji pokrycia lasu.
+
 
 \noindent \textbf{Słowa kluczowe:} big data, ekstremalne uczenie maszynowe, klasyfikacja, Matlab, Python, sieci neuronowe, uczenie maszynowe
 \end{abstract}
