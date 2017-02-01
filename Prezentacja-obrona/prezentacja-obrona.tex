@@ -1,0 +1,143 @@
+\documentclass{beamer}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{graphics}
+\usepackage{minted}
+\usepackage{fvextra}
+\usepackage{caption}
+\usepackage{epigraph}
+\usepackage{array}
+\usepackage{multimedia}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\definecolor{NiceGreen}{RGB}{40,200,0}
+\definecolor{CoolDarkGray}{RGB}{50,50,50}
+
+
+\title{\texttt{Projekt aplikacji do ekstremalnego uczenia maszynowego do klasyfikacji big data}}
+\author{Autorzy: Ahmed Abdelkarim, Aleksandra Hernik \\ Promotor: Jerzy Balicki}
+
+\begin{document}
+\setbeamercolor{background canvas}{bg=CoolDarkGray}
+\setbeamercolor{title}{fg=NiceGreen}
+\setbeamercolor{frametitle}{fg=NiceGreen}
+\setbeamercolor{structure}{fg=white}
+\setbeamertemplate{section in toc}{%
+    \textcolor{NiceGreen}{\inserttocsectionnumber)}   \inserttocsection \par}
+
+\addtobeamertemplate{navigation symbols}{}{%
+    \usebeamerfont{footline}%
+    \usebeamercolor[fg]{footline}%
+    \hspace{1em}%
+    \insertframenumber/\inserttotalframenumber
+}
+
+\setbeamercolor{normal text}{fg=white}\usebeamercolor*{normal text}
+\begin{frame}
+  \maketitle
+\end{frame}
+
+\begin{frame}{Plan}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\section{Wprowadzenie do ekstremalnego uczenia maszynowego}
+\begin{frame}{Czym jest ekstremalne uczenie maszzynowe?}
+\begin{figure}[H]
+\includegraphics[scale=0.5]{schemat_sieci.png}
+\caption{Sieć ELM}
+\end{figure}
+\end{frame}
+\section{Cele}
+\begin{frame}{Cele}
+\begin{itemize}
+\item Sprawdzenie wydajności i skuteczności metody
+\item Stworzenie i porównanie dwóch aplikacji
+\end{itemize}
+\end{frame}
+\section{Prezentacja aplikacji}
+
+\section{Wyniki}
+\begin{frame}{Dominujący gatunek drzew w lesie}
+\begin{itemize}
+\item 15 120 próbek
+\item 54 kolumny, w tym 44 binarne
+\item 7 możliwych klas:
+\begin{itemize}
+\item świerk/jodła,
+\item sosna wydmowa,
+\item sosna żółta,
+\item topola/wierzba,
+\item osika,
+\item daglezja zielona,
+\item \textit{krummholz}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Skuteczność aplikacji w Pythonie}
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{wyniki_forest_python_percentage.png}
+\caption{Jakość uczenia}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Szybkość aplikacji w Pythonie}
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{wyniki_forest_python_training_time.png}
+\caption{Czas uczenia}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Skuteczność aplikacji w Matlabie}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{forest_liczba_neuronow.png}
+\caption{Jakość uczenia}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Szybkość aplikacji w Matlabie}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{forest_wydajnosc.png}
+\caption{Czas uczenia}
+\end{figure}
+\end{frame}
+
+\section{Wnioski}
+\begin{frame}{Różnice w implementacjach}
+\begin{itemize}
+\item Normalizacja
+\item Sposób losowania wag wejściowych
+\item Potencjalna rozbieżność biblioteki z teorią
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Wnioski}
+\begin{itemize}
+\item ELM rzeczywiście działają bardzo szybko
+\item ELM mogą osiągać akceptowalne wyniki
+\item Drobne różnice w implementacji powodują zupełnie inne wyniki
+\item Zwiększanie liczby neuronów poprawia rezultaty tylko do pewnego momentu
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Kierunki dalszych badań)
+\begin{itemize}
+\item Porównanie z innymi klasyfikatorami
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\huge{Dziękujemy za uwagę}
+\end{center}
+
+\end{frame}
+
+\end{document}
+\endinput
