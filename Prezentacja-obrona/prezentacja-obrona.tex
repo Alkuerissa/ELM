@@ -65,10 +65,15 @@
 \section{Prezentacja aplikacji}
 
 \section{Wyniki}
-\begin{frame}{Dominujący gatunek drzew w lesie}
+\begin{frame}{Benchmarki}
+
+\begin{columns}
+\begin{column}[T]{0.5\textwidth}
+Klasyfikacja obszarów lasu ze względu na dominujące drzewa:
+
 \begin{itemize}
 \item 15 120 próbek
-\item 54 kolumny, w tym 44 binarne
+\item 54 kolumny, w tym 44~binarne
 \item 7 możliwych klas:
 \begin{itemize}
 \item świerk/jodła,
@@ -80,6 +85,22 @@
 \item \textit{krummholz}
 \end{itemize}
 \end{itemize}
+\end{column}
+\begin{column}[T]{0.5\textwidth}
+Klasyfikacja meczów w grze Dota~2 ze względu na zwycięzcę:
+
+\begin{itemize}
+\item 50 000 próbek
+\item 10 kolumn, w tym 6~nieistotnych
+\item 2 możliwe klasy:
+\begin{itemize}
+\item zwycięstwo zespołu \textit{Radiant}
+\item zwycięstwo zespołu \textit{Dire}
+\end{itemize}
+\end{itemize}
+\end{column}
+\end{columns}
+
 \end{frame}
 
 \begin{frame}{Skuteczność aplikacji w Pythonie}
